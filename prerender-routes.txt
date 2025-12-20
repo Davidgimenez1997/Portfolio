@@ -1,0 +1,6 @@
+/
+/about
+/projects
+/experience
+/contact
+/diagnostics/tests
