@@ -7,8 +7,16 @@
     "contact": "Contact"
   },
   "home": {
-    "title": "Hi, I'm David",
-    "subtitle": "Frontend Engineer (Angular) — SSR, prerender, DX"
+    "home": {
+      "title": "Hi, I'm David",
+      "subtitle": "Frontend Engineer (Angular) — SSR, prerendering and clean architecture.",
+      "ctaProjects": "View projects",
+      "ctaContact": "Contact",
+      "featuredTitle": "Featured projects",
+      "featuredSubtitle": "A quick selection to show the kind of work and technical focus.",
+      "skillsTitle": "Tech stack",
+      "skillsSubtitle": "Core and daily tools."
+    }
   },
   "about": {
     "title": "About",

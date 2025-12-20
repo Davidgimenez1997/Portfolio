@@ -8,7 +8,13 @@
   },
   "home": {
     "title": "Hola, soy David",
-    "subtitle": "Frontend Engineer (Angular) — SSR, prerender, DX"
+    "subtitle": "Frontend Engineer (Angular) — SSR, prerender y arquitectura limpia.",
+    "ctaProjects": "Ver proyectos",
+    "ctaContact": "Contactar",
+    "featuredTitle": "Proyectos destacados",
+    "featuredSubtitle": "Una selección rápida para ver el tipo de trabajo y enfoque técnico.",
+    "skillsTitle": "Stack técnico",
+    "skillsSubtitle": "Core y herramientas del día a día."
   },
   "about": {
     "title": "Sobre mí",
