@@ -46,6 +46,7 @@
     "@angular/build": "^21.0.4",
     "@angular/cli": "^21.0.4",
     "@angular/compiler-cli": "^21.0.0",
+    "@playwright/test": "^1.57.0",
     "@types/express": "^5.0.1",
     "@types/jest": "^30.0.0",
     "@types/node": "^20.17.19",
