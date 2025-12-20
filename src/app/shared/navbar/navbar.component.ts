@@ -1,0 +1,77 @@
+import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { LanguageService } from '../../core/i18n/language.service';
+
+@Component({
+    standalone: true,
+    selector: 'app-navbar',
+    imports: [RouterLink, RouterLinkActive, TranslateModule, FaIconComponent],
+    template: `
+  <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+    <div class="container">
+      <a class="navbar-brand fw-semibold" routerLink="/">
+        <fa-icon [icon]="['fas','code']" class="me-2"></fa-icon>
+        David Giménez
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"
+        aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div id="nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+              {{ 'nav.home' | translate }}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/about" routerLinkActive="active">
+              {{ 'nav.about' | translate }}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/projects" routerLinkActive="active">
+              {{ 'nav.projects' | translate }}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/experience" routerLinkActive="active">
+              {{ 'nav.experience' | translate }}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/contact" routerLinkActive="active">
+              {{ 'nav.contact' | translate }}
+            </a>
+          </li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          <a class="btn btn-outline-secondary btn-sm" href="https://github.com/" target="_blank" rel="noreferrer">
+            <fa-icon [icon]="['fab','github']" class="me-1"></fa-icon> GitHub
+          </a>
+
+          <button class="btn btn-outline-primary btn-sm" (click)="toggleLang()">
+            {{ currentLang === 'es' ? 'EN' : 'ES' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  `,
+})
+export class NavbarComponent {
+    constructor(private readonly lang: LanguageService) {}
+
+    get currentLang() {
+        return this.lang.current;
+    }
+
+    toggleLang() {
+        this.lang.use(this.currentLang === 'es' ? 'en' : 'es');
+    }
+}

@@ -1,0 +1,5 @@
+{
+  "core": ["Angular", "TypeScript", "RxJS", "SCSS", "SSR", "Prerender"],
+  "daily": ["Bootstrap", "Node.js", "Docker", "Git", "REST"],
+  "familiar": ["Kubernetes", "Helm", "Strapi", "PostgreSQL", "CI/CD"]
+}

@@ -1,12 +1,21 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { FooterComponent } from './shared/footer/footer.component';
 
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.scss'
+    standalone: true,
+    selector: 'app-root',
+    imports: [RouterOutlet, NavbarComponent, FooterComponent],
+    template: `
+    <app-navbar />
+    <main class="flex-grow-1">
+      <router-outlet />
+    </main>
+    <app-footer />
+  `,
+    styles: [`
+    :host { display: flex; min-height: 100vh; flex-direction: column; }
+  `],
 })
-export class App {
-  protected readonly title = signal('portfolio');
-}
+export class AppComponent {}

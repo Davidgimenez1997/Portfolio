@@ -1,0 +1,17 @@
+{
+  "name": "David Giménez",
+  "role": {
+    "es": "Frontend Engineer (Angular)",
+    "en": "Frontend Engineer (Angular)"
+  },
+  "location": "Spain",
+  "summary": {
+    "es": "Frontend Engineer especializado en Angular. Experiencia con SSR, prerender, arquitectura, DX y despliegues con Docker/Kubernetes.",
+    "en": "Frontend Engineer specialized in Angular. Experience with SSR, prerendering, architecture, DX, and deployments with Docker/Kubernetes."
+  },
+  "links": {
+    "github": "https://github.com/",
+    "linkedin": "https://www.linkedin.com/",
+    "cv": "/assets/content/cv.pdf"
+  }
+}

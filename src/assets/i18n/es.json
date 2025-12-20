@@ -9,5 +9,29 @@
   "home": {
     "title": "Hola, soy David",
     "subtitle": "Frontend Engineer (Angular) — SSR, prerender, DX"
+  },
+  "about": {
+    "title": "Sobre mí",
+    "subtitle": "Enfoque en Angular, SSR, prerender y arquitectura limpia.",
+    "skills": {
+      "core": "Core",
+      "daily": "Daily",
+      "familiar": "Familiar"
+    }
+  },
+  "experience": {
+    "title": "Experiencia",
+    "subtitle": "Roles, impacto y tecnologías.",
+    "present": "Actualidad"
+  },
+  "contact": {
+    "title": "Contacto",
+    "name": "Nombre",
+    "email": "Email",
+    "emailError": "Introduce un email válido.",
+    "message": "Mensaje",
+    "send": "Enviar",
+    "note": "Se abrirá tu cliente de correo (mailto).",
+    "links": "Enlaces"
   }
 }

@@ -1,0 +1,17 @@
+[
+  {
+    "slug": "angular-ssr-prerender-portfolio",
+    "title": "Angular SSR + Prerender Portfolio",
+    "description": "Portfolio with SSR, prerendering, i18n and Docker deploy.",
+    "stack": ["Angular", "SSR", "Prerender", "Bootstrap", "FontAwesome", "Docker", "Nginx"],
+    "highlights": [
+      "SSR request language detection",
+      "Prerendered static routes",
+      "Docker setup with nginx reverse proxy"
+    ],
+    "links": {
+      "github": "https://github.com/",
+      "live": "https://example.com"
+    }
+  }
+]

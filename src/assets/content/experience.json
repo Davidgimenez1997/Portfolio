@@ -1,0 +1,24 @@
+[
+  {
+    "company": "Grupo Orenes",
+    "role": {
+      "es": "Full Stack (Frontend focus)",
+      "en": "Full Stack (Frontend focus)"
+    },
+    "from": "2023-01",
+    "to": null,
+    "highlights": {
+      "es": [
+        "Arquitectura SSR + prerender para múltiples marcas.",
+        "Integración con CMS (Strapi) y rutas dinámicas.",
+        "Optimización DX: scripts, cachés y automatización."
+      ],
+      "en": [
+        "SSR + prerender architecture for multiple brands.",
+        "CMS integration (Strapi) and dynamic routes.",
+        "DX improvements: scripts, caching and automation."
+      ]
+    },
+    "stack": ["Angular", "SSR", "Node.js", "Docker", "Kubernetes", "Strapi"]
+  }
+]
