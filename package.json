@@ -6,9 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "serve:ssr:portfolio": "node dist/portfolio/server/server.mjs",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "ng test",
+    "serve:ssr:portfolio": "node dist/portfolio/server/server.mjs"
   },
   "prettier": {
     "printWidth": 100,
@@ -37,6 +36,8 @@
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
+    "@ngx-translate/core": "^17.0.0",
+    "@ngx-translate/http-loader": "^17.0.0",
     "bootstrap": "^5.3.8",
     "express": "^5.1.0",
     "rxjs": "~7.8.0",
@@ -46,7 +47,6 @@
     "@angular/build": "^21.0.4",
     "@angular/cli": "^21.0.4",
     "@angular/compiler-cli": "^21.0.0",
-    "@playwright/test": "^1.57.0",
     "@types/express": "^5.0.1",
     "@types/jest": "^30.0.0",
     "@types/node": "^20.17.19",

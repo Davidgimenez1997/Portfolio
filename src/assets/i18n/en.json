@@ -1,0 +1,13 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "experience": "Experience",
+    "contact": "Contact"
+  },
+  "home": {
+    "title": "Hi, I'm David",
+    "subtitle": "Frontend Engineer (Angular) — SSR, prerender, DX"
+  }
+}
