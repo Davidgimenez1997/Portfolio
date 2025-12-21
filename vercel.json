@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "api/ssr.mjs", "use": "@vercel/node" },
+    { "src": "dist/porfolio/browser/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/api/ssr.mjs" }
+  ]
+}
