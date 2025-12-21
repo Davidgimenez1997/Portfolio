@@ -1,6 +1,7 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
+import {I18nText} from "../content/models";
 
 export type AppLang = 'es' | 'en';
 
@@ -28,6 +29,16 @@ export class LanguageService {
         if (isPlatformBrowser(this.platformId)) {
             localStorage.setItem(this.storageKey, normalized);
         }
+    }
+
+    resolveI18nText(value: string | I18nText | undefined, lang: 'es' | 'en'): string {
+        if (!value) return '';
+        return typeof value === 'string' ? value : (value[lang] ?? value.es ?? value.en ?? '');
+    }
+
+    resolveI18nList(value: { es: string[]; en: string[] } | undefined, lang: 'es' | 'en'): string[] {
+        if (!value) return [];
+        return value[lang] ?? value.es ?? value.en ?? [];
     }
 
     get current(): AppLang {
