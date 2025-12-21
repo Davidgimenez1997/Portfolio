@@ -1,0 +1,45 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "experience": "Experience",
+    "contact": "Contact"
+  },
+  "home": {
+    "home": {
+      "title": "Hi, I'm David",
+      "subtitle": "Frontend Engineer (Angular) — SSR, prerendering and clean architecture.",
+      "ctaProjects": "View projects",
+      "ctaContact": "Contact",
+      "featuredTitle": "Featured projects",
+      "featuredSubtitle": "A quick selection to show the kind of work and technical focus.",
+      "skillsTitle": "Tech stack",
+      "skillsSubtitle": "Core and daily tools."
+    }
+  },
+  "about": {
+    "title": "About",
+    "subtitle": "Focused on Angular, SSR, prerendering and clean architecture.",
+    "skills": {
+      "core": "Core",
+      "daily": "Daily",
+      "familiar": "Familiar"
+    }
+  },
+  "experience": {
+    "title": "Experience",
+    "subtitle": "Roles, impact and technologies.",
+    "present": "Present"
+  },
+  "contact": {
+    "title": "Contact",
+    "name": "Name",
+    "email": "Email",
+    "emailError": "Please enter a valid email.",
+    "message": "Message",
+    "send": "Send",
+    "note": "This will open your email client (mailto).",
+    "links": "Links"
+  }
+}

@@ -1,0 +1,74 @@
+<section class="container py-5">
+    <h1 class="h3 mb-4">{{ 'contact.title' | translate }}</h1>
+
+    <div class="row g-4">
+        <div class="col-12 col-lg-6">
+            <form [formGroup]="formGroup" novalidate (ngSubmit)="openMail()">
+                <div class="mb-3">
+                    <label class="form-label">{{ 'contact.name' | translate }}</label>
+                    <input class="form-control" formControlName="name" />
+
+                    @if (formGroup.controls.name.touched && formGroup.controls.name.invalid) {
+                        <div class="text-danger small mt-1">
+                            {{ 'contact.nameError' | translate }}
+                        </div>
+                    }
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">{{ 'contact.email' | translate }}</label>
+                    <input class="form-control" formControlName="email" type="email" />
+
+                    @if (formGroup.controls.email.touched && formGroup.controls.email.invalid) {
+                        <div class="text-danger small mt-1">
+                            @if (formGroup.controls.email.errors?.['required']) {
+                                {{ 'contact.emailRequiredError' | translate }}
+                            } @else if (formGroup.controls.email.errors?.['email']) {
+                                {{ 'contact.emailFormatError' | translate }}
+                            } @else {
+                                {{ 'contact.emailError' | translate }}
+                            }
+                        </div>
+                    }
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">{{ 'contact.message' | translate }}</label>
+                    <textarea class="form-control" rows="5" formControlName="message"></textarea>
+
+                    @if (formGroup.controls.message.touched && formGroup.controls.message.invalid) {
+                        <div class="text-danger small mt-1">
+                            @if (formGroup.controls.message.errors?.['required']) {
+                                {{ 'contact.messageRequiredError' | translate }}
+                            } @else if (formGroup.controls.message.errors?.['minlength']) {
+                                {{ 'contact.messageMinLengthError' | translate:{ min: 10 } }}
+                            } @else {
+                                {{ 'contact.messageError' | translate }}
+                            }
+                        </div>
+                    }
+                </div>
+
+                <button class="btn btn-primary" type="submit" [disabled]="formGroup.invalid">
+                    {{ 'contact.send' | translate }}
+                </button>
+
+                <p class="text-muted small mt-3 mb-0">
+                    {{ 'contact.note' | translate }}
+                </p>
+            </form>
+        </div>
+
+        <div class="col-12 col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="h5">{{ 'contact.links' | translate }}</h2>
+                    <ul class="mb-0">
+                        <li><a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a></li>
+                        <li><a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
