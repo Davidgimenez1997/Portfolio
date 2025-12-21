@@ -16,7 +16,7 @@ export const routes: Routes = [
     },
     {
         path: 'projects/:slug',
-        loadComponent: () => import('./features/projects/project-detail.component').then(m => m.ProjectDetailComponent),
+        loadComponent: () => import('./features/projects/project-detail/project-detail.component').then(m => m.ProjectDetailComponent),
     },
     {
         path: 'experience',

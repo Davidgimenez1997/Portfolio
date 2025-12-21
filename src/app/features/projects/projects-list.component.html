@@ -1,0 +1,24 @@
+<section class="container py-5">
+    <h1 class="h3 mb-4">Projects</h1>
+
+    <div class="row g-3">
+        @for (project of projects$ | async; track project) {
+            <div class="col-12 col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="h5">{{ project?.title }}</h2>
+                        <p class="text-muted mb-3">{{ project?.description }}</p>
+
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                            @for (stack of project.stack; track stack) {
+                                <span class="badge text-bg-light border">{{ stack }}</span>
+                            }
+                        </div>
+
+                        <a class="btn btn-sm btn-primary" [routerLink]="['/projects', project.slug]">View</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>

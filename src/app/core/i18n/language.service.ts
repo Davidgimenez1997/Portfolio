@@ -6,13 +6,13 @@ export type AppLang = 'es' | 'en';
 
 @Injectable({ providedIn: 'root' })
 export class LanguageService {
+
     private readonly supported: AppLang[] = ['es', 'en'];
     private readonly storageKey = 'portfolio.lang';
 
     constructor(private readonly translate: TranslateService,
                 @Inject(PLATFORM_ID) private readonly platformId: object) {
         this.translate.addLangs(this.supported);
-        this.translate.use('es');
     }
 
     init(initialFromServer?: string) {
@@ -31,13 +31,14 @@ export class LanguageService {
     }
 
     get current(): AppLang {
-        return (this.translate.currentLang as AppLang) || 'es';
+        return <AppLang>this.translate.getCurrentLang() || 'es';
     }
 
     private getStoredLang(): AppLang | null {
         if (!isPlatformBrowser(this.platformId)) return null;
-        const v = localStorage.getItem(this.storageKey);
-        return v === 'en' || v === 'es' ? v : null;
+
+        const storageLang = localStorage.getItem(this.storageKey);
+        return storageLang === 'en' || storageLang === 'es' ? storageLang : null;
     }
 
     private detectBrowserLang(): string | null {

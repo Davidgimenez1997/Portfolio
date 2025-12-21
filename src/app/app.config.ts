@@ -1,43 +1,26 @@
-import {
-    APP_INITIALIZER,
-    ApplicationConfig,
-    importProvidersFrom,
-    inject,
-    provideBrowserGlobalErrorListeners
-} from '@angular/core';
-import {provideRouter} from '@angular/router';
-import {LanguageService} from "./core/i18n/language.service";
-import {INITIAL_LANG} from "./core/i18n/initial-lang.token";
-import {routes} from "./app.routes";
-import {provideClientHydration, withEventReplay} from "@angular/platform-browser";
-import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
-import {TranslateHttpLoader} from "@ngx-translate/http-loader";
-import {HttpClient} from "@angular/common/http";
-
-function initI18n() {
-    const langService = inject(LanguageService);
-    const initial = inject(INITIAL_LANG);
-    return () => langService.init(initial ?? undefined);
-}
+import {ApplicationConfig, provideBrowserGlobalErrorListeners} from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import {provideHttpClient, withFetch} from '@angular/common/http';
+import {provideTranslateService} from '@ngx-translate/core';
+import {provideTranslateHttpLoader} from '@ngx-translate/http-loader';
+import { routes } from './app.routes';
+import {provideFontAwesomeIcons} from "./core/icons/fontawesome.provider";
 
 export const appConfig: ApplicationConfig = {
     providers: [
         provideBrowserGlobalErrorListeners(),
-        provideRouter(routes), provideClientHydration(withEventReplay()),
-        importProvidersFrom(
-            TranslateModule.forRoot({
-                loader: {
-                    provide: TranslateLoader,
-                    useFactory: TranslateHttpLoader,
-                    deps: [HttpClient],
-                },
+        provideRouter(routes),
+        provideClientHydration(withEventReplay()),
+        ...provideFontAwesomeIcons(),
+        provideHttpClient(withFetch()),
+        provideTranslateService({
+            lang: 'es',
+            fallbackLang: 'en',
+            loader: provideTranslateHttpLoader({
+                prefix: '/i18n/',
+                suffix: '.json'
             })
-        ),
-
-        {
-            provide: APP_INITIALIZER,
-            multi: true,
-            useFactory: initI18n,
-        },
-    ]
+        }),
+    ],
 };

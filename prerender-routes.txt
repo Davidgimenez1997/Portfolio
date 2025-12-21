@@ -1,6 +1,6 @@
 /
 /about
 /projects
+/projects/:slug
 /experience
 /contact
-/diagnostics/tests

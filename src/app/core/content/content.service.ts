@@ -1,44 +1,43 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { shareReplay } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import {inject, Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {map, shareReplay} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {Profile, Skills, ExperienceItem, Project} from './models';
 
-import { Profile, Skills, ExperienceItem } from './models';
-import { Project } from './project.model';
-
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class ContentService {
-    constructor(private readonly http: HttpClient) {}
 
-    private readonly profile$ = this.http
-        .get<Profile>('/assets/content/profile.json')
-        .pipe(shareReplay(1));
-
-    private readonly skills$ = this.http
-        .get<Skills>('/assets/content/skills.json')
-        .pipe(shareReplay(1));
-
-    private readonly experience$ = this.http
-        .get<ExperienceItem[]>('/assets/content/experience.json')
-        .pipe(shareReplay(1));
-
-    private readonly projects$ = this.http
-        .get<Project[]>('/assets/content/projects.json')
-        .pipe(shareReplay(1));
+    private http: HttpClient = inject(HttpClient);
 
     getProfile(): Observable<Profile> {
-        return this.profile$;
+        return this.http
+            .get<Profile>('/content/profile.json')
+            .pipe(shareReplay(1));
     }
 
     getSkills(): Observable<Skills> {
-        return this.skills$;
+        return this.http
+            .get<Skills>('/content/skills.json')
+            .pipe(shareReplay(1));
     }
 
     getExperience(): Observable<ExperienceItem[]> {
-        return this.experience$;
+        return this.http
+            .get<ExperienceItem[]>('/content/experience.json')
+            .pipe(shareReplay(1));
     }
 
     getProjects(): Observable<Project[]> {
-        return this.projects$;
+        return this.http.get<Project[]>('/content/projects.json')
+            .pipe(shareReplay(1));
+    }
+
+    getProjectBySlug(slug: string): Observable<Project> {
+        return this.getProjects().pipe(
+            map((projects: Project[]): Project => {
+                return <Project>projects.find(item => item.slug === slug);
+            }),
+            shareReplay(1)
+        )
     }
 }

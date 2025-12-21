@@ -18,4 +18,4 @@ import { FooterComponent } from './shared/footer/footer.component';
     :host { display: flex; min-height: 100vh; flex-direction: column; }
   `],
 })
-export class AppComponent {}
+export class App {}
