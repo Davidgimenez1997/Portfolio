@@ -1,39 +1,69 @@
 @if (project$ | async; as project) {
     <section class="container py-5">
-        <a class="btn btn-link px-0 mb-3" routerLink="/projects">← Back</a>
+        @if (project) {
+            <a class="btn btn-link px-0 mb-3" routerLink="/projects">← Back</a>
 
-        <h1 class="h3 mb-2">{{ project?.title }}</h1>
-        <p class="text-muted mb-4">{{ project?.description }}</p>
+            <h1 class="h3 mb-2">{{ project._title }}</h1>
+            <p class="text-muted mb-4">{{ project._description }}</p>
 
-        <h2 class="h5">Highlights</h2>
-        <ul>
-            @for (highlight of project?.highlights; track highlight) {
-                <li>{{ highlight }}</li>
+            @if (project._context) {
+                <h2 class="h5">Context</h2>
+                <p class="text-muted">{{ project._context }}</p>
             }
-        </ul>
 
-        <h2 class="h5 mt-4">Stack</h2>
-        <div class="d-flex flex-wrap gap-2">
-            @for (stack of project?.stack; track stack) {
-                <span class="badge text-bg-light border">{{ stack }}</span>
+            @if (project._solution.length) {
+                <h2 class="h5 mt-4">Solution</h2>
+                <ul>
+                    @for (item of project._solution; track item) {
+                        <li>{{ item }}</li>
+                    }
+                </ul>
             }
-        </div>
 
-        @if (project.links) {
-            <div class="d-flex gap-2 mt-4">
-                @if (project.links.github) {
-                    <a class="btn btn-outline-secondary btn-sm" [href]="project.links.github" target="_blank" rel="noreferrer">GitHub</a>
-                }
+            @if (project._impact.length) {
+                <h2 class="h5 mt-4">Impact</h2>
+                <ul>
+                    @for (item of project._impact; track item) {
+                        <li>{{ item }}</li>
+                    }
+                </ul>
+            }
 
-                @if (project.links.live) {
-                    <a class="btn btn-primary btn-sm" [href]="project.links.live" target="_blank" rel="noreferrer">Live</a>
+            @if (project.highlights?.length) {
+                <h2 class="h5 mt-4">Highlights</h2>
+                <ul>
+                    @for (highlight of project.highlights ?? []; track highlight) {
+                        <li>{{ highlight }}</li>
+                    }
+                </ul>
+            }
+
+            <h2 class="h5 mt-4">Stack</h2>
+            <div class="d-flex flex-wrap gap-2">
+                @for (tech of project.stack ?? []; track tech) {
+                    <span class="badge text-bg-light border">{{ tech }}</span>
                 }
             </div>
+
+            @if (project.links) {
+                <div class="d-flex gap-2 mt-4">
+                    @if (project.links.github) {
+                        <a class="btn btn-outline-secondary btn-sm"
+                           [href]="project.links.github" target="_blank" rel="noreferrer">
+                            GitHub
+                        </a>
+                    }
+                    @if (project.links.live) {
+                        <a class="btn btn-primary btn-sm"
+                           [href]="project.links.live" target="_blank" rel="noreferrer">
+                            Live
+                        </a>
+                    }
+                </div>
+            }
+        } @else {
+            <h1 class="h4">Project not found</h1>
+            <a class="btn btn-link px-0" routerLink="/projects">Back to projects</a>
         }
-    </section>
-} @else {
-    <section class="container py-5">
-        <h1 class="h4">Project not found</h1>
-        <a class="btn btn-link px-0" routerLink="/projects">Back to projects</a>
     </section>
 }

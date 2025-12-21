@@ -1,17 +1,213 @@
 [
   {
-    "slug": "angular-ssr-prerender-portfolio",
-    "title": "Angular SSR + Prerender Portfolio",
-    "description": "Portfolio with SSR, prerendering, i18n and Docker deploy.",
-    "stack": ["Angular", "SSR", "Prerender", "Bootstrap", "FontAwesome", "Docker", "Nginx"],
-    "highlights": [
-      "SSR request language detection",
-      "Prerendered static routes",
-      "Docker setup with nginx reverse proxy"
-    ],
-    "links": {
-      "github": "https://github.com/",
-      "live": "https://example.com"
-    }
+    "slug": "distributed-angular-prerendering",
+    "type": "case-study",
+    "title": {
+      "es": "Sistema distribuido de prerender en Angular",
+      "en": "Distributed Angular Prerendering System"
+    },
+    "description": {
+      "es": "Sistema de prerender distribuido para aplicaciones Angular multi-marca, orientado a SEO, rendimiento y despliegues independientes.",
+      "en": "Distributed prerendering system for multi-brand Angular applications, focused on SEO, performance and independent deployments."
+    },
+    "context": {
+      "es": "Aplicaciones Angular con cientos de rutas dinámicas, múltiples idiomas y necesidad de actualización frecuente sin downtime.",
+      "en": "Angular applications with hundreds of dynamic routes, multiple languages and frequent update requirements without downtime."
+    },
+    "solution": {
+      "es": [
+        "Separación de procesos SSR y prerender en servicios independientes.",
+        "Generación de HTML estático bajo demanda y por eventos.",
+        "Persistencia de prerender en volúmenes compartidos."
+      ],
+      "en": [
+        "Separation of SSR and prerender processes into independent services.",
+        "Event-driven generation of static HTML.",
+        "Shared volume persistence for prerendered output."
+      ]
+    },
+    "impact": {
+      "es": [
+        "Mejora significativa de SEO y TTFB.",
+        "Reducción de carga en el servidor SSR.",
+        "Despliegues sin interrupciones."
+      ],
+      "en": [
+        "Significant SEO and TTFB improvements.",
+        "Reduced SSR server load.",
+        "Zero-downtime deployments."
+      ]
+    },
+    "stack": ["Angular", "SSR", "Prerender", "Node.js", "Docker", "Kubernetes"]
+  },
+
+  {
+    "slug": "event-driven-prerender-queue",
+    "type": "case-study",
+    "title": {
+      "es": "Cola de prerender basada en eventos (CMS)",
+      "en": "Event-driven Prerender Queue (CMS)"
+    },
+    "description": {
+      "es": "Sistema de colas para disparar builds y prerender bajo demanda a partir de eventos del CMS, desacoplando procesos pesados del servidor SSR.",
+      "en": "Queue-based system to trigger builds and prerender on demand from CMS events, decoupling heavy processes from the SSR server."
+    },
+    "context": {
+      "es": "La publicación de contenido requiere refrescar rutas prerenderizadas sin redeploy completo ni impacto en tráfico.",
+      "en": "Content publishing requires refreshing prerendered routes without full redeploy or traffic impact."
+    },
+    "solution": {
+      "es": [
+        "Plugin de CMS que escucha eventos create/update/delete.",
+        "Disparo de prerender mediante endpoint protegido por API key.",
+        "Filtrado de eventos y control de ejecuciones masivas."
+      ],
+      "en": [
+        "CMS plugin listening to create/update/delete events.",
+        "Prerender trigger via API-key protected endpoint.",
+        "Event filtering and bulk execution control."
+      ]
+    },
+    "impact": {
+      "es": [
+        "Actualización de contenido más rápida.",
+        "Menos redeploys y menos errores manuales.",
+        "Mayor estabilidad del SSR."
+      ],
+      "en": [
+        "Faster content updates.",
+        "Fewer redeploys and manual errors.",
+        "Improved SSR stability."
+      ]
+    },
+    "stack": ["Strapi", "Node.js", "TypeScript", "Docker", "Kubernetes"]
+  },
+
+  {
+    "slug": "multi-brand-deployment-architecture",
+    "type": "case-study",
+    "title": {
+      "es": "Arquitectura de despliegue multi-marca en Kubernetes",
+      "en": "Multi-brand Deployment Architecture on Kubernetes"
+    },
+    "description": {
+      "es": "Arquitectura de despliegue para múltiples marcas y entornos basada en Kubernetes y Helm.",
+      "en": "Deployment architecture for multiple brands and environments based on Kubernetes and Helm."
+    },
+    "context": {
+      "es": "Múltiples marcas comparten base técnica pero requieren configuración, rutas y assets distintos.",
+      "en": "Multiple brands share a technical base but require different configuration, routes and assets."
+    },
+    "solution": {
+      "es": [
+        "Parametrización mediante Helm y values específicos por entorno.",
+        "Separación de servicios SSR, prerender y estáticos.",
+        "Configuración dinámica con ConfigMaps y Secrets."
+      ],
+      "en": [
+        "Helm-based parametrization with environment-specific values.",
+        "Separation of SSR, prerender and static services.",
+        "Dynamic configuration via ConfigMaps and Secrets."
+      ]
+    },
+    "impact": {
+      "es": [
+        "Despliegues reproducibles.",
+        "Menos incidencias entre entornos.",
+        "Escalado independiente por servicio."
+      ],
+      "en": [
+        "Reproducible deployments.",
+        "Fewer environment-related incidents.",
+        "Independent service scaling."
+      ]
+    },
+    "stack": ["Kubernetes", "Helm", "Docker", "Nginx", "Node.js"]
+  },
+
+  {
+    "slug": "runtime-cache-invalidation",
+    "type": "case-study",
+    "title": {
+      "es": "Caché en tiempo de ejecución e invalidación",
+      "en": "Runtime Cache & Invalidation"
+    },
+    "description": {
+      "es": "Sistema de caché e invalidación de contenido dinámico en aplicaciones Angular con SSR.",
+      "en": "Runtime caching and invalidation system for dynamic content in Angular SSR applications."
+    },
+    "solution": {
+      "es": [
+        "Caché de HTML y datos en tiempo de ejecución.",
+        "Invalidación por eventos de CMS.",
+        "Fallback controlado a SSR."
+      ],
+      "en": [
+        "Runtime HTML and data caching.",
+        "CMS-driven invalidation events.",
+        "Controlled SSR fallback."
+      ]
+    },
+    "stack": ["Angular", "Node.js", "SSR", "Docker"]
+  },
+
+  {
+    "slug": "headless-cms-dynamic-routing",
+    "type": "case-study",
+    "title": {
+      "es": "Rutas dinámicas con CMS headless",
+      "en": "Headless CMS Dynamic Routing"
+    },
+    "description": {
+      "es": "Sistema de rutas dinámicas en Angular basado en contenido gestionado desde un CMS headless.",
+      "en": "Dynamic routing system in Angular driven by headless CMS content."
+    },
+    "solution": {
+      "es": [
+        "Carga dinámica de rutas en el arranque.",
+        "Resolución multi-idioma.",
+        "Caché para evitar peticiones redundantes."
+      ],
+      "en": [
+        "Runtime route configuration loading.",
+        "Multi-language resolution.",
+        "Caching to avoid redundant requests."
+      ]
+    },
+    "stack": ["Angular", "Strapi", "TypeScript", "RxJS"]
+  },
+
+  {
+    "slug": "frontend-dx-tooling",
+    "type": "case-study",
+    "title": {
+      "es": "Tooling de DX para Frontend",
+      "en": "Frontend Developer Experience Tooling"
+    },
+    "description": {
+      "es": "Herramientas internas para mejorar la experiencia de desarrollo en proyectos Angular de gran escala.",
+      "en": "Internal tooling to improve developer experience in large-scale Angular projects."
+    },
+    "solution": {
+      "es": [
+        "Scripts de automatización de build y prerender.",
+        "Gestión centralizada de configuración."
+      ],
+      "en": [
+        "Build and prerender automation scripts.",
+        "Centralized configuration management."
+      ]
+    },
+    "impact": {
+      "es": [
+        "Reducción de tiempos de build.",
+        "Onboarding más rápido."
+      ],
+      "en": [
+        "Reduced build times.",
+        "Faster onboarding."
+      ]
+    },
+    "stack": ["Node.js", "Angular", "TypeScript", "Docker"]
   }
 ]

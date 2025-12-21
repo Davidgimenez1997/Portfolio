@@ -2,23 +2,51 @@
   {
     "company": "Grupo Orenes",
     "role": {
-      "es": "Full Stack (Frontend focus)",
-      "en": "Full Stack (Frontend focus)"
+      "es": "Senior Frontend Engineer (Angular · SSR)",
+      "en": "Senior Frontend Engineer (Angular · SSR)"
     },
-    "from": "2023-01",
+    "from": "2019-05",
     "to": null,
     "highlights": {
       "es": [
-        "Arquitectura SSR + prerender para múltiples marcas.",
-        "Integración con CMS (Strapi) y rutas dinámicas.",
-        "Optimización DX: scripts, cachés y automatización."
+        "Diseño e implementación de arquitectura Angular con SSR y prerendering para múltiples marcas y mercados.",
+        "Integración avanzada con CMS headless (Strapi), incluyendo rutas dinámicas, contenido multi-idioma y estrategias de caché.",
+        "Automatización de procesos de build, prerender y despliegue mediante Docker y Kubernetes.",
+        "Mejoras de Developer Experience (DX): scripts internos, optimización de builds y reducción de peticiones redundantes."
       ],
       "en": [
-        "SSR + prerender architecture for multiple brands.",
-        "CMS integration (Strapi) and dynamic routes.",
-        "DX improvements: scripts, caching and automation."
+        "Designed and implemented Angular architecture with SSR and prerendering for multiple brands and markets.",
+        "Advanced integration with headless CMS (Strapi), including dynamic routes, multi-language content and caching strategies.",
+        "Automation of build, prerender and deployment processes using Docker and Kubernetes.",
+        "Developer Experience (DX) improvements: internal tooling, build optimization and reduced redundant requests."
       ]
     },
-    "stack": ["Angular", "SSR", "Node.js", "Docker", "Kubernetes", "Strapi"]
+    "stack": ["Angular", "TypeScript", "SSR", "Prerender", "Node.js", "Docker", "Kubernetes", "Strapi"]
+  },
+  {
+    "company": "R. Franco Digital",
+    "role": {
+      "es": "Frontend Web Developer",
+      "en": "Frontend Web Developer"
+    },
+    "from": "2019-03",
+    "to": "2019-05",
+    "highlights": {
+      "es": [
+        "Desarrollo de aplicaciones móviles nativas con Java y Android Studio.",
+        "Consumo de APIs REST y gestión de datos locales mediante SQLite.",
+        "Persistencia de datos y comunicación con bases de datos MySQL.",
+        "Apoyo en desarrollo web con HTML5, CSS3, JavaScript y Bootstrap.",
+        "Trabajo en equipo bajo metodología ágil con seguimiento de tareas en Jira."
+      ],
+      "en": [
+        "Development of native mobile applications using Java and Android Studio.",
+        "Consumption of REST APIs and local data management with SQLite.",
+        "Data persistence and interaction with MySQL databases.",
+        "Support in web development using HTML5, CSS3, JavaScript and Bootstrap.",
+        "Team collaboration under agile methodologies with task tracking in Jira."
+      ]
+    },
+    "stack": ["Java", "Android", "REST APIs", "SQLite", "MySQL", "HTML", "CSS", "JavaScript", "Bootstrap"]
   }
 ]
