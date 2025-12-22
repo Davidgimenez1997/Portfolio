@@ -11,20 +11,22 @@ jobs:
   smoke:
     if: ${{ github.event.deployment_status.state == 'success' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 10
 
     steps:
       - name: Preview URL
         run: echo "${{ github.event.deployment_status.target_url }}"
 
       - name: Smoke test (HTTP 200)
+        env:
+          VERCEL_BYPASS_SECRET: ${{ secrets.VERCEL_BYPASS_SECRET }}
         run: |
           URL="${{ github.event.deployment_status.target_url }}"
-          curl -fsS "$URL/" > /dev/null
+          curl -fsS -H "x-vercel-protection-bypass: $VERCEL_BYPASS_SECRET" "$URL/" > /dev/null
 
       - name: Assert SSR actually ran (optional)
+        env:
+          VERCEL_BYPASS_SECRET: ${{ secrets.VERCEL_BYPASS_SECRET }}
         run: |
           URL="${{ github.event.deployment_status.target_url }}"
-          # busca algo típico de Angular SSR/hydration si lo tienes
-          html="$(curl -fsS "$URL/")"
+          html="$(curl -fsS -H "x-vercel-protection-bypass: $VERCEL_BYPASS_SECRET" "$URL/")"
           echo "$html" | grep -qi "<app-root" || (echo "No app-root found" && exit 1)
