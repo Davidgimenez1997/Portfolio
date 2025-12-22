@@ -1,0 +1,50 @@
+.home-hero {
+  .hero-title {
+    letter-spacing: -0.02em;
+  }
+
+  .hero-subtitle {
+    max-width: 62ch;
+  }
+
+  .btn-pill {
+    border-radius: 999px;
+  }
+
+  .snapshot-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .6rem .75rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .04);
+  }
+
+  .stat-label {
+    color: var(--muted);
+    font-size: .85rem;
+  }
+
+  .stat-value {
+    color: var(--text);
+    font-weight: 600;
+    font-size: .9rem;
+  }
+}
+
+/* Featured cards hover */
+.card-modern {
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.card-modern:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, .18);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, .35);
+}

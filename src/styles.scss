@@ -1,7 +1,58 @@
-/* You can add global styles to this file, and also import other style files */
-body {
-  background: #fff;
+html {
+  scroll-behavior: smooth;
 }
-.card {
-  border-radius: 1rem;
+
+[data-spy] {
+  scroll-margin-top: 80px;
+}
+
+:root {
+  --bg: #0b0f19;
+  --surface: rgba(255, 255, 255, .06);
+  --surface-2: rgba(255, 255, 255, .10);
+  --text: rgba(255, 255, 255, .92);
+  --muted: rgba(255, 255, 255, .66);
+  --border: rgba(255, 255, 255, .12);
+  --accent: #7c3aed;
+  --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+  --radius: 18px;
+  --font-sans: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+body {
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(124, 58, 237, .25), transparent 60%),
+  radial-gradient(1000px 500px at 80% 20%, rgba(59, 130, 246, .18), transparent 55%),
+  var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans), serif;
+}
+
+.card-modern {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.badge-chip {
+  border: 1px solid var(--border);
+  color: var(--text);
+  background: rgba(255, 255, 255, .06);
+  border-radius: 999px;
+  padding: .35rem .65rem;
+  font-weight: 500;
+}
+
+.btn-accent {
+  background: var(--accent);
+  border: 1px solid rgba(255, 255, 255, .14);
+  color: white;
+  border-radius: 999px;
+  padding: .65rem 1rem;
+  font-weight: 600;
+}
+
+.btn-accent:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
 }
