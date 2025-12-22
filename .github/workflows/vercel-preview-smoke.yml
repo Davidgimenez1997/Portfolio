@@ -16,12 +16,24 @@ jobs:
       - name: Preview URL
         run: echo "${{ github.event.deployment_status.target_url }}"
 
+      - name: Check bypass secret present
+        env:
+          VERCEL_BYPASS_SECRET: ${{ secrets.VERCEL_BYPASS_SECRET }}
+        run: |
+          if [ -z "$VERCEL_BYPASS_SECRET" ]; then
+            echo "VERCEL_BYPASS_SECRET is empty or not available in this workflow context"
+            exit 1
+          fi
+          echo "VERCEL_BYPASS_SECRET present"
+
+
       - name: Smoke test (HTTP 200)
         env:
           VERCEL_BYPASS_SECRET: ${{ secrets.VERCEL_BYPASS_SECRET }}
         run: |
           URL="${{ github.event.deployment_status.target_url }}"
           curl -fsS -H "x-vercel-protection-bypass: $VERCEL_BYPASS_SECRET" "$URL/" > /dev/null
+
 
       - name: Assert SSR actually ran (optional)
         env:
