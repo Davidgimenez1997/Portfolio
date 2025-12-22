@@ -4,11 +4,11 @@
             <a class="btn btn-link px-0 mb-3" routerLink="/projects">← Back</a>
 
             <h1 class="h3 mb-2">{{ project._title }}</h1>
-            <p class="text-muted mb-4">{{ project._description }}</p>
+            <p class="mb-4">{{ project._description }}</p>
 
             @if (project._context) {
                 <h2 class="h5">Context</h2>
-                <p class="text-muted">{{ project._context }}</p>
+                <p>{{ project._context }}</p>
             }
 
             @if (project._solution.length) {
@@ -41,7 +41,7 @@
             <h2 class="h5 mt-4">Stack</h2>
             <div class="d-flex flex-wrap gap-2">
                 @for (tech of project.stack ?? []; track tech) {
-                    <span class="badge text-bg-light border">{{ tech }}</span>
+                    <span class="badge text-bg-light border badge-chip">{{ tech }}</span>
                 }
             </div>
 

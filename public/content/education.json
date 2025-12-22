@@ -1,0 +1,44 @@
+[
+  {
+    "institution": "U-Tad Centro Universitario de Tecnología y Arte Digital",
+    "degree": {
+      "es": "Grado Superior DAM (Desarrollo de Aplicaciones Multiplataforma)",
+      "en": "Higher Level DAM (Multiplatform Application Development)"
+    },
+    "from": "2015",
+    "to": "2019",
+    "highlights": {
+      "es": [
+        "Formación sólida en desarrollo de software, algoritmos y arquitecturas de sistemas.",
+        "Proyectos de equipo específicos en Angular, TypeScript y desarrollo web moderno.",
+        "Participación en seminarios de DevOps, testing y metodologías ágiles.",
+        "Trabajo de Fin de Grado enfocado en aplicaciones web escalables."
+      ],
+      "en": [
+        "Strong academic foundation in software development, algorithms and system architecture.",
+        "Team projects focused on Angular, TypeScript and modern web development.",
+        "Participation in DevOps, testing and agile methodology workshops.",
+        "Final Degree Project focused on scalable web applications."
+      ]
+    },
+    "stack": ["Angular", "TypeScript", "REST APIs", "Agile", "Git"]
+  },
+  {
+    "institution": "IES San Isidro",
+    "degree": {
+      "es": "Bachillerato en Ciencias y Tecnología",
+      "en": "High School Diploma in Science and Technology"
+    },
+    "from": "2012",
+    "to": "2014",
+    "highlights": {
+      "es": [
+        "Bachillerato especializado en la modalidad de ciencias y tecnologia."
+      ],
+      "en": [
+        "High school diploma specializing in science and technology."
+      ]
+    },
+    "stack": []
+  }
+]

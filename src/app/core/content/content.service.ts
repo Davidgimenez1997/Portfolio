@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { Profile, Skills, ExperienceItem, Project } from './models';
+import {Profile, Skills, ExperienceItem, Project, EducationItem} from './models';
 
 @Injectable({ providedIn: 'root' })
 export class ContentService {
@@ -11,6 +11,7 @@ export class ContentService {
     private profile$ = this.http.get<Profile>('/content/profile.json').pipe(shareReplay(1));
     private skills$ = this.http.get<Skills>('/content/skills.json').pipe(shareReplay(1));
     private experience$ = this.http.get<ExperienceItem[]>('/content/experience.json').pipe(shareReplay(1));
+    private education$ = this.http.get<EducationItem[]>('/content/education.json').pipe(shareReplay(1));
     private projects$ = this.http.get<Project[]>('/content/projects.json').pipe(shareReplay(1));
 
     getProfile(): Observable<Profile> {
@@ -23,6 +24,10 @@ export class ContentService {
 
     getExperience(): Observable<ExperienceItem[]> {
         return this.experience$;
+    }
+
+    getEducation(): Observable<EducationItem[]> {
+        return this.education$;
     }
 
     getProjects(): Observable<Project[]> {

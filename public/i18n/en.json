@@ -4,42 +4,83 @@
     "about": "About",
     "projects": "Projects",
     "experience": "Experience",
+    "education": "Education",
     "contact": "Contact"
   },
   "home": {
-    "home": {
-      "title": "Hi, I'm David",
-      "subtitle": "Frontend Engineer (Angular) — SSR, prerendering and clean architecture.",
-      "ctaProjects": "View projects",
-      "ctaContact": "Contact",
-      "featuredTitle": "Featured projects",
-      "featuredSubtitle": "A quick selection to show the kind of work and technical focus.",
-      "skillsTitle": "Tech stack",
-      "skillsSubtitle": "Core and daily tools."
-    }
+    "title": "Hi, I'm David",
+    "subtitle": "Frontend Developer specialized in Angular, web architecture and performance.",
+    "ctaProjects": "View projects",
+    "ctaContact": "Get in touch",
+    "skillsTitle": "Technologies",
+    "skillsSubtitle": "Tools I work with on a daily basis",
+    "featuredTitle": "Featured projects",
+    "featuredSubtitle": "A selection of representative projects"
   },
   "about": {
     "title": "About",
-    "subtitle": "Focused on Angular, SSR, prerendering and clean architecture.",
+    "subtitle": "Professional profile and approach",
+    "ctaFull": "View full profile",
+    "linksTitle": "Links",
+    "highlightsTitle": "Overview",
+    "highlight1": "More than 6 years of frontend development experience",
+    "highlight2": "Specialized in Angular, SSR and web performance",
+    "highlight3": "Experience with complex architectures and production environments",
     "skills": {
       "core": "Core",
       "daily": "Daily",
-      "familiar": "Familiar"
+      "familiar": "Family"
     }
+  },
+  "projects": {
+    "subtitle": "Case studies and personal projects",
+    "ctaAll": "View all",
+    "ctaView": "View project",
+    "empty": "No projects available at the moment"
   },
   "experience": {
     "title": "Experience",
-    "subtitle": "Roles, impact and technologies.",
+    "subtitle": "Professional background",
+    "ctaFull": "View full experience",
+    "present": "Present"
+  },
+  "education": {
+    "title": "Education",
+    "subtitle": "Academic and technical education",
+    "ctaFull": "View full education",
     "present": "Present"
   },
   "contact": {
-    "title": "Contact",
+    "title": "Contacto",
+    "subtitle": "Let’s talk",
+    "quickTitle": "Quick contact",
+    "quickText": "If you are interested in my profile or want to discuss a project, feel free to reach out.",
+    "ctaForm": "Contact form",
+    "ctaEmail": "Send email",
+    "linksTitle": "Links",
+    "linkGithub": "GitHub",
+    "linkLinkedin": "LinkedIn",
+    "linkCv": "Resume (PDF)",
     "name": "Name",
     "email": "Email",
-    "emailError": "Please enter a valid email.",
     "message": "Message",
-    "send": "Send",
-    "note": "This will open your email client (mailto).",
-    "links": "Links"
+    "send": "Send"
+  },
+  "footer": {
+    "brand": "David Giménez",
+    "summary": "Frontend Developer specialized in Angular, web architecture and performance.",
+    "sections": {
+      "title": "Sections"
+    },
+    "stack": {
+      "title": "Stack"
+    },
+    "links": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "cv": "Resume"
+    },
+    "builtWith": "Built with Angular · SSR · Prerender · i18n",
+    "copyrightName": "David Giménez"
   }
 }

@@ -5,31 +5,38 @@
     </app-section-title>
 
     @if (items$ | async; as items) {
-        <div class="vstack gap-3">
-
+        <div class="timeline">
             @for (item of items; track item) {
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex flex-column flex-md-row justify-content-between gap-2">
-                            <div>
-                                <h3 class="h5 mb-1">{{ item?.company }}</h3>
-                                <div class="text-muted">{{ item?.role?.[currentLang] }}</div>
-                            </div>
-
-                            <div class="text-muted">
-                                {{ item?.from }} — {{ item?.to ?? ('experience.present' | translate) }}
-                            </div>
+                <article class="timeline-item">
+                    <div class="timeline-rail">
+                        <div class="timeline-marker">
+                            <span class="timeline-icon">✦</span>
                         </div>
-
-                        <ul class="mt-3 mb-3">
-                            @for (highLight of item?.highlights?.[currentLang]; track highLight) {
-                                <li>{{ highLight }}</li>
-                            }
-                        </ul>
-
-                        <app-tech-badges [items]="item?.stack"></app-tech-badges>
                     </div>
-                </div>
+
+                    <div class="card card-modern timeline-card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column flex-md-row justify-content-between gap-2">
+                                <div>
+                                    <h3 class="h5 mb-1 text-color">{{ item?.company }}</h3>
+                                    <div class="text-color">{{ item?.role?.[currentLang] }}</div>
+                                </div>
+
+                                <div class="timeline-period">
+                                    {{ item?.from }} — {{ item?.to ?? ('experience.present' | translate) }}
+                                </div>
+                            </div>
+
+                            <ul class="mt-3 mb-3 timeline-highlights">
+                                @for (highLight of item?.highlights?.[currentLang]; track highLight) {
+                                    <li>{{ highLight }}</li>
+                                }
+                            </ul>
+
+                            <app-tech-badges [items]="item?.stack"></app-tech-badges>
+                        </div>
+                    </div>
+                </article>
             }
         </div>
     }

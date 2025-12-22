@@ -1,6 +1,91 @@
-<footer class="border-top py-4 mt-auto">
-    <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
-        <div class="text-muted small">© {{ year }} David Giménez</div>
-        <div class="text-muted small">Angular SSR · Prerender · Bootstrap · FontAwesome</div>
+<footer class="footer border-top mt-auto bg-body-tertiary">
+    <div class="container py-5">
+        <div class="row g-4">
+
+            <!-- Brand / Summary -->
+            <div class="col-12 col-lg-4">
+                <div class="fw-semibold mb-2">{{ 'footer.brand' | translate }}</div>
+                <p class="text-muted small mb-3">
+                    {{ 'footer.summary' | translate }}
+                </p>
+
+                @if (profile$ | async; as profile) {
+                    <div class="d-flex flex-wrap gap-2">
+                        @if (profile?.links?.github) {
+                            <a class="btn btn-outline-secondary btn-sm"
+                               [href]="profile.links?.github"
+                               target="_blank"
+                               rel="noreferrer">
+                                {{ 'footer.links.github' | translate }}
+                            </a>
+                        }
+                        @if (profile?.links?.linkedin) {
+                            <a class="btn btn-outline-secondary btn-sm"
+                               [href]="profile.links?.linkedin"
+                               target="_blank"
+                               rel="noreferrer">
+                                {{ 'footer.links.linkedin' | translate }}
+                            </a>
+                        }
+                        @if (profile?.links?.cv) {
+                            <a class="btn btn-outline-secondary btn-sm"
+                               [href]="profile.links?.cv"
+                               target="_blank"
+                               rel="noreferrer">
+                                {{ 'footer.links.cv' | translate }}
+                            </a>
+                        }
+                    </div>
+                }
+            </div>
+
+            <!-- Navigation -->
+            <div class="col-6 col-lg-4">
+                <div class="fw-semibold mb-2">{{ 'footer.sections.title' | translate }}</div>
+
+                <ul class="list-unstyled small mb-0 footer-links">
+                    @if (isHome$ | async) {
+                        <li><a [routerLink]="['/']" fragment="home">{{ 'nav.home' | translate }}</a></li>
+                        <li><a [routerLink]="['/']" fragment="about">{{ 'nav.about' | translate }}</a></li>
+                        <li><a [routerLink]="['/']" fragment="projects">{{ 'nav.projects' | translate }}</a></li>
+                        <li><a [routerLink]="['/']" fragment="experience">{{ 'nav.experience' | translate }}</a></li>
+                        <li><a [routerLink]="['/']" fragment="education">{{ 'nav.education' | translate }}</a></li>
+                        <li><a [routerLink]="['/']" fragment="contact">{{ 'nav.contact' | translate }}</a></li>
+                    } @else {
+                        <li><a routerLink="/">{{ 'nav.home' | translate }}</a></li>
+                        <li><a routerLink="/about">{{ 'nav.about' | translate }}</a></li>
+                        <li><a routerLink="/projects">{{ 'nav.projects' | translate }}</a></li>
+                        <li><a routerLink="/experience">{{ 'nav.experience' | translate }}</a></li>
+                        <li><a routerLink="/education">{{ 'nav.education' | translate }}</a></li>
+                        <li><a routerLink="/contact">{{ 'nav.contact' | translate }}</a></li>
+                    }
+                </ul>
+            </div>
+
+
+            <!-- Tech stack -->
+            <div class="col-6 col-lg-4">
+                <div class="fw-semibold mb-2">{{ 'footer.stack.title' | translate }}</div>
+
+                <div class="d-flex flex-wrap gap-2">
+                    <span class="badge text-bg-light border">Angular</span>
+                    <span class="badge text-bg-light border">Standalone</span>
+                    <span class="badge text-bg-light border">SSR</span>
+                    <span class="badge text-bg-light border">Prerender</span>
+                    <span class="badge text-bg-light border">TypeScript</span>
+                    <span class="badge text-bg-light border">Bootstrap</span>
+                    <span class="badge text-bg-light border">Docker</span>
+                </div>
+            </div>
+
+        </div>
+
+        <hr class="my-4">
+
+        <!-- Bottom -->
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 small text-muted">
+            <div>© {{ year }} {{ 'footer.copyrightName' | translate }}</div>
+            <div>{{ 'footer.builtWith' | translate }}</div>
+        </div>
     </div>
 </footer>

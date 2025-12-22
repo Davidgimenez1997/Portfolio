@@ -7,15 +7,6 @@ import { FooterComponent } from './shared/footer/footer.component';
     standalone: true,
     selector: 'app-root',
     imports: [RouterOutlet, NavbarComponent, FooterComponent],
-    template: `
-    <app-navbar />
-    <main class="flex-grow-1">
-      <router-outlet />
-    </main>
-    <app-footer />
-  `,
-    styles: [`
-    :host { display: flex; min-height: 100vh; flex-direction: column; }
-  `],
+    templateUrl: './app.html'
 })
 export class App {}

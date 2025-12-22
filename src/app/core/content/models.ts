@@ -32,6 +32,15 @@ export interface ExperienceItem {
   stack?: string[];
 }
 
+export interface EducationItem {
+    institution?: string;
+    degree?: Record<Lang, string>;
+    from?: string;
+    to?: string | null;
+    highlights?: Record<Lang, string[]>;
+    stack?: string[];
+}
+
 export interface ProjectLinks {
     github?: string;
     live?: string;

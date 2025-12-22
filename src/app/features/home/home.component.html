@@ -1,30 +1,45 @@
-<section class="container py-5">
-
+<section id="home" data-spy="home" class="container py-5 home-hero">
     <div class="row align-items-center g-4">
         <div class="col-12 col-lg-8">
-            <h1 class="display-6 fw-semibold mb-2">{{ 'home.title' | translate }}</h1>
-            <p class="lead text-muted mb-4">{{ 'home.subtitle' | translate }}</p>
+            <h1 class="display-6 fw-semibold mb-2 hero-title">{{ 'home.title' | translate }}</h1>
+            <p class="lead mb-4 hero-subtitle">{{ 'home.subtitle' | translate }}</p>
 
-            <div class="d-flex flex-wrap gap-2">
-                <a class="btn btn-primary" routerLink="/projects">
+            <div class="d-flex flex-wrap gap-2 mb-4">
+                <a class="btn btn-primary btn-accent" routerLink="/projects">
                     {{ 'home.ctaProjects' | translate }}
                 </a>
-                <a class="btn btn-outline-secondary" routerLink="/contact">
+                <a class="btn btn-outline-secondary btn-pill" routerLink="/contact">
                     {{ 'home.ctaContact' | translate }}
                 </a>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2">
+                <span class="badge-chip">Angular • Standalone</span>
+                <span class="badge-chip">SSR + Prerender</span>
+                <span class="badge-chip">i18n ES/EN</span>
+                <span class="badge-chip">Docker + Nginx</span>
             </div>
         </div>
 
         <div class="col-12 col-lg-4">
-            <div class="card shadow-sm">
+            <div class="card card-modern snapshot-card">
                 <div class="card-body">
-                    <div class="text-muted small mb-2">Snapshot</div>
-                    <ul class="mb-0">
-                        <li>Angular (standalone)</li>
-                        <li>SSR + prerender</li>
-                        <li>i18n ES/EN</li>
-                        <li>Docker + Nginx + Node</li>
-                    </ul>
+                    <div class="text-muted small mb-3">Snapshot</div>
+
+                    <div class="vstack gap-2">
+                        <div class="stat-row">
+                            <div class="stat-label text-muted">Focus</div>
+                            <div class="stat-value text-muted">Frontend + Architecture</div>
+                        </div>
+                        <div class="stat-row">
+                            <div class="stat-label text-muted">Strength</div>
+                            <div class="stat-value text-muted">Performance / SEO</div>
+                        </div>
+                        <div class="stat-row">
+                            <div class="stat-label text-muted">Stack</div>
+                            <div class="stat-value text-muted">Angular / Node / K8s</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -39,7 +54,7 @@
 
             <div class="row g-3">
                 <div class="col-12 col-lg-6">
-                    <div class="card h-100">
+                    <div class="card h-100 card-modern">
                         <div class="card-body">
                             <h3 class="h6 mb-3">Core</h3>
                             <app-tech-badges [items]="skill?.core"></app-tech-badges>
@@ -48,7 +63,7 @@
                 </div>
 
                 <div class="col-12 col-lg-6">
-                    <div class="card h-100">
+                    <div class="card h-100 card-modern">
                         <div class="card-body">
                             <h3 class="h6 mb-3">Daily</h3>
                             <app-tech-badges [items]="skill?.daily"></app-tech-badges>
@@ -70,18 +85,18 @@
             </app-section-title>
 
             <div class="row g-3">
-                @for (feature of features; track feature) {
+                @for (feature of features; track feature?.slug) {
                     <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card h-100">
+                        <div class="card h-100 card-modern">
                             <div class="card-body d-flex flex-column">
                                 <h3 class="h6">{{ feature?._title }}</h3>
                                 <p class="text-muted small flex-grow-1 mb-3">{{ feature?._description }}</p>
 
                                 <div class="d-flex flex-wrap gap-2 mb-3">
                                     @for (stack of feature?.stack; track stack) {
-                                        <span class="badge text-bg-light border">
-                                                    {{ stack }}
-                                                </span>
+                                        <span class="badge text-bg-light border badge-chip">
+                      {{ stack }}
+                    </span>
                                     }
                                 </div>
 
@@ -93,6 +108,291 @@
                         </div>
                     </div>
                 }
+            </div>
+        </div>
+    }
+</section>
+
+<section id="about" data-spy="about" class="container py-5">
+    <app-section-title
+            [title]="'nav.about' | translate"
+            [subtitle]="'about.subtitle' | translate">
+        <a class="btn btn-outline-primary btn-sm" routerLink="/about">
+            {{ 'about.ctaFull' | translate }}
+        </a>
+    </app-section-title>
+
+    @if (profile$ | async; as profile) {
+        <div class="row g-4">
+            <div class="col-12 col-lg-7">
+                <div class="card card-modern">
+                    <div class="card-body">
+                        <h3 class="h5 mb-1">{{ profile?.name }}</h3>
+
+                        @if (tRecord(profile?.role)) {
+                            <div class="text-muted mb-2">{{ tRecord(profile?.role) }}</div>
+                        }
+
+                        @if (profile?.location) {
+                            <div class="text-muted small mb-3">{{ profile?.location }}</div>
+                        }
+
+                        @if (tRecord(profile?.summary)) {
+                            <p class="mb-0">{{ tRecord(profile?.summary) }}</p>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-5">
+                <div class="card card-modern h-100">
+                    <div class="card-body">
+                        <h3 class="h6 mb-3">{{ 'about.linksTitle' | translate }}</h3>
+
+                        <div class="vstack gap-2">
+                            @if (profile?.links?.github) {
+                                <a class="btn btn-outline-secondary btn-sm text-start"
+                                   [href]="profile.links?.github" target="_blank" rel="noreferrer">
+                                    GitHub
+                                </a>
+                            }
+                            @if (profile?.links?.linkedin) {
+                                <a class="btn btn-outline-secondary btn-sm text-start"
+                                   [href]="profile.links?.linkedin" target="_blank" rel="noreferrer">
+                                    LinkedIn
+                                </a>
+                            }
+                            @if (profile?.links?.cv) {
+                                <a class="btn btn-outline-secondary btn-sm text-start"
+                                   [href]="profile.links?.cv" target="_blank" rel="noreferrer">
+                                    CV (PDF)
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</section>
+
+<section id="projects" data-spy="projects" class="container py-5">
+    <app-section-title
+            [title]="'nav.projects' | translate"
+            [subtitle]="'projects.subtitle' | translate">
+        <a class="btn btn-outline-primary btn-sm" routerLink="/projects">
+            {{ 'projects.ctaAll' | translate }}
+        </a>
+    </app-section-title>
+
+    @if (featured$ | async; as features) {
+        <div class="row g-3">
+            @for (feature of features; track feature?.slug) {
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100 card-modern">
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="h6">{{ feature?._title }}</h3>
+                            <p class="text-muted small flex-grow-1 mb-3">{{ feature?._description }}</p>
+
+                            @if (feature?.stack?.length) {
+                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                    @for (s of feature.stack; track s) {
+                                        <span class="badge text-bg-light border badge-chip">{{ s }}</span>
+                                    }
+                                </div>
+                            }
+
+                            <div class="d-flex gap-2">
+                                <a class="btn btn-primary btn-sm"
+                                   [routerLink]="['/projects', feature?.slug]">
+                                    {{ 'projects.ctaView' | translate }}
+                                </a>
+
+                                @if (feature?.links?.github) {
+                                    <a class="btn btn-outline-secondary btn-sm"
+                                       [href]="feature.links?.github" target="_blank" rel="noreferrer">
+                                        GitHub
+                                    </a>
+                                }
+
+                                @if (feature?.links?.live) {
+                                    <a class="btn btn-outline-secondary btn-sm"
+                                       [href]="feature.links?.live" target="_blank" rel="noreferrer">
+                                        Live
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</section>
+
+<section id="experience" data-spy="experience" class="container py-5">
+    <app-section-title
+            [title]="'nav.experience' | translate"
+            [subtitle]="'experience.subtitle' | translate">
+        <a class="btn btn-outline-primary btn-sm" routerLink="/experience">
+            {{ 'experience.ctaFull' | translate }}
+        </a>
+    </app-section-title>
+
+    @if (experience$ | async; as items) {
+        <div class="vstack gap-3">
+            @for (item of items; track item?.company) {
+                <div class="card card-modern">
+                    <div class="card-body">
+                        <div class="d-flex flex-wrap align-items-baseline justify-content-between gap-2 mb-2">
+                            <div class="fw-semibold">
+                                {{ tRecord(item?.role) }}
+                                @if (item?.company) { <span class="text-muted"> · {{ item.company }}</span> }
+                            </div>
+                            <div class="text-muted small">
+                                {{ item?.from }}
+                                @if (item?.to) { - {{ item.to }} } @else { - Present }
+                            </div>
+                        </div>
+
+                        @if (item?.highlights) {
+                            <ul class="mb-2">
+                                @for (h of tArray(item?.highlights); track h) {
+                                    <li>{{ h }}</li>
+                                }
+                            </ul>
+                        }
+
+                        @if (item?.stack?.length) {
+                            <div class="d-flex flex-wrap gap-2">
+                                @for (s of item.stack; track s) {
+                                    <span class="badge text-bg-light border badge-chip">{{ s }}</span>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</section>
+
+<section id="education" data-spy="education" class="container py-5">
+    <app-section-title
+            [title]="'nav.education' | translate"
+            [subtitle]="'education.subtitle' | translate">
+        <a class="btn btn-outline-primary btn-sm" routerLink="/education">
+            {{ 'education.ctaFull' | translate }}
+        </a>
+    </app-section-title>
+
+    @if (education$ | async; as items) {
+        <div class="row g-3">
+            @for (item of items; track item?.institution) {
+                <div class="col-12 col-lg-6">
+                    <div class="card h-100 card-modern">
+                        <div class="card-body">
+                            <div class="fw-semibold">{{ tRecord(item?.degree) }}</div>
+                            <div class="text-muted">{{ item?.institution }}</div>
+                            <div class="text-muted small mt-1">
+                                {{ item?.from }}
+                                @if (item?.to) { - {{ item.to }} }
+                            </div>
+
+                            @if (item?.highlights) {
+                                <ul class="mt-3 mb-0">
+                                    @for (h of tArray(item?.highlights); track h) {
+                                        <li>{{ h }}</li>
+                                    }
+                                </ul>
+                            }
+
+                            @if (item?.stack?.length) {
+                                <div class="d-flex flex-wrap gap-2 mt-3">
+                                    @for (s of item.stack; track s) {
+                                        <span class="badge text-bg-light border badge-chip">{{ s }}</span>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</section>
+
+<section id="contact" data-spy="contact" class="container py-5">
+    <app-section-title
+            [title]="'nav.contact' | translate"
+            [subtitle]="'contact.subtitle' | translate">
+    </app-section-title>
+
+    @if (profile$ | async; as profile) {
+        <div class="row g-4">
+            <div class="col-12 col-lg-7">
+                <div class="card card-modern">
+                    <div class="card-body">
+                        <h3 class="h6 mb-2">{{ 'contact.quickTitle' | translate }}</h3>
+                        <p class="text-muted mb-3">{{ 'contact.quickText' | translate }}</p>
+
+                        <div class="d-flex flex-wrap gap-2">
+                            <a class="btn btn-primary btn-sm" routerLink="/contact">
+                                {{ 'contact.ctaForm' | translate }}
+                            </a>
+
+                            @if (profile?.links?.linkedin) {
+                                <a class="btn btn-outline-secondary btn-sm"
+                                   [href]="profile.links?.linkedin" target="_blank" rel="noreferrer">
+                                    LinkedIn
+                                </a>
+                            }
+
+                            @if (profile?.links?.github) {
+                                <a class="btn btn-outline-secondary btn-sm"
+                                   [href]="profile.links?.github" target="_blank" rel="noreferrer">
+                                    GitHub
+                                </a>
+                            }
+
+                            @if (profile?.links?.cv) {
+                                <a class="btn btn-outline-secondary btn-sm"
+                                   [href]="profile.links?.cv" target="_blank" rel="noreferrer">
+                                    CV (PDF)
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-5">
+                <div class="card card-modern h-100">
+                    <div class="card-body">
+                        <h3 class="h6 mb-3">{{ 'contact.linksTitle' | translate }}</h3>
+
+                        <div class="vstack gap-2">
+                            @if (profile?.links?.github) {
+                                <a class="btn btn-outline-secondary btn-sm text-start"
+                                   [href]="profile.links?.github" target="_blank" rel="noreferrer">
+                                    {{ 'contact.linkGithub' | translate }}
+                                </a>
+                            }
+                            @if (profile?.links?.linkedin) {
+                                <a class="btn btn-outline-secondary btn-sm text-start"
+                                   [href]="profile.links?.linkedin" target="_blank" rel="noreferrer">
+                                    {{ 'contact.linkLinkedin' | translate }}
+                                </a>
+                            }
+                            @if (profile?.links?.cv) {
+                                <a class="btn btn-outline-secondary btn-sm text-start"
+                                   [href]="profile.links?.cv" target="_blank" rel="noreferrer">
+                                    {{ 'contact.linkCv' | translate }}
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     }
