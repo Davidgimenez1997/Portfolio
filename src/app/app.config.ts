@@ -10,6 +10,7 @@ import {provideTranslateHttpLoader} from '@ngx-translate/http-loader';
 import {routes} from './app.routes';
 import {provideFontAwesomeIcons} from "./core/icons/fontawesome.provider";
 import {provideVercelAnalytics} from "./core/analytics/vercel-analytics.provider";
+import {provideVercelSpeedInsights} from "./core/analytics/vercel-speed-insights.provider";
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -26,6 +27,7 @@ export const appConfig: ApplicationConfig = {
                 suffix: '.json'
             })
         }),
-        provideVercelAnalytics()
+        provideVercelAnalytics(),
+        provideVercelSpeedInsights()
     ],
 };
