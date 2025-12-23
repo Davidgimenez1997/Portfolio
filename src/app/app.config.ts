@@ -2,7 +2,7 @@ import {
     ApplicationConfig,
     provideBrowserGlobalErrorListeners
 } from '@angular/core';
-import {provideRouter} from '@angular/router';
+import {provideRouter, withInMemoryScrolling} from '@angular/router';
 import {provideClientHydration, withEventReplay} from '@angular/platform-browser';
 import {provideHttpClient, withFetch} from '@angular/common/http';
 import {provideTranslateService} from '@ngx-translate/core';
@@ -15,7 +15,10 @@ import {provideVercelSpeedInsights} from "./core/analytics/vercel-speed-insights
 export const appConfig: ApplicationConfig = {
     providers: [
         provideBrowserGlobalErrorListeners(),
-        provideRouter(routes),
+        provideRouter(routes, withInMemoryScrolling({
+            scrollPositionRestoration: 'top',
+            anchorScrolling: 'enabled',
+        })),
         provideClientHydration(withEventReplay()),
         ...provideFontAwesomeIcons(),
         provideHttpClient(withFetch()),

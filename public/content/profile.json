@@ -4,14 +4,17 @@
     "es": "Senior Frontend Engineer (Angular · SSR · Arquitectura)",
     "en": "Senior Frontend Engineer (Angular · SSR · Architecture)"
   },
-  "location": "Madrid, Spain",
+  "location": {
+    "es": "Madrid, España",
+    "en": "Madrid, Spain"
+  },
   "summary": {
     "es": "Senior Frontend Engineer especializado en Angular con foco en SSR, prerendering y arquitectura escalable. Más de 6 años de experiencia desarrollando aplicaciones complejas, integradas con CMS y desplegadas con Docker y Kubernetes.",
     "en": "Senior Frontend Engineer specialized in Angular with a strong focus on SSR, prerendering, and scalable architecture. Over 6 years of experience building complex applications integrated with headless CMS and deployed using Docker and Kubernetes."
   },
   "links": {
-    "github": "https://github.com/",
+    "github": "https://github.com/Davidgimenez1997",
     "linkedin": "https://www.linkedin.com/in/davidgimenezrodriguezderivera/",
-    "cv": "/assets/content/cv.pdf"
+    "cv": "/cv/cv_enero_2024.pdf"
   }
 }

@@ -1,15 +1,15 @@
 <section id="home" trackSection="home" data-spy="home" class="container py-5 home-hero">
     <div class="row align-items-center g-4">
         <div class="col-12 col-lg-8">
-            <h1 class="display-6 fw-semibold mb-2 hero-title">{{ 'home.title' | translate }}</h1>
-            <p class="lead mb-4 hero-subtitle">{{ 'home.subtitle' | translate }}</p>
+            <h1 class="display-6 fw-semibold mb-2 title">{{ 'home.title' | translate }}</h1>
+            <p class="lead mb-4 subtitle">{{ 'home.subtitle' | translate }}</p>
 
             <div class="d-flex flex-wrap gap-2 mb-4">
                 <a class="btn btn-primary btn-accent" routerLink="/projects"
                    (click)="analyticsService.ctaClick('view_projects', 'herp')">
                     {{ 'home.ctaProjects' | translate }}
                 </a>
-                <a class="btn btn-outline-secondary btn-pill" routerLink="/contact"
+                <a class="btn btn-primary btn-accent" routerLink="/contact"
                    (click)="analyticsService.ctaClick('contact', 'herp')">
                     {{ 'home.ctaContact' | translate }}
                 </a>
@@ -26,20 +26,20 @@
         <div class="col-12 col-lg-4">
             <div class="card card-modern snapshot-card">
                 <div class="card-body">
-                    <div class="text-muted small mb-3">Snapshot</div>
+                    <div class="text-muted small mb-3">{{ 'home.snapshot' | translate }}</div>
 
                     <div class="vstack gap-2">
                         <div class="stat-row">
-                            <div class="stat-label text-muted">Focus</div>
-                            <div class="stat-value text-muted">Frontend + Architecture</div>
+                            <div class="stat-label text-muted">{{ 'home.focus.title' | translate }}</div>
+                            <div class="stat-value text-muted">{{ 'home.focus.message' | translate }}</div>
                         </div>
                         <div class="stat-row">
-                            <div class="stat-label text-muted">Strength</div>
-                            <div class="stat-value text-muted">Performance / SEO</div>
+                            <div class="stat-label text-muted">{{ 'home.strength.title' | translate }}</div>
+                            <div class="stat-value text-muted">{{ 'home.strength.message' | translate }}</div>
                         </div>
                         <div class="stat-row">
-                            <div class="stat-label text-muted">Stack</div>
-                            <div class="stat-value text-muted">Angular / Node / K8s</div>
+                            <div class="stat-label text-muted">{{ 'home.stack.title' | translate }}</div>
+                            <div class="stat-value text-muted">{{ 'home.stack.message' | translate }}</div>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                 <div class="col-12 col-lg-6">
                     <div class="card h-100 card-modern">
                         <div class="card-body">
-                            <h3 class="h6 mb-3">Core</h3>
+                            <h3 class="h6 mb-3">{{ 'home.skills.core' | translate }}</h3>
                             <app-tech-badges [items]="skill?.core"></app-tech-badges>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                 <div class="col-12 col-lg-6">
                     <div class="card h-100 card-modern">
                         <div class="card-body">
-                            <h3 class="h6 mb-3">Daily</h3>
+                            <h3 class="h6 mb-3">{{ 'home.skills.daily' | translate }}</h3>
                             <app-tech-badges [items]="skill?.daily"></app-tech-badges>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
             <app-section-title
                     [title]="'home.featuredTitle' | translate"
                     [subtitle]="'home.featuredSubtitle' | translate">
-                <a class="btn btn-outline-primary btn-sm" routerLink="/projects">
+                <a class="btn btn-primary btn-sm btn-accent" routerLink="/projects">
                     {{ 'home.ctaProjects' | translate }}
                 </a>
             </app-section-title>
@@ -97,14 +97,14 @@
                                 <div class="d-flex flex-wrap gap-2 mb-3">
                                     @for (stack of feature?.stack; track stack) {
                                         <span class="badge text-bg-light border badge-chip">
-                      {{ stack }}
-                    </span>
+                                            {{ stack }}
+                                        </span>
                                     }
                                 </div>
 
                                 <a class="btn btn-primary btn-sm align-self-start"
                                    [routerLink]="['/projects', feature?.slug]">
-                                    View
+                                    {{ 'home.viewProject' | translate }}
                                 </a>
                             </div>
                         </div>
@@ -119,7 +119,7 @@
     <app-section-title
             [title]="'nav.about' | translate"
             [subtitle]="'about.subtitle' | translate">
-        <a class="btn btn-outline-primary btn-sm" routerLink="/about">
+        <a class="btn btn-primary btn-sm btn-accent" routerLink="/about">
             {{ 'about.ctaFull' | translate }}
         </a>
     </app-section-title>
@@ -135,8 +135,8 @@
                             <div class="text-muted mb-2">{{ tRecord(profile?.role) }}</div>
                         }
 
-                        @if (profile?.location) {
-                            <div class="text-muted small mb-3">{{ profile?.location }}</div>
+                        @if (tRecord(profile?.location)) {
+                            <div class="text-muted small mb-3">{{ tRecord(profile?.location) }}</div>
                         }
 
                         @if (tRecord(profile?.summary)) {
@@ -153,21 +153,21 @@
 
                         <div class="vstack gap-2">
                             @if (profile?.links?.github) {
-                                <a class="btn btn-outline-secondary btn-sm text-start"
+                                <a class="btn btn-outline-primary btn-sm text-start"
                                    [href]="profile.links?.github" target="_blank" rel="noreferrer">
                                     GitHub
                                 </a>
                             }
                             @if (profile?.links?.linkedin) {
-                                <a class="btn btn-outline-secondary btn-sm text-start"
+                                <a class="btn btn-outline-primary btn-sm text-start"
                                    [href]="profile.links?.linkedin" target="_blank" rel="noreferrer">
-                                    LinkedIn
+                                    {{ 'contact.linkLinkedin' | translate }}
                                 </a>
                             }
                             @if (profile?.links?.cv) {
-                                <a class="btn btn-outline-secondary btn-sm text-start"
+                                <a class="btn btn-outline-primary btn-sm text-start"
                                    [href]="profile.links?.cv" target="_blank" rel="noreferrer">
-                                    CV (PDF)
+                                    {{ 'contact.linkCv' | translate }}
                                 </a>
                             }
                         </div>
@@ -182,7 +182,7 @@
     <app-section-title
             [title]="'nav.projects' | translate"
             [subtitle]="'projects.subtitle' | translate">
-        <a class="btn btn-outline-primary btn-sm" routerLink="/projects">
+        <a class="btn btn-primary btn-sm btn-accent" routerLink="/projects">
             {{ 'projects.ctaAll' | translate }}
         </a>
     </app-section-title>
@@ -198,8 +198,8 @@
 
                             @if (feature?.stack?.length) {
                                 <div class="d-flex flex-wrap gap-2 mb-3">
-                                    @for (s of feature.stack; track s) {
-                                        <span class="badge text-bg-light border badge-chip">{{ s }}</span>
+                                    @for (stack of feature.stack; track stack) {
+                                        <span class="badge text-bg-light border badge-chip">{{ stack }}</span>
                                     }
                                 </div>
                             }
@@ -236,7 +236,7 @@
     <app-section-title
             [title]="'nav.experience' | translate"
             [subtitle]="'experience.subtitle' | translate">
-        <a class="btn btn-outline-primary btn-sm" routerLink="/experience">
+        <a class="btn btn-primary btn-sm btn-accent" routerLink="/experience">
             {{ 'experience.ctaFull' | translate }}
         </a>
     </app-section-title>
@@ -252,8 +252,8 @@
                                 @if (item?.company) { <span class="text-muted"> · {{ item.company }}</span> }
                             </div>
                             <div class="text-muted small">
-                                {{ item?.from }}
-                                @if (item?.to) { - {{ item.to }} } @else { - Present }
+                                {{ tRecord(item?.from) }}
+                                @if (tRecord(item?.to)) { - {{ tRecord(item.to) }} } @else { - {{ 'home.present' | translate }} }
                             </div>
                         </div>
 
@@ -283,7 +283,7 @@
     <app-section-title
             [title]="'nav.education' | translate"
             [subtitle]="'education.subtitle' | translate">
-        <a class="btn btn-outline-primary btn-sm" routerLink="/education">
+        <a class="btn btn-primary btn-sm btn-accent" routerLink="/education">
             {{ 'education.ctaFull' | translate }}
         </a>
     </app-section-title>
@@ -344,24 +344,24 @@
                                 {{ 'contact.ctaForm' | translate }}
                             </a>
 
-                            @if (profile?.links?.linkedin) {
-                                <a class="btn btn-outline-secondary btn-sm"
-                                   [href]="profile.links?.linkedin" target="_blank" rel="noreferrer">
-                                    LinkedIn
+                            @if (profile?.links?.github) {
+                                <a class="btn btn-outline-primary btn-sm"
+                                   [href]="profile.links?.github" target="_blank" rel="noreferrer">
+                                    {{ 'contact.linkGithub' | translate }}
                                 </a>
                             }
 
-                            @if (profile?.links?.github) {
-                                <a class="btn btn-outline-secondary btn-sm"
-                                   [href]="profile.links?.github" target="_blank" rel="noreferrer">
-                                    GitHub
+                            @if (profile?.links?.linkedin) {
+                                <a class="btn btn-outline-primary btn-sm"
+                                   [href]="profile.links?.linkedin" target="_blank" rel="noreferrer">
+                                    {{ 'contact.linkLinkedin' | translate }}
                                 </a>
                             }
 
                             @if (profile?.links?.cv) {
-                                <a class="btn btn-outline-secondary btn-sm"
+                                <a class="btn btn-outline-primary btn-sm"
                                    [href]="profile.links?.cv" target="_blank" rel="noreferrer">
-                                    CV (PDF)
+                                    {{ 'contact.linkCv' | translate }}
                                 </a>
                             }
                         </div>
@@ -376,19 +376,19 @@
 
                         <div class="vstack gap-2">
                             @if (profile?.links?.github) {
-                                <a class="btn btn-outline-secondary btn-sm text-start"
+                                <a class="btn btn-outline-primary btn-sm text-start"
                                    [href]="profile.links?.github" target="_blank" rel="noreferrer">
                                     {{ 'contact.linkGithub' | translate }}
                                 </a>
                             }
                             @if (profile?.links?.linkedin) {
-                                <a class="btn btn-outline-secondary btn-sm text-start"
+                                <a class="btn btn-outline-primary btn-sm text-start"
                                    [href]="profile.links?.linkedin" target="_blank" rel="noreferrer">
                                     {{ 'contact.linkLinkedin' | translate }}
                                 </a>
                             }
                             @if (profile?.links?.cv) {
-                                <a class="btn btn-outline-secondary btn-sm text-start"
+                                <a class="btn btn-outline-primary btn-sm text-start"
                                    [href]="profile.links?.cv" target="_blank" rel="noreferrer">
                                     {{ 'contact.linkCv' | translate }}
                                 </a>

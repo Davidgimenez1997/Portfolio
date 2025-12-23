@@ -8,7 +8,7 @@ export interface I18nText {
 export interface Profile {
   name?: string;
   role?: Record<Lang, string>;
-  location?: string;
+  location?: Record<Lang, string>;
   summary?: Record<Lang, string>;
   links?: {
     github?: string;
@@ -26,8 +26,8 @@ export interface Skills {
 export interface ExperienceItem {
   company?: string;
   role?: Record<Lang, string>;
-  from?: string;
-  to?: string | null;
+  from?: Record<Lang, string>;
+  to?: Record<Lang, string> | null;
   highlights?: Record<Lang, string[]>;
   stack?: string[];
 }

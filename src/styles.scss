@@ -32,6 +32,13 @@ body {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   backdrop-filter: blur(10px);
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.card-modern:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, .18);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, .35);
 }
 
 .badge-chip {

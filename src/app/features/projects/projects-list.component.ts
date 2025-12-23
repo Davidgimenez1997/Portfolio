@@ -6,10 +6,11 @@ import { map } from 'rxjs/operators';
 import { ContentService } from '../../core/content/content.service';
 import { LanguageService } from '../../core/i18n/language.service';
 import {AnalyticsService} from "../../core/analytics/analytics.service";
+import {TranslatePipe} from "@ngx-translate/core";
 
 @Component({
     standalone: true,
-    imports: [AsyncPipe, RouterLink],
+    imports: [AsyncPipe, RouterLink, TranslatePipe],
     templateUrl: './projects-list.component.html',
     styleUrl: './projects-list.component.scss'
 })

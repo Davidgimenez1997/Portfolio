@@ -6,18 +6,18 @@ import {
     PLATFORM_ID,
     inject,
 } from '@angular/core';
-import { AsyncPipe, NgIf, isPlatformBrowser, Location } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
-import { map, shareReplay } from 'rxjs/operators';
+import {AsyncPipe, isPlatformBrowser, Location} from '@angular/common';
+import {ActivatedRoute, RouterLink} from '@angular/router';
+import {TranslateModule} from '@ngx-translate/core';
+import {map, shareReplay} from 'rxjs/operators';
 
-import { ContentService } from '../../core/content/content.service';
-import { LanguageService } from '../../core/i18n/language.service';
-import { ScrollSpyService } from '../../core/scroll-spy/scroll-spy.service';
+import {ContentService} from '../../core/content/content.service';
+import {LanguageService} from '../../core/i18n/language.service';
+import {ScrollSpyService} from '../../core/scroll-spy/scroll-spy.service';
 
-import { ExperienceItem, EducationItem, Project } from '../../core/content/models';
-import { SectionTitleComponent } from '../../shared/section-title/section-title.component';
-import { TechBadgesComponent } from '../../shared/tech-badges/tech-badges.component';
+import {ExperienceItem, EducationItem, Project} from '../../core/content/models';
+import {SectionTitleComponent} from '../../shared/section-title/section-title.component';
+import {TechBadgesComponent} from '../../shared/tech-badges/tech-badges.component';
 import {AnalyticsService} from "../../core/analytics/analytics.service";
 import {TrackSectionDirective} from "../../core/analytics/track-section.directive";
 
@@ -83,7 +83,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
         this.route.fragment.subscribe((fragment) => {
             if (!fragment) return;
-            document.getElementById(fragment)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.getElementById(fragment)?.scrollIntoView({behavior: 'smooth', block: 'start'});
         });
 
         const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-spy]'));
@@ -115,10 +115,5 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     ngOnDestroy(): void {
         this.observer?.disconnect();
     }
-
-    trackByIndex = (i: number) => i;
-    trackByCompany = (_: number, item: ExperienceItem) => item.company ?? _;
-    trackByInstitution = (_: number, item: EducationItem) => item.institution ?? _;
-    trackBySlug = (_: number, item: FeaturedProjectVM) => item.slug ?? _;
 
 }

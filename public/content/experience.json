@@ -5,7 +5,10 @@
       "es": "Senior Frontend Engineer (Angular · SSR)",
       "en": "Senior Frontend Engineer (Angular · SSR)"
     },
-    "from": "2019-05",
+    "from": {
+      "es": "Junio 2019",
+      "en": "June 2019"
+    },
     "to": null,
     "highlights": {
       "es": [
@@ -29,8 +32,14 @@
       "es": "Frontend Web Developer",
       "en": "Frontend Web Developer"
     },
-    "from": "2019-03",
-    "to": "2019-05",
+    "from": {
+      "es": "Marzo 2019",
+      "en": "March 2019"
+    },
+    "to": {
+      "es": "Junio 2019",
+      "en": "June 2019"
+    },
     "highlights": {
       "es": [
         "Desarrollo de aplicaciones móviles nativas con Java y Android Studio.",
