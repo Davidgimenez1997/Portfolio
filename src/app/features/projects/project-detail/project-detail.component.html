@@ -1,18 +1,18 @@
 @if (project$ | async; as project) {
     <section class="container py-5">
         @if (project) {
-            <a class="btn btn-link px-0 mb-3" routerLink="/projects">← Back</a>
+            <a class="btn btn-link px-0 mb-3" routerLink="/projects">← {{ 'projects.back' | translate }}</a>
 
             <h1 class="h3 mb-2">{{ project._title }}</h1>
             <p class="mb-4">{{ project._description }}</p>
 
             @if (project._context) {
-                <h2 class="h5">Context</h2>
+                <h2 class="h5">{{ 'projects.context' | translate }}</h2>
                 <p>{{ project._context }}</p>
             }
 
             @if (project._solution.length) {
-                <h2 class="h5 mt-4">Solution</h2>
+                <h2 class="h5 mt-4">{{ 'projects.solution' | translate }}</h2>
                 <ul>
                     @for (item of project._solution; track item) {
                         <li>{{ item }}</li>
@@ -21,7 +21,7 @@
             }
 
             @if (project._impact.length) {
-                <h2 class="h5 mt-4">Impact</h2>
+                <h2 class="h5 mt-4">{{ 'projects.impact' | translate }}</h2>
                 <ul>
                     @for (item of project._impact; track item) {
                         <li>{{ item }}</li>
@@ -30,7 +30,7 @@
             }
 
             @if (project.highlights?.length) {
-                <h2 class="h5 mt-4">Highlights</h2>
+                <h2 class="h5 mt-4">{{ 'projects.highlights' | translate }}</h2>
                 <ul>
                     @for (highlight of project.highlights ?? []; track highlight) {
                         <li>{{ highlight }}</li>
@@ -38,7 +38,7 @@
                 </ul>
             }
 
-            <h2 class="h5 mt-4">Stack</h2>
+            <h2 class="h5 mt-4">{{ 'projects.stack' | translate }}</h2>
             <div class="d-flex flex-wrap gap-2">
                 @for (tech of project.stack ?? []; track tech) {
                     <span class="badge text-bg-light border badge-chip">{{ tech }}</span>
@@ -50,13 +50,13 @@
                     @if (project.links.github) {
                         <a class="btn btn-outline-secondary btn-sm"
                            [href]="project.links.github" target="_blank" rel="noreferrer">
-                            GitHub
+                            {{ 'contact.linkGithub' | translate }}
                         </a>
                     }
                     @if (project.links.live) {
                         <a class="btn btn-primary btn-sm"
                            [href]="project.links.live" target="_blank" rel="noreferrer">
-                            Live
+                            {{ 'contact.linkLinkedin' | translate }}
                         </a>
                     }
                 </div>

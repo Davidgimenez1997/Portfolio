@@ -5,10 +5,11 @@ import { switchMap, map } from 'rxjs/operators';
 
 import { ContentService } from '../../../core/content/content.service';
 import { LanguageService } from '../../../core/i18n/language.service';
+import {TranslatePipe} from "@ngx-translate/core";
 
 @Component({
     standalone: true,
-    imports: [AsyncPipe, RouterLink],
+    imports: [AsyncPipe, RouterLink, TranslatePipe],
     templateUrl: './project-detail.component.html',
     styleUrl: './project-detail.component.scss'
 })

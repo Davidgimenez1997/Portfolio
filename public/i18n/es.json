@@ -15,7 +15,26 @@
     "skillsTitle": "Tecnologías",
     "skillsSubtitle": "Herramientas con las que trabajo habitualmente",
     "featuredTitle": "Proyectos destacados",
-    "featuredSubtitle": "Una selección de proyectos representativos"
+    "featuredSubtitle": "Una selección de proyectos representativos",
+    "snapshot": "Instantánea",
+    "focus": {
+      "title": "Enfoque",
+      "message": "Frontend + Arquitectura"
+    },
+    "strength": {
+      "title": "Fuerte",
+      "message": "Rendimiento / SEO"
+    },
+    "stack": {
+      "title": "Stack",
+      "message": "Angular / Node / K8s"
+    },
+    "skills": {
+      "core": "Core",
+      "daily": "Diario"
+    },
+    "viewProject": "Ver proyecto",
+    "present": "Actualidad"
   },
   "about": {
     "title": "Sobre mi",
@@ -33,10 +52,18 @@
     }
   },
   "projects": {
+    "title": "Projectos",
     "subtitle": "Casos de estudio y proyectos personales",
     "ctaAll": "Ver todos",
     "ctaView": "Ver proyecto",
-    "empty": "No hay proyectos disponibles en este momento"
+    "empty": "No hay proyectos disponibles en este momento",
+    "view": "Ver proyecto",
+    "back": "Atrás",
+    "context": "Contexto",
+    "solution": "Solución",
+    "impact": "Impacto",
+    "highlights": "Highlights",
+    "stack": "Stack"
   },
   "experience": {
     "title": "Experiencia",
@@ -64,7 +91,8 @@
     "name": "Nombre",
     "email": "Email",
     "message": "Mensaje",
-    "send": "Enviar"
+    "send": "Enviar",
+    "live": "Live"
   },
   "footer": {
     "brand": "David Giménez",

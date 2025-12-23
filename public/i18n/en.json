@@ -15,7 +15,26 @@
     "skillsTitle": "Technologies",
     "skillsSubtitle": "Tools I work with on a daily basis",
     "featuredTitle": "Featured projects",
-    "featuredSubtitle": "A selection of representative projects"
+    "featuredSubtitle": "A selection of representative projects",
+    "snapshot": "Snapshot",
+    "focus": {
+      "title": "Focus",
+      "message": "Frontend + Architecture"
+    },
+    "strength": {
+      "title": "Strength",
+      "message": "Performance / SEO"
+    },
+    "stack": {
+      "title": "Stack",
+      "message": "Angular / Node / K8s"
+    },
+    "skills": {
+      "core": "Core",
+      "daily": "Daily"
+    },
+    "viewProject": "View project",
+    "present": "Present"
   },
   "about": {
     "title": "About",
@@ -33,10 +52,18 @@
     }
   },
   "projects": {
+    "title": "Projects",
     "subtitle": "Case studies and personal projects",
     "ctaAll": "View all",
     "ctaView": "View project",
-    "empty": "No projects available at the moment"
+    "empty": "No projects available at the moment",
+    "view": "View project",
+    "back": "Back",
+    "context": "Context",
+    "solution": "Solution",
+    "impact": "Impact",
+    "highlights": "Highlights",
+    "stack": "Stack"
   },
   "experience": {
     "title": "Experience",
@@ -64,7 +91,8 @@
     "name": "Name",
     "email": "Email",
     "message": "Message",
-    "send": "Send"
+    "send": "Send",
+    "live": "Live"
   },
   "footer": {
     "brand": "David Giménez",

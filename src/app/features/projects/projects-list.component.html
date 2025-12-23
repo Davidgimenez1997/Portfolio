@@ -1,5 +1,5 @@
 <section class="container py-5">
-    <h1 class="h3 mb-4">Projects</h1>
+    <h1 class="h3 mb-4">{{ 'projects.title' | translate }}</h1>
 
     <div class="row g-3">
         @for (project of projects$ | async; track project.slug) {
@@ -16,7 +16,9 @@
                         </div>
 
                         <a class="btn btn-sm btn-primary" [routerLink]="['/projects', project.slug]"
-                           (click)="analyticsService.projectOpen(project.slug, 'projects_list')">View</a>
+                           (click)="analyticsService.projectOpen(project.slug, 'projects_list')">
+                            {{ 'projects.view' | translate }}
+                        </a>
                     </div>
                 </div>
             </div>

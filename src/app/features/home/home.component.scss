@@ -1,14 +1,10 @@
 .home-hero {
-  .hero-title {
+  .title {
     letter-spacing: -0.02em;
   }
 
-  .hero-subtitle {
+  .subtitle {
     max-width: 62ch;
-  }
-
-  .btn-pill {
-    border-radius: 999px;
   }
 
   .snapshot-card {
@@ -36,15 +32,4 @@
     font-weight: 600;
     font-size: .9rem;
   }
-}
-
-/* Featured cards hover */
-.card-modern {
-  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
-}
-
-.card-modern:hover {
-  transform: translateY(-3px);
-  border-color: rgba(255, 255, 255, .18);
-  box-shadow: 0 14px 40px rgba(0, 0, 0, .35);
 }
