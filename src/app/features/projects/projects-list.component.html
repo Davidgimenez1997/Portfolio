@@ -15,7 +15,8 @@
                             }
                         </div>
 
-                        <a class="btn btn-sm btn-primary" [routerLink]="['/projects', project.slug]">View</a>
+                        <a class="btn btn-sm btn-primary" [routerLink]="['/projects', project.slug]"
+                           (click)="analyticsService.projectOpen(project.slug, 'projects_list')">View</a>
                     </div>
                 </div>
             </div>

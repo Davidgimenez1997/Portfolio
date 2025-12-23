@@ -7,6 +7,7 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 import { LanguageService } from '../../core/i18n/language.service';
 import { ScrollSpyService } from '../../core/scroll-spy/scroll-spy.service';
+import {AnalyticsService} from "../../core/analytics/analytics.service";
 
 @Component({
     standalone: true,
@@ -19,6 +20,7 @@ export class NavbarComponent {
     private router = inject(Router);
     private languageService = inject(LanguageService);
     private spy = inject(ScrollSpyService);
+    private analyticService = inject(AnalyticsService);
 
     currentLang = this.languageService.current;
     activeSection$ = this.spy.activeSection$;
@@ -30,6 +32,8 @@ export class NavbarComponent {
     );
 
     toggleLang() {
-        this.languageService.use(this.currentLang === 'es' ? 'en' : 'es');
+        const nextLang = this.currentLang === 'es' ? 'en' : 'es';
+        this.languageService.use(nextLang);
+        this.analyticService.langChange(this.currentLang, nextLang);
     }
 }

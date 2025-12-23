@@ -1,14 +1,16 @@
-<section id="home" data-spy="home" class="container py-5 home-hero">
+<section id="home" trackSection="home" data-spy="home" class="container py-5 home-hero">
     <div class="row align-items-center g-4">
         <div class="col-12 col-lg-8">
             <h1 class="display-6 fw-semibold mb-2 hero-title">{{ 'home.title' | translate }}</h1>
             <p class="lead mb-4 hero-subtitle">{{ 'home.subtitle' | translate }}</p>
 
             <div class="d-flex flex-wrap gap-2 mb-4">
-                <a class="btn btn-primary btn-accent" routerLink="/projects">
+                <a class="btn btn-primary btn-accent" routerLink="/projects"
+                   (click)="analyticsService.ctaClick('view_projects', 'herp')">
                     {{ 'home.ctaProjects' | translate }}
                 </a>
-                <a class="btn btn-outline-secondary btn-pill" routerLink="/contact">
+                <a class="btn btn-outline-secondary btn-pill" routerLink="/contact"
+                   (click)="analyticsService.ctaClick('contact', 'herp')">
                     {{ 'home.ctaContact' | translate }}
                 </a>
             </div>
@@ -113,7 +115,7 @@
     }
 </section>
 
-<section id="about" data-spy="about" class="container py-5">
+<section id="about" trackSection="about" data-spy="about" class="container py-5">
     <app-section-title
             [title]="'nav.about' | translate"
             [subtitle]="'about.subtitle' | translate">
@@ -176,7 +178,7 @@
     }
 </section>
 
-<section id="projects" data-spy="projects" class="container py-5">
+<section id="projects" trackSection="projects" data-spy="projects" class="container py-5">
     <app-section-title
             [title]="'nav.projects' | translate"
             [subtitle]="'projects.subtitle' | translate">
@@ -230,7 +232,7 @@
     }
 </section>
 
-<section id="experience" data-spy="experience" class="container py-5">
+<section id="experience" trackSection="experience" data-spy="experience" class="container py-5">
     <app-section-title
             [title]="'nav.experience' | translate"
             [subtitle]="'experience.subtitle' | translate">
@@ -277,7 +279,7 @@
     }
 </section>
 
-<section id="education" data-spy="education" class="container py-5">
+<section id="education" trackSection="education" data-spy="education" class="container py-5">
     <app-section-title
             [title]="'nav.education' | translate"
             [subtitle]="'education.subtitle' | translate">
@@ -322,7 +324,7 @@
     }
 </section>
 
-<section id="contact" data-spy="contact" class="container py-5">
+<section id="contact" trackSection="contact" data-spy="contact" class="container py-5">
     <app-section-title
             [title]="'nav.contact' | translate"
             [subtitle]="'contact.subtitle' | translate">
@@ -337,7 +339,8 @@
                         <p class="text-muted mb-3">{{ 'contact.quickText' | translate }}</p>
 
                         <div class="d-flex flex-wrap gap-2">
-                            <a class="btn btn-primary btn-sm" routerLink="/contact">
+                            <a class="btn btn-primary btn-sm" routerLink="/contact"
+                               (click)="analyticsService.outbound('email', 'contact')">
                                 {{ 'contact.ctaForm' | translate }}
                             </a>
 

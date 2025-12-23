@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { ContentService } from '../../core/content/content.service';
 import { LanguageService } from '../../core/i18n/language.service';
+import {AnalyticsService} from "../../core/analytics/analytics.service";
 
 @Component({
     standalone: true,
@@ -15,6 +16,8 @@ import { LanguageService } from '../../core/i18n/language.service';
 export class ProjectsListComponent {
     private contentService = inject(ContentService);
     private langService = inject(LanguageService);
+
+    analyticsService: AnalyticsService = inject(AnalyticsService);
 
     projects$ = this.contentService.getProjects().pipe(
         map(projects =>
