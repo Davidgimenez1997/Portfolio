@@ -31,7 +31,8 @@
             </ul>
 
             <button class="btn btn-outline-primary btn-sm" (click)="toggleLang()">
-                {{ currentLang === 'es' ? 'EN' : 'ES' }}
+                <span aria-hidden="true">{{ nextLang === 'es' ? '🇪🇸' : '🇬🇧' }}</span>
+                <span class="visually-hidden">Change language to {{ nextLang }}</span>
             </button>
         </div>
     </div>

@@ -22,7 +22,6 @@ export class NavbarComponent {
     private spy = inject(ScrollSpyService);
     private analyticService = inject(AnalyticsService);
 
-    currentLang = this.languageService.current;
     activeSection$ = this.spy.activeSection$;
 
     isHome$ = this.router.events.pipe(
@@ -30,6 +29,14 @@ export class NavbarComponent {
         startWith(null),
         map(() => this.router.url === '/' || this.router.url.startsWith('/#'))
     );
+
+    get currentLang() {
+        return this.languageService.current;
+    }
+
+    get nextLang() {
+        return this.currentLang === 'es' ? 'en' : 'es';
+    }
 
     toggleLang() {
         const nextLang = this.currentLang === 'es' ? 'en' : 'es';
