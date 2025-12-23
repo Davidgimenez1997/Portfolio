@@ -1,11 +1,15 @@
-import {ApplicationConfig, provideBrowserGlobalErrorListeners} from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import {
+    ApplicationConfig,
+    provideBrowserGlobalErrorListeners
+} from '@angular/core';
+import {provideRouter} from '@angular/router';
+import {provideClientHydration, withEventReplay} from '@angular/platform-browser';
 import {provideHttpClient, withFetch} from '@angular/common/http';
 import {provideTranslateService} from '@ngx-translate/core';
 import {provideTranslateHttpLoader} from '@ngx-translate/http-loader';
-import { routes } from './app.routes';
+import {routes} from './app.routes';
 import {provideFontAwesomeIcons} from "./core/icons/fontawesome.provider";
+import {provideVercelAnalytics} from "./core/analytics/vercel-analytics.provider";
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -22,5 +26,6 @@ export const appConfig: ApplicationConfig = {
                 suffix: '.json'
             })
         }),
+        provideVercelAnalytics()
     ],
 };

@@ -18,6 +18,8 @@ import { ScrollSpyService } from '../../core/scroll-spy/scroll-spy.service';
 import { ExperienceItem, EducationItem, Project } from '../../core/content/models';
 import { SectionTitleComponent } from '../../shared/section-title/section-title.component';
 import { TechBadgesComponent } from '../../shared/tech-badges/tech-badges.component';
+import {AnalyticsService} from "../../core/analytics/analytics.service";
+import {TrackSectionDirective} from "../../core/analytics/track-section.directive";
 
 type FeaturedProjectVM = Project & { _title: string; _description: string };
 
@@ -29,6 +31,7 @@ type FeaturedProjectVM = Project & { _title: string; _description: string };
         TranslateModule,
         SectionTitleComponent,
         TechBadgesComponent,
+        TrackSectionDirective,
     ],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
@@ -42,6 +45,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
     private observer?: IntersectionObserver;
     private isBrowser: boolean;
+
+    analyticsService: AnalyticsService = inject(AnalyticsService);
 
     constructor(@Inject(PLATFORM_ID) platformId: object) {
         this.isBrowser = isPlatformBrowser(platformId);

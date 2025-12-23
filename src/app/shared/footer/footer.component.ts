@@ -5,6 +5,7 @@ import { Router, NavigationEnd, RouterLink } from '@angular/router';
 import { filter, map, startWith } from 'rxjs/operators';
 
 import { ContentService } from '../../core/content/content.service';
+import {AnalyticsService} from "../../core/analytics/analytics.service";
 
 @Component({
     standalone: true,
@@ -16,6 +17,8 @@ import { ContentService } from '../../core/content/content.service';
 export class FooterComponent {
     private contentService = inject(ContentService);
     private router = inject(Router);
+
+    analyticsService: AnalyticsService = inject(AnalyticsService);
 
     year = new Date().getFullYear();
     profile$ = this.contentService.getProfile();
