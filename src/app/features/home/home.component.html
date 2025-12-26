@@ -343,27 +343,6 @@
                                (click)="analyticsService.outbound('email', 'contact')">
                                 {{ 'contact.ctaForm' | translate }}
                             </a>
-
-                            @if (profile?.links?.github) {
-                                <a class="btn btn-outline-primary btn-sm"
-                                   [href]="profile.links?.github" target="_blank" rel="noreferrer">
-                                    {{ 'contact.linkGithub' | translate }}
-                                </a>
-                            }
-
-                            @if (profile?.links?.linkedin) {
-                                <a class="btn btn-outline-primary btn-sm"
-                                   [href]="profile.links?.linkedin" target="_blank" rel="noreferrer">
-                                    {{ 'contact.linkLinkedin' | translate }}
-                                </a>
-                            }
-
-                            @if (profile?.links?.cv) {
-                                <a class="btn btn-outline-primary btn-sm"
-                                   [href]="profile.links?.cv" target="_blank" rel="noreferrer">
-                                    {{ 'contact.linkCv' | translate }}
-                                </a>
-                            }
                         </div>
                     </div>
                 </div>

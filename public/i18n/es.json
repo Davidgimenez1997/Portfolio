@@ -92,15 +92,23 @@
     "email": "Email",
     "message": "Mensaje",
     "send": "Enviar",
-    "live": "Live",
+    "live": "Disponible",
     "errors": {
-      "requiredName": "El nombre es requerido",
+      "requiredName": "El nombre es obligatorio.",
       "maxLengthName": "El nombre no puede tener más de {{ count }} caracteres.",
-      "requiredEmail": "El email es requerido",
-      "invalidEmail": "El formato del email es incorrecto.",
-      "requiredMessage": "El mensaje es requerido",
-      "minLengthMessage": "La logitud minima del mensaje tiene que ser de {{ count }} caracteres.",
+      "requiredEmail": "El email es obligatorio.",
+      "invalidEmail": "El formato del email no es válido.",
+      "requiredMessage": "El mensaje es obligatorio.",
+      "minLengthMessage": "La longitud mínima del mensaje es de {{ count }} caracteres.",
       "maxLengthMessage": "El mensaje no puede tener más de {{ count }} caracteres."
+    },
+    "subject": "[Portfolio] Mensaje de {{ name }}",
+    "emailLabel": "Email",
+    "copyEmail": "Copiar email",
+    "copied": "Copiado",
+    "mail": {
+      "quickBody": "[Portfolio] Hola David,\n\nMe gustaría contactar contigo por tu portfolio.\n\nGracias.",
+      "formBody": "Hola David,\n\n{{ message }}\n\n---\nNombre: {{ name }}\nEmail: {{ email }}\n"
     }
   },
   "footer": {

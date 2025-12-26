@@ -10,6 +10,7 @@ export interface Profile {
   role?: Record<Lang, string>;
   location?: Record<Lang, string>;
   summary?: Record<Lang, string>;
+  email?: string;
   links?: {
     github?: string;
     linkedin?: string;
