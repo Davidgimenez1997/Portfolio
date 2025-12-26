@@ -11,6 +11,7 @@
     "title": "Hi, I'm David",
     "subtitle": "Frontend Developer specialized in Angular, web architecture and performance.",
     "ctaProjects": "View projects",
+    "ctaExperience": "View experience",
     "ctaContact": "Contact",
     "skillsTitle": "Technologies",
     "skillsSubtitle": "Tools I work with on a daily basis",
@@ -31,7 +32,8 @@
     },
     "skills": {
       "core": "Core",
-      "daily": "Daily"
+      "daily": "Daily",
+      "family": "Family"
     },
     "viewProject": "View project",
     "present": "Present"
