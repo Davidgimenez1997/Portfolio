@@ -11,6 +11,7 @@
     "title": "Hola, soy David",
     "subtitle": "Desarrollador Frontend especializado en Angular, arquitectura web y rendimiento.",
     "ctaProjects": "Ver proyectos",
+    "ctaExperience": "Ver experiencia",
     "ctaContact": "Contactar",
     "skillsTitle": "Tecnologías",
     "skillsSubtitle": "Herramientas con las que trabajo habitualmente",
@@ -31,7 +32,8 @@
     },
     "skills": {
       "core": "Core",
-      "daily": "Diario"
+      "daily": "Diario",
+      "family": "Familiar"
     },
     "viewProject": "Ver proyecto",
     "present": "Actualidad"
