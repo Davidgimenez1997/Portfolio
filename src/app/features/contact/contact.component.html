@@ -6,27 +6,35 @@
             <form [formGroup]="formGroup" novalidate (ngSubmit)="openMail()">
                 <div class="mb-3">
                     <label class="form-label">{{ 'contact.name' | translate }}</label>
-                    <input class="form-control" formControlName="name" />
+                    <input [class.is-invalid]="formGroup.controls.name.invalid && formGroup.controls.name.dirty"
+                           class="form-control" formControlName="name" />
 
-                    @if (formGroup.controls.name.touched && formGroup.controls.name.invalid) {
+                    @if (formGroup.controls.name.dirty && formGroup.controls.name.errors) {
                         <div class="text-danger small mt-1">
-                            {{ 'contact.nameError' | translate }}
+                            @if (formGroup.controls.name.hasError('required')) {
+                                {{ 'contact.errors.requiredName' | translate }}
+                            }
+
+                            @if (formGroup.controls.name.hasError('maxlength')) {
+                                {{ 'contact.errors.maxLengthName' | translate: { count: maxLengthNameField } }}
+                            }
                         </div>
                     }
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">{{ 'contact.email' | translate }}</label>
-                    <input class="form-control" formControlName="email" type="email" />
+                    <input [class.is-invalid]="formGroup.controls.email.invalid && formGroup.controls.email.dirty"
+                           class="form-control" formControlName="email" type="email" />
 
-                    @if (formGroup.controls.email.touched && formGroup.controls.email.invalid) {
+                    @if (formGroup.controls.email.dirty && formGroup.controls.email.errors) {
                         <div class="text-danger small mt-1">
-                            @if (formGroup.controls.email.errors?.['required']) {
-                                {{ 'contact.emailRequiredError' | translate }}
-                            } @else if (formGroup.controls.email.errors?.['email']) {
-                                {{ 'contact.emailFormatError' | translate }}
-                            } @else {
-                                {{ 'contact.emailError' | translate }}
+                            @if (formGroup.controls.email.hasError('required')) {
+                                {{ 'contact.errors.requiredEmail' | translate }}
+                            }
+
+                            @if (formGroup.controls.email.hasError('email')) {
+                                {{ 'contact.errors.invalidEmail' | translate }}
                             }
                         </div>
                     }
@@ -34,16 +42,21 @@
 
                 <div class="mb-3">
                     <label class="form-label">{{ 'contact.message' | translate }}</label>
-                    <textarea class="form-control" rows="5" formControlName="message"></textarea>
+                    <textarea [class.is-invalid]="formGroup.controls.message.invalid && formGroup.controls.message.dirty"
+                              class="form-control" rows="5" formControlName="message"></textarea>
 
-                    @if (formGroup.controls.message.touched && formGroup.controls.message.invalid) {
+                    @if (formGroup.controls.message.dirty && formGroup.controls.message.errors) {
                         <div class="text-danger small mt-1">
-                            @if (formGroup.controls.message.errors?.['required']) {
-                                {{ 'contact.messageRequiredError' | translate }}
-                            } @else if (formGroup.controls.message.errors?.['minlength']) {
-                                {{ 'contact.messageMinLengthError' | translate:{ min: 10 } }}
-                            } @else {
-                                {{ 'contact.messageError' | translate }}
+                            @if (formGroup.controls.message.hasError('required')) {
+                                {{ 'contact.errors.requiredMessage' | translate }}
+                            }
+
+                            @if (formGroup.controls.message.hasError('minlength')) {
+                                {{ 'contact.errors.minLengthMessage' | translate: { count: minLengthMessageField } }}
+                            }
+
+                            @if (formGroup.controls.message.hasError('maxlength')) {
+                                {{ 'contact.errors.maxLengthMessage' | translate: { count: maxLengthMessageField } }}
                             }
                         </div>
                     }
