@@ -6,11 +6,15 @@
 
             <div class="d-flex flex-wrap gap-2 mb-4">
                 <a class="btn btn-primary btn-accent" routerLink="/projects"
-                   (click)="analyticsService.ctaClick('view_projects', 'herp')">
+                   (click)="analyticsService.ctaClick('view_projects', 'hero')">
                     {{ 'home.ctaProjects' | translate }}
                 </a>
+                <a class="btn btn-primary btn-accent" routerLink="/experience"
+                   (click)="analyticsService.ctaClick('view_projects', 'hero')">
+                    {{ 'home.ctaExperience' | translate }}
+                </a>
                 <a class="btn btn-primary btn-accent" routerLink="/contact"
-                   (click)="analyticsService.ctaClick('contact', 'herp')">
+                   (click)="analyticsService.ctaClick('contact', 'hero')">
                     {{ 'home.ctaContact' | translate }}
                 </a>
             </div>
@@ -46,73 +50,6 @@
             </div>
         </div>
     </div>
-
-    @if (skills$ | async; as skill) {
-        <div class="mt-5">
-            <app-section-title
-                    [title]="'home.skillsTitle' | translate"
-                    [subtitle]="'home.skillsSubtitle' | translate">
-            </app-section-title>
-
-            <div class="row g-3">
-                <div class="col-12 col-lg-6">
-                    <div class="card h-100 card-modern">
-                        <div class="card-body">
-                            <h3 class="h6 mb-3">{{ 'home.skills.core' | translate }}</h3>
-                            <app-tech-badges [items]="skill?.core"></app-tech-badges>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="card h-100 card-modern">
-                        <div class="card-body">
-                            <h3 class="h6 mb-3">{{ 'home.skills.daily' | translate }}</h3>
-                            <app-tech-badges [items]="skill?.daily"></app-tech-badges>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
-
-    @if (featured$ | async; as features) {
-        <div class="mt-5">
-            <app-section-title
-                    [title]="'home.featuredTitle' | translate"
-                    [subtitle]="'home.featuredSubtitle' | translate">
-                <a class="btn btn-primary btn-sm btn-accent" routerLink="/projects">
-                    {{ 'home.ctaProjects' | translate }}
-                </a>
-            </app-section-title>
-
-            <div class="row g-3">
-                @for (feature of features; track feature?.slug) {
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card h-100 card-modern">
-                            <div class="card-body d-flex flex-column">
-                                <h3 class="h6">{{ feature?._title }}</h3>
-                                <p class="text-muted small flex-grow-1 mb-3">{{ feature?._description }}</p>
-
-                                <div class="d-flex flex-wrap gap-2 mb-3">
-                                    @for (stack of feature?.stack; track stack) {
-                                        <span class="badge text-bg-light border badge-chip">
-                                            {{ stack }}
-                                        </span>
-                                    }
-                                </div>
-
-                                <a class="btn btn-primary btn-sm align-self-start"
-                                   [routerLink]="['/projects', feature?.slug]">
-                                    {{ 'home.viewProject' | translate }}
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-    }
 </section>
 
 <section id="about" trackSection="about" data-spy="about" class="container py-5">
@@ -170,6 +107,44 @@
                                     {{ 'contact.linkCv' | translate }}
                                 </a>
                             }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (skills$ | async; as skill) {
+        <div class="mt-5">
+            <app-section-title
+                    [title]="'home.skillsTitle' | translate"
+                    [subtitle]="'home.skillsSubtitle' | translate">
+            </app-section-title>
+
+            <div class="row g-3">
+                <div class="col-12 col-lg-4">
+                    <div class="card h-100 card-modern">
+                        <div class="card-body">
+                            <h3 class="h6 mb-3">{{ 'home.skills.core' | translate }}</h3>
+                            <app-tech-badges [items]="skill?.core"></app-tech-badges>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4">
+                    <div class="card h-100 card-modern">
+                        <div class="card-body">
+                            <h3 class="h6 mb-3">{{ 'home.skills.daily' | translate }}</h3>
+                            <app-tech-badges [items]="skill?.daily"></app-tech-badges>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4">
+                    <div class="card h-100 card-modern">
+                        <div class="card-body">
+                            <h3 class="h6 mb-3">{{ 'home.skills.family' | translate }}</h3>
+                            <app-tech-badges [items]="skill?.familiar"></app-tech-badges>
                         </div>
                     </div>
                 </div>
@@ -343,27 +318,6 @@
                                (click)="analyticsService.outbound('email', 'contact')">
                                 {{ 'contact.ctaForm' | translate }}
                             </a>
-
-                            @if (profile?.links?.github) {
-                                <a class="btn btn-outline-primary btn-sm"
-                                   [href]="profile.links?.github" target="_blank" rel="noreferrer">
-                                    {{ 'contact.linkGithub' | translate }}
-                                </a>
-                            }
-
-                            @if (profile?.links?.linkedin) {
-                                <a class="btn btn-outline-primary btn-sm"
-                                   [href]="profile.links?.linkedin" target="_blank" rel="noreferrer">
-                                    {{ 'contact.linkLinkedin' | translate }}
-                                </a>
-                            }
-
-                            @if (profile?.links?.cv) {
-                                <a class="btn btn-outline-primary btn-sm"
-                                   [href]="profile.links?.cv" target="_blank" rel="noreferrer">
-                                    {{ 'contact.linkCv' | translate }}
-                                </a>
-                            }
                         </div>
                     </div>
                 </div>

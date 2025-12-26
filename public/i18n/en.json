@@ -11,6 +11,7 @@
     "title": "Hi, I'm David",
     "subtitle": "Frontend Developer specialized in Angular, web architecture and performance.",
     "ctaProjects": "View projects",
+    "ctaExperience": "View experience",
     "ctaContact": "Contact",
     "skillsTitle": "Technologies",
     "skillsSubtitle": "Tools I work with on a daily basis",
@@ -31,7 +32,8 @@
     },
     "skills": {
       "core": "Core",
-      "daily": "Daily"
+      "daily": "Daily",
+      "family": "Family"
     },
     "viewProject": "View project",
     "present": "Present"
@@ -78,10 +80,10 @@
     "present": "Present"
   },
   "contact": {
-    "title": "Contacto",
+    "title": "Contact",
     "subtitle": "Let’s talk",
     "quickTitle": "Quick contact",
-    "quickText": "If you are interested in my profile or want to discuss a project, feel free to reach out.",
+    "quickText": "If you are interested in my profile or would like to discuss a project, feel free to reach out.",
     "ctaForm": "Contact form",
     "ctaEmail": "Send email",
     "linksTitle": "Links",
@@ -92,17 +94,26 @@
     "email": "Email",
     "message": "Message",
     "send": "Send",
-    "live": "Live",
+    "live": "Available",
     "errors": {
-      "requiredName": "The name is required",
+      "requiredName": "Name is required.",
       "maxLengthName": "The name cannot be longer than {{ count }} characters.",
-      "requiredEmail": "Email is required",
-      "invalidEmail": "The email format is incorrect.",
-      "requiredMessage": "The message is required",
-      "minLengthMessage": "The minimum message length must be {{ count }} characters.",
+      "requiredEmail": "Email is required.",
+      "invalidEmail": "The email format is not valid.",
+      "requiredMessage": "Message is required.",
+      "minLengthMessage": "The minimum message length is {{ count }} characters.",
       "maxLengthMessage": "The message cannot be longer than {{ count }} characters."
+    },
+    "subject": "[Portfolio] Message from {{ name }}",
+    "emailLabel": "Email",
+    "copyEmail": "Copy email",
+    "copied": "Copied",
+    "mail": {
+      "quickBody": "[Portfolio] Hi David,\n\nI’d like to contact you about your portfolio.\n\nThanks!",
+      "formBody": "Hi David,\n\n{{ message }}\n\n---\nName: {{ name }}\nEmail: {{ email }}\n"
     }
   },
+
   "footer": {
     "brand": "David Giménez",
     "summary": "Frontend Developer specialized in Angular, web architecture and performance.",

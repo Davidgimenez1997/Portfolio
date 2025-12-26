@@ -9,7 +9,7 @@ export class AnalyticsService {
         track(name, props ?? {});
     }
 
-    ctaClick(cta: 'view_projects' | 'contact', section: string) {
+    ctaClick(cta: 'view_projects' | 'view_experience' | 'contact', section: string) {
         this.event('cta_click', { cta, section });
     }
 

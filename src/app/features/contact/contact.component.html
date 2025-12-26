@@ -1,71 +1,189 @@
 <section class="container py-5">
-    <h1 class="h3 mb-4">{{ 'contact.title' | translate }}</h1>
+    <!-- Header -->
+    <header class="mb-4">
+        <h1 class="h3 mb-1">{{ 'contact.title' | translate }}</h1>
+        <p class="text-muted mb-0">{{ 'contact.subtitle' | translate }}</p>
+    </header>
 
     <div class="row g-4">
-        <div class="col-12 col-lg-6">
-            <form [formGroup]="formGroup" novalidate (ngSubmit)="openMail()">
-                <div class="mb-3">
-                    <label class="form-label">{{ 'contact.name' | translate }}</label>
-                    <input [class.is-invalid]="formGroup.controls.name.invalid && formGroup.controls.name.dirty"
-                           class="form-control" formControlName="name" />
+        <!-- Left column: quick contact + links -->
+        <div class="col-12 col-lg-5">
+            <div class="card card-modern h-100">
+                <div class="card-body">
+                    <h2 class="h5 mb-2">{{ 'contact.quickTitle' | translate }}</h2>
+                    <p class="text-muted mb-3">{{ 'contact.quickText' | translate }}</p>
 
-                    @if (formGroup.controls.name.dirty && formGroup.controls.name.errors) {
-                        <div class="text-danger small mt-1">
-                            @if (formGroup.controls.name.hasError('required')) {
-                                {{ 'contact.errors.requiredName' | translate }}
-                            }
+                    <!-- Email box + CTAs -->
+                    @if (toEmail$ | async; as toEmail) {
+                        <div class="mb-3">
+                            <div class="text-muted small mb-1">
+                                {{ 'contact.emailLabel' | translate }}
+                            </div>
 
-                            @if (formGroup.controls.name.hasError('maxlength')) {
-                                {{ 'contact.errors.maxLengthName' | translate: { count: maxLengthNameField } }}
-                            }
+                            <div class="d-flex align-items-center gap-2 flex-wrap">
+                                <a class="fw-semibold text-decoration-none" [href]="'mailto:' + toEmail">
+                                    {{ toEmail }}
+                                </a>
+
+                                <button
+                                        class="btn btn-sm btn-outline-secondary"
+                                        type="button"
+                                        (click)="copyEmail(toEmail)"
+                                >
+                                    {{ copied ? ('contact.copied' | translate) : ('contact.copyEmail' | translate) }}
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-sm-flex mb-4">
+                            <button class="btn btn-primary" type="button" (click)="openMailQuick(toEmail)">
+                                {{ 'contact.ctaEmail' | translate }}
+                            </button>
                         </div>
                     }
-                </div>
 
-                <div class="mb-3">
-                    <label class="form-label">{{ 'contact.email' | translate }}</label>
-                    <input [class.is-invalid]="formGroup.controls.email.invalid && formGroup.controls.email.dirty"
-                           class="form-control" formControlName="email" type="email" />
+                    <hr class="my-4"/>
 
-                    @if (formGroup.controls.email.dirty && formGroup.controls.email.errors) {
-                        <div class="text-danger small mt-1">
-                            @if (formGroup.controls.email.hasError('required')) {
-                                {{ 'contact.errors.requiredEmail' | translate }}
+                    <!-- Links box -->
+                    <h3 class="h6 mb-3">{{ 'contact.linksTitle' | translate }}</h3>
+
+                    @if (profile$ | async; as profile) {
+                        <ul class="list-unstyled d-grid gap-2 mb-0">
+                            @if (profile.links?.github) {
+                                <li>
+                                    <a
+                                            class="link-primary text-decoration-none"
+                                            [href]="profile.links?.github"
+                                            target="_blank"
+                                            rel="noopener"
+                                    >
+                                        {{ 'contact.linkGithub' | translate }}
+                                    </a>
+                                </li>
                             }
 
-                            @if (formGroup.controls.email.hasError('email')) {
-                                {{ 'contact.errors.invalidEmail' | translate }}
+                            @if (profile.links?.linkedin) {
+                                <li>
+                                    <a
+                                            class="link-primary text-decoration-none"
+                                            [href]="profile.links?.linkedin"
+                                            target="_blank"
+                                            rel="noopener"
+                                    >
+                                        {{ 'contact.linkLinkedin' | translate }}
+                                    </a>
+                                </li>
                             }
-                        </div>
+
+                            @if (profile.links?.cv) {
+                                <li>
+                                    <a
+                                            class="link-primary text-decoration-none"
+                                            [href]="profile.links?.cv"
+                                            target="_blank"
+                                            rel="noopener"
+                                    >
+                                        {{ 'contact.linkCv' | translate }}
+                                    </a>
+                                </li>
+                            }
+                        </ul>
                     }
                 </div>
+            </div>
+        </div>
 
-                <div class="mb-3">
-                    <label class="form-label">{{ 'contact.message' | translate }}</label>
-                    <textarea [class.is-invalid]="formGroup.controls.message.invalid && formGroup.controls.message.dirty"
-                              class="form-control" rows="5" formControlName="message"></textarea>
+        <!-- Right column: form -->
+        <div class="col-12 col-lg-7">
+            <div class="card card-modern">
+                <div class="card-body">
+                    <h2 class="h5 mb-3" id="contact-form">{{ 'contact.ctaForm' | translate }}</h2>
 
-                    @if (formGroup.controls.message.dirty && formGroup.controls.message.errors) {
-                        <div class="text-danger small mt-1">
-                            @if (formGroup.controls.message.hasError('required')) {
-                                {{ 'contact.errors.requiredMessage' | translate }}
-                            }
+                    @if (toEmail$ | async; as toEmail) {
+                        <form [formGroup]="formGroup" novalidate (ngSubmit)="openMail(toEmail)">
+                            <!-- Name -->
+                            <div class="mb-3">
+                                <label class="form-label" for="contactName">{{ 'contact.name' | translate }}</label>
+                                <input
+                                        id="contactName"
+                                        class="form-control"
+                                        formControlName="name"
+                                        [class.is-invalid]="isInvalid(formGroup.controls.name)"
+                                        [attr.maxlength]="maxLengthNameField"
+                                        autocomplete="name"
+                                />
 
-                            @if (formGroup.controls.message.hasError('minlength')) {
-                                {{ 'contact.errors.minLengthMessage' | translate: { count: minLengthMessageField } }}
-                            }
+                                @if (showErrors(formGroup.controls.name)) {
+                                    <div class="invalid-feedback d-block">
+                                        @if (formGroup.controls.name.hasError('required')) {
+                                            {{ 'contact.errors.requiredName' | translate }}
+                                        }
+                                        @if (formGroup.controls.name.hasError('maxlength')) {
+                                            {{ 'contact.errors.maxLengthName' | translate: {count: maxLengthNameField} }}
+                                        }
+                                    </div>
+                                }
+                            </div>
 
-                            @if (formGroup.controls.message.hasError('maxlength')) {
-                                {{ 'contact.errors.maxLengthMessage' | translate: { count: maxLengthMessageField } }}
-                            }
-                        </div>
+                            <!-- Email -->
+                            <div class="mb-3">
+                                <label class="form-label" for="contactEmail">{{ 'contact.email' | translate }}</label>
+                                <input
+                                        id="contactEmail"
+                                        class="form-control"
+                                        type="email"
+                                        formControlName="email"
+                                        [class.is-invalid]="isInvalid(formGroup.controls.email)"
+                                        autocomplete="email"
+                                />
+
+                                @if (showErrors(formGroup.controls.email)) {
+                                    <div class="invalid-feedback d-block">
+                                        @if (formGroup.controls.email.hasError('required')) {
+                                            {{ 'contact.errors.requiredEmail' | translate }}
+                                        }
+                                        @if (formGroup.controls.email.hasError('email')) {
+                                            {{ 'contact.errors.invalidEmail' | translate }}
+                                        }
+                                    </div>
+                                }
+                            </div>
+
+                            <!-- Message -->
+                            <div class="mb-3">
+                                <label class="form-label"
+                                       for="contactMessage">{{ 'contact.message' | translate }}</label>
+                                <textarea
+                                        id="contactMessage"
+                                        class="form-control"
+                                        rows="6"
+                                        formControlName="message"
+                                        [class.is-invalid]="isInvalid(formGroup.controls.message)"
+                                        [attr.maxlength]="maxLengthMessageField"
+                                ></textarea>
+
+                                @if (showErrors(formGroup.controls.message)) {
+                                    <div class="invalid-feedback d-block">
+                                        @if (formGroup.controls.message.hasError('required')) {
+                                            {{ 'contact.errors.requiredMessage' | translate }}
+                                        }
+                                        @if (formGroup.controls.message.hasError('minlength')) {
+                                            {{ 'contact.errors.minLengthMessage' | translate: {count: minLengthMessageField} }}
+                                        }
+                                        @if (formGroup.controls.message.hasError('maxlength')) {
+                                            {{ 'contact.errors.maxLengthMessage' | translate: {count: maxLengthMessageField} }}
+                                        }
+                                    </div>
+                                }
+                            </div>
+
+                            <button class="btn btn-primary" type="submit">
+                                {{ 'contact.send' | translate }}
+                            </button>
+                        </form>
                     }
                 </div>
-
-                <button class="btn btn-primary" type="submit" [disabled]="formGroup.invalid">
-                    {{ 'contact.send' | translate }}
-                </button>
-            </form>
+            </div>
         </div>
     </div>
 </section>
