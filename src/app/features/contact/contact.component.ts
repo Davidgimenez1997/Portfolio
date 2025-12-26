@@ -28,14 +28,20 @@ export class ContactComponent implements OnInit {
 
     formGroup!: FormGroup<ContactFormGroup>;
 
+    maxLengthNameField = 80;
+
+    minLengthMessageField = 10;
+    maxLengthMessageField = 2000;
+
     ngOnInit() {
         this.formGroup = this.formBuilder.nonNullable.group<ContactFormGroup>({
             name: this.formBuilder.nonNullable.control('',
-                [Validators.required, Validators.maxLength(80)]),
+                [Validators.required, Validators.maxLength(this.maxLengthNameField)]),
             email: this.formBuilder.nonNullable.control('',
                 [Validators.required, Validators.email]),
             message: this.formBuilder.nonNullable.control('',
-                [Validators.required, Validators.minLength(10), Validators.maxLength(2000)]),
+                [Validators.required, Validators.minLength(this.minLengthMessageField),
+                    Validators.maxLength(this.maxLengthMessageField)]),
         });
     }
 

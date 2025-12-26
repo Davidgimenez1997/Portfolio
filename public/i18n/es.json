@@ -92,7 +92,16 @@
     "email": "Email",
     "message": "Mensaje",
     "send": "Enviar",
-    "live": "Live"
+    "live": "Live",
+    "errors": {
+      "requiredName": "El nombre es requerido",
+      "maxLengthName": "El nombre no puede tener más de {{ count }} caracteres.",
+      "requiredEmail": "El email es requerido",
+      "invalidEmail": "El formato del email es incorrecto.",
+      "requiredMessage": "El mensaje es requerido",
+      "minLengthMessage": "La logitud minima del mensaje tiene que ser de {{ count }} caracteres.",
+      "maxLengthMessage": "El mensaje no puede tener más de {{ count }} caracteres."
+    }
   },
   "footer": {
     "brand": "David Giménez",
