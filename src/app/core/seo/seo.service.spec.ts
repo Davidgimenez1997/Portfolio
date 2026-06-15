@@ -8,6 +8,7 @@ import { EMPTY, of } from 'rxjs';
 import { ContentService } from '../content/content.service';
 import { LanguageService } from '../i18n/language.service';
 import { SeoService } from './seo.service';
+import { SITE_URL } from './site-url';
 
 describe('SeoService', () => {
   beforeEach(() => {
@@ -39,12 +40,25 @@ describe('SeoService', () => {
               key === 'seo.projectDetail.dynamicTitle'
                 ? `${params?.['title']} | David Giménez`
                 : key,
-            get: (key: string, params?: Record<string, string>) =>
-              of(
+            get: (key: string | string[], params?: Record<string, string>) => {
+              if (Array.isArray(key)) {
+                return of(
+                  key.reduce(
+                    (translations, item) => ({
+                      ...translations,
+                      [item]: item.includes('title') ? 'Test title' : 'Test description',
+                    }),
+                    {},
+                  ),
+                );
+              }
+
+              return of(
                 key === 'seo.projectDetail.dynamicTitle'
                   ? `${params?.['title']} | David Giménez`
                   : key,
-              ),
+              );
+            },
           },
         },
         {
@@ -92,11 +106,51 @@ describe('SeoService', () => {
 
     expect(title.getTitle()).toBe('Angular SSR | David Giménez');
     expect(meta.getTag('name="description"')?.content).toBe('Arquitectura SSR');
+    expect(meta.getTag('name="author"')?.content).toBe('David Gimenez Rodriguez De Rivera');
+    expect(meta.getTag('name="robots"')?.content).toBe('index,follow');
     expect(meta.getTag('property="og:url"')?.content).toBe(
       'https://davidgimenezrodriguez.com/projects/angular-ssr',
     );
+    expect(meta.getTag('property="og:site_name"')?.content).toBe('David Gimenez Portfolio');
+    expect(meta.getTag('property="og:locale"')?.content).toBe('es_ES');
+    expect(meta.getTag('name="twitter:card"')?.content).toBe('summary');
     expect(document.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(
       'https://davidgimenezrodriguez.com/projects/angular-ssr',
     );
+
+    const structuredData = JSON.parse(
+      document.querySelector('script[data-seo-json-ld]')?.textContent ?? '{}',
+    );
+
+    expect(structuredData['@context']).toBe('https://schema.org');
+    expect(structuredData['@graph']).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          '@type': 'Person',
+          '@id': `${SITE_URL}/#person`,
+          sameAs: expect.arrayContaining(['https://github.com/Davidgimenez1997']),
+        }),
+        expect.objectContaining({
+          '@type': 'CreativeWork',
+          name: 'Angular SSR | David Giménez',
+        }),
+        expect.objectContaining({
+          '@type': 'BreadcrumbList',
+        }),
+      ]),
+    );
+  });
+
+  it('marks noindex routes with robots metadata', () => {
+    const service = TestBed.inject(SeoService);
+    const meta = TestBed.inject(Meta);
+
+    (
+      service as unknown as {
+        applyMetadata: (title: string, description: string, options: { noindex: boolean }) => void;
+      }
+    ).applyMetadata('Page not found | David Giménez', 'Missing page', { noindex: true });
+
+    expect(meta.getTag('name="robots"')?.content).toBe('noindex,follow');
   });
 });
