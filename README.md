@@ -6,6 +6,12 @@ This project is focused on clean frontend architecture, performance and maintain
 
 The project was generated using [Angular CLI](https://github.com/angular/angular-cli) version **21.0.4**.
 
+Production site:
+
+```bash
+https://davidgimenezrodriguez.com
+```
+
 ---
 
 ## Development
@@ -91,14 +97,16 @@ The sitemap is generated from the content files. Set `SITE_URL` when the product
 SITE_URL=https://example.com npm run sitemap
 ```
 
-Angular 22 is intentionally deferred to `2.0.0` because it requires the TypeScript 6 toolchain.
+Release notes are maintained in [CHANGELOG.md](CHANGELOG.md).
+
+Angular major upgrades are handled as dedicated releases so framework migration risk stays separate from content, SEO and deployment changes.
 
 ---
 
 ## Project status
 
-This repository contains the **first public release** of the portfolio.  
-The project will continue evolving with new content and improvements over time.
+This repository contains the production portfolio for `davidgimenezrodriguez.com`.
+The project will continue evolving with new content, SEO improvements and release hardening over time.
 
 ---
 

@@ -72,6 +72,7 @@ export const routes: Routes = [
     data: {
       titleKey: 'seo.notFound.title',
       descriptionKey: 'seo.notFound.description',
+      noindex: true,
     },
   },
   {
@@ -81,6 +82,7 @@ export const routes: Routes = [
     data: {
       titleKey: 'seo.notFound.title',
       descriptionKey: 'seo.notFound.description',
+      noindex: true,
     },
   },
 ];
