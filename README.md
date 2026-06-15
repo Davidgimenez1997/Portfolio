@@ -43,6 +43,7 @@ For a complete list of available schematics (such as components, directives or p
 ```bash
 ng generate --help
 ```
+
 ---
 
 ## Build
@@ -68,6 +69,30 @@ To execute unit tests using the [Vitest](https://vitest.dev/) test runner, run:
 ```bash
 ng test
 ```
+
+---
+
+## Release workflow
+
+- `develop` contains the latest work and the next release version.
+- `main` contains the latest published release.
+- Release stabilization happens in `release/x.y.z` branches.
+- Published releases are marked with version tags.
+
+Before cutting a release branch, run:
+
+```bash
+npm run release:check
+```
+
+The sitemap is generated from the content files. Set `SITE_URL` when the production domain differs from the default `https://davidgimenezrodriguez.com`:
+
+```bash
+SITE_URL=https://example.com npm run sitemap
+```
+
+Angular 22 is intentionally deferred to `2.0.0` because it requires the TypeScript 6 toolchain.
+
 ---
 
 ## Project status

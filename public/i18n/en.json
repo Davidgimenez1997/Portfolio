@@ -5,7 +5,51 @@
     "projects": "Projects",
     "experience": "Experience",
     "education": "Education",
-    "contact": "Contact"
+    "contact": "Contact",
+    "toggle": "Open navigation menu",
+    "changeLanguage": "Change language to {{ lang }}"
+  },
+  "seo": {
+    "home": {
+      "title": "David Giménez | Senior Frontend Engineer",
+      "description": "Portfolio of David Giménez, Senior Frontend Engineer specialized in Angular, SSR, web architecture and performance."
+    },
+    "about": {
+      "title": "About | David Giménez",
+      "description": "Professional profile of David Giménez, frontend engineer specialized in Angular, SSR and scalable architecture."
+    },
+    "projects": {
+      "title": "Projects | David Giménez",
+      "description": "Case studies about Angular, SSR, prerendering, Kubernetes, headless CMS and frontend architecture."
+    },
+    "projectDetail": {
+      "title": "Project | David Giménez",
+      "description": "Technical project detail by David Giménez about frontend architecture, performance and deployment.",
+      "dynamicTitle": "{{ title }} | David Giménez"
+    },
+    "experience": {
+      "title": "Experience | David Giménez",
+      "description": "Professional background of David Giménez as a frontend engineer specialized in Angular."
+    },
+    "education": {
+      "title": "Education | David Giménez",
+      "description": "Academic and technical education of David Giménez."
+    },
+    "contact": {
+      "title": "Contact | David Giménez",
+      "description": "Contact David Giménez for frontend, Angular, SSR and web architecture opportunities."
+    },
+    "notFound": {
+      "title": "Page not found | David Giménez",
+      "description": "The requested page does not exist or has moved."
+    }
+  },
+  "notFound": {
+    "eyebrow": "404",
+    "title": "Page not found",
+    "message": "The route you opened does not exist or has moved.",
+    "ctaHome": "Back home",
+    "ctaProjects": "View projects"
   },
   "home": {
     "title": "Hi, I'm David",
