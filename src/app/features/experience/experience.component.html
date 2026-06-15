@@ -28,7 +28,7 @@
                             </div>
 
                             <ul class="mt-3 mb-3 timeline-highlights">
-                                @for (highLight of item?.highlights?.[currentLang]; track highLight) {
+                                @for (highLight of item?.highlights?.[currentLang] ?? []; track highLight) {
                                     <li>{{ highLight }}</li>
                                 }
                             </ul>

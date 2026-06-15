@@ -25,7 +25,7 @@
             "inlineStyleLanguage": "scss",
             "stylePreprocessorOptions": {
               "sass": {
-                "silenceDeprecations": ["import", "global-builtin", "color-functions"]
+                "silenceDeprecations": ["import", "global-builtin", "color-functions", "if-function"]
               }
             },
             "assets": [
@@ -47,7 +47,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "575kB",
+                  "maximumWarning": "600kB",
                   "maximumError": "1MB"
                 },
                 {

@@ -11,28 +11,28 @@
 
                 @if (profile$ | async; as profile) {
                     <div class="d-flex flex-wrap gap-2">
-                        @if (profile?.links?.github) {
+                        @if (profile?.links?.github; as github) {
                             <a class="btn btn-outline-secondary btn-sm"
                                (click)="analyticsService.outbound('github', 'footer')"
-                               [href]="profile.links?.github"
+                               [href]="github"
                                target="_blank"
                                rel="noreferrer">
                                 {{ 'footer.links.github' | translate }}
                             </a>
                         }
-                        @if (profile?.links?.linkedin) {
+                        @if (profile?.links?.linkedin; as linkedin) {
                             <a class="btn btn-outline-secondary btn-sm"
                                (click)="analyticsService.outbound('linkedin', 'footer')"
-                               [href]="profile.links?.linkedin"
+                               [href]="linkedin"
                                target="_blank"
                                rel="noreferrer">
                                 {{ 'footer.links.linkedin' | translate }}
                             </a>
                         }
-                        @if (profile?.links?.cv) {
+                        @if (profile?.links?.cv; as cv) {
                             <a class="btn btn-outline-secondary btn-sm"
                                (click)="analyticsService.outbound('email', 'footer')"
-                               [href]="profile.links?.cv"
+                               [href]="cv"
                                target="_blank"
                                rel="noreferrer">
                                 {{ 'footer.links.cv' | translate }}

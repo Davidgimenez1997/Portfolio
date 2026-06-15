@@ -27,12 +27,14 @@
                                 </div>
                             </div>
 
-                            @if (item?.highlights?.[currentLang]?.length) {
-                                <ul class="mt-3 mb-3 timeline-highlights">
-                                    @for (h of item?.highlights?.[currentLang]; track h) {
-                                        <li>{{ h }}</li>
-                                    }
-                                </ul>
+                            @if (item?.highlights?.[currentLang]; as highlights) {
+                                @if (highlights.length) {
+                                    <ul class="mt-3 mb-3 timeline-highlights">
+                                        @for (h of highlights; track h) {
+                                            <li>{{ h }}</li>
+                                        }
+                                    </ul>
+                                }
                             }
 
                             @if (item?.stack?.length) {

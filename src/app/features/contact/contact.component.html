@@ -49,11 +49,11 @@
 
                     @if (profile$ | async; as profile) {
                         <ul class="list-unstyled d-grid gap-2 mb-0">
-                            @if (profile.links?.github) {
+                            @if (profile.links?.github; as github) {
                                 <li>
                                     <a
                                             class="link-primary text-decoration-none"
-                                            [href]="profile.links?.github"
+                                            [href]="github"
                                             target="_blank"
                                             rel="noopener"
                                     >
@@ -62,11 +62,11 @@
                                 </li>
                             }
 
-                            @if (profile.links?.linkedin) {
+                            @if (profile.links?.linkedin; as linkedin) {
                                 <li>
                                     <a
                                             class="link-primary text-decoration-none"
-                                            [href]="profile.links?.linkedin"
+                                            [href]="linkedin"
                                             target="_blank"
                                             rel="noopener"
                                     >
@@ -75,11 +75,11 @@
                                 </li>
                             }
 
-                            @if (profile.links?.cv) {
+                            @if (profile.links?.cv; as cv) {
                                 <li>
                                     <a
                                             class="link-primary text-decoration-none"
-                                            [href]="profile.links?.cv"
+                                            [href]="cv"
                                             target="_blank"
                                             rel="noopener"
                                     >

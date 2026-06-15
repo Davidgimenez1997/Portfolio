@@ -96,30 +96,30 @@
             <h3 class="h6 mb-3">{{ 'about.linksTitle' | translate }}</h3>
 
             <div class="vstack gap-2">
-              @if (profile?.links?.github) {
+              @if (profile?.links?.github; as github) {
                 <a
                   class="btn btn-outline-primary btn-sm text-start"
-                  [href]="profile.links?.github"
+                  [href]="github"
                   target="_blank"
                   rel="noreferrer"
                 >
                   GitHub
                 </a>
               }
-              @if (profile?.links?.linkedin) {
+              @if (profile?.links?.linkedin; as linkedin) {
                 <a
                   class="btn btn-outline-primary btn-sm text-start"
-                  [href]="profile.links?.linkedin"
+                  [href]="linkedin"
                   target="_blank"
                   rel="noreferrer"
                 >
                   {{ 'contact.linkLinkedin' | translate }}
                 </a>
               }
-              @if (profile?.links?.cv) {
+              @if (profile?.links?.cv; as cv) {
                 <a
                   class="btn btn-outline-primary btn-sm text-start"
-                  [href]="profile.links?.cv"
+                  [href]="cv"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -205,10 +205,10 @@
                   {{ 'projects.ctaView' | translate }}
                 </a>
 
-                @if (feature?.links?.github) {
+                @if (feature?.links?.github; as github) {
                   <a
                     class="btn btn-outline-secondary btn-sm"
-                    [href]="feature.links?.github"
+                    [href]="github"
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -216,10 +216,10 @@
                   </a>
                 }
 
-                @if (feature?.links?.live) {
+                @if (feature?.links?.live; as live) {
                   <a
                     class="btn btn-outline-secondary btn-sm"
-                    [href]="feature.links?.live"
+                    [href]="live"
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -371,30 +371,30 @@
             <h3 class="h6 mb-3">{{ 'contact.linksTitle' | translate }}</h3>
 
             <div class="vstack gap-2">
-              @if (profile?.links?.github) {
+              @if (profile?.links?.github; as github) {
                 <a
                   class="btn btn-outline-primary btn-sm text-start"
-                  [href]="profile.links?.github"
+                  [href]="github"
                   target="_blank"
                   rel="noreferrer"
                 >
                   {{ 'contact.linkGithub' | translate }}
                 </a>
               }
-              @if (profile?.links?.linkedin) {
+              @if (profile?.links?.linkedin; as linkedin) {
                 <a
                   class="btn btn-outline-primary btn-sm text-start"
-                  [href]="profile.links?.linkedin"
+                  [href]="linkedin"
                   target="_blank"
                   rel="noreferrer"
                 >
                   {{ 'contact.linkLinkedin' | translate }}
                 </a>
               }
-              @if (profile?.links?.cv) {
+              @if (profile?.links?.cv; as cv) {
                 <a
                   class="btn btn-outline-primary btn-sm text-start"
-                  [href]="profile.links?.cv"
+                  [href]="cv"
                   target="_blank"
                   rel="noreferrer"
                 >
