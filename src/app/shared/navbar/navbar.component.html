@@ -1,39 +1,117 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom sticky-top">
-    <div class="container">
-        <a class="navbar-brand fw-semibold" routerLink="/">
-            <fa-icon [icon]="['fas', 'code']" class="me-2"></fa-icon>
-            David Giménez
-        </a>
+  <div class="container">
+    <a class="navbar-brand fw-semibold" routerLink="/">
+      <fa-icon [icon]="['fas', 'code']" class="me-2"></fa-icon>
+      David Giménez
+    </a>
 
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav me-auto">
+    <button
+      class="navbar-toggler"
+      type="button"
+      [attr.aria-expanded]="isMenuOpen"
+      aria-controls="mainNavbar"
+      [attr.aria-label]="'nav.toggle' | translate"
+      (click)="toggleMenu()"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-                @if (isHome$ | async) {
-                    @for (id of ['home','about','projects','experience','education','contact']; track id) {
-                        <li class="nav-item">
-                            <a class="nav-link"
-                               [routerLink]="['/']"
-                               [fragment]="id"
-                               [class.active]="(activeSection$ | async) === id">
-                                {{ ('nav.' + id) | translate }}
-                            </a>
-                        </li>
-                    }
-                } @else {
-                    <li class="nav-item"><a class="nav-link" routerLink="/">{{ 'nav.home' | translate }}</a></li>
-                    <li class="nav-item"><a class="nav-link" routerLink="/about">{{ 'nav.about' | translate }}</a></li>
-                    <li class="nav-item"><a class="nav-link" routerLink="/projects">{{ 'nav.projects' | translate }}</a></li>
-                    <li class="nav-item"><a class="nav-link" routerLink="/experience">{{ 'nav.experience' | translate }}</a></li>
-                    <li class="nav-item"><a class="nav-link" routerLink="/education">{{ 'nav.education' | translate }}</a></li>
-                    <li class="nav-item"><a class="nav-link" routerLink="/contact">{{ 'nav.contact' | translate }}</a></li>
-                }
+    <div id="mainNavbar" class="collapse navbar-collapse" [class.show]="isMenuOpen">
+      <ul class="navbar-nav me-auto">
+        @if (isHome$ | async) {
+          @for (
+            id of ['home', 'about', 'projects', 'experience', 'education', 'contact'];
+            track id
+          ) {
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [routerLink]="['/']"
+                [fragment]="id"
+                [class.active]="(activeSection$ | async) === id"
+                [attr.aria-current]="(activeSection$ | async) === id ? 'page' : null"
+                (click)="closeMenu()"
+              >
+                {{ 'nav.' + id | translate }}
+              </a>
+            </li>
+          }
+        } @else {
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              (click)="closeMenu()"
+              >{{ 'nav.home' | translate }}</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/about"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              (click)="closeMenu()"
+              >{{ 'nav.about' | translate }}</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/projects"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              (click)="closeMenu()"
+              >{{ 'nav.projects' | translate }}</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/experience"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              (click)="closeMenu()"
+              >{{ 'nav.experience' | translate }}</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/education"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              (click)="closeMenu()"
+              >{{ 'nav.education' | translate }}</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/contact"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              (click)="closeMenu()"
+              >{{ 'nav.contact' | translate }}</a
+            >
+          </li>
+        }
+      </ul>
 
-            </ul>
-
-            <button class="btn btn-outline-primary btn-sm" (click)="toggleLang()">
-                <span aria-hidden="true">{{ nextLang === 'es' ? '🇪🇸' : '🇬🇧' }}</span>
-                <span class="visually-hidden">Change language to {{ nextLang }}</span>
-            </button>
-        </div>
+      <button
+        class="btn btn-outline-primary btn-sm"
+        type="button"
+        [attr.aria-label]="'nav.changeLanguage' | translate: { lang: nextLangLabel }"
+        [title]="'nav.changeLanguage' | translate: { lang: nextLangLabel }"
+        (click)="toggleLang()"
+      >
+        <span aria-hidden="true">{{ nextLang === 'es' ? '🇪🇸' : '🇬🇧' }}</span>
+        <span class="visually-hidden">
+          {{ 'nav.changeLanguage' | translate: { lang: nextLangLabel } }}
+        </span>
+      </button>
     </div>
+  </div>
 </nav>

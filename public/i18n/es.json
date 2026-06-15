@@ -5,7 +5,51 @@
     "projects": "Proyectos",
     "experience": "Experiencia",
     "education": "Formación",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "toggle": "Abrir menú de navegación",
+    "changeLanguage": "Cambiar idioma a {{ lang }}"
+  },
+  "seo": {
+    "home": {
+      "title": "David Giménez | Senior Frontend Engineer",
+      "description": "Portfolio de David Giménez, Senior Frontend Engineer especializado en Angular, SSR, arquitectura web y rendimiento."
+    },
+    "about": {
+      "title": "Sobre mí | David Giménez",
+      "description": "Perfil profesional de David Giménez, frontend engineer especializado en Angular, SSR y arquitectura escalable."
+    },
+    "projects": {
+      "title": "Proyectos | David Giménez",
+      "description": "Casos de estudio sobre Angular, SSR, prerendering, Kubernetes, CMS headless y arquitectura frontend."
+    },
+    "projectDetail": {
+      "title": "Proyecto | David Giménez",
+      "description": "Detalle de proyecto técnico de David Giménez sobre arquitectura frontend, rendimiento y despliegue.",
+      "dynamicTitle": "{{ title }} | David Giménez"
+    },
+    "experience": {
+      "title": "Experiencia | David Giménez",
+      "description": "Trayectoria profesional de David Giménez como frontend engineer especializado en Angular."
+    },
+    "education": {
+      "title": "Formación | David Giménez",
+      "description": "Formación académica y técnica de David Giménez."
+    },
+    "contact": {
+      "title": "Contacto | David Giménez",
+      "description": "Contacta con David Giménez para oportunidades frontend, Angular, SSR y arquitectura web."
+    },
+    "notFound": {
+      "title": "Página no encontrada | David Giménez",
+      "description": "La página solicitada no existe o ha cambiado de ubicación."
+    }
+  },
+  "notFound": {
+    "eyebrow": "404",
+    "title": "Página no encontrada",
+    "message": "La ruta que has abierto no existe o ha cambiado de ubicación.",
+    "ctaHome": "Volver al inicio",
+    "ctaProjects": "Ver proyectos"
   },
   "home": {
     "title": "Hola, soy David",
@@ -39,7 +83,7 @@
     "present": "Actualidad"
   },
   "about": {
-    "title": "Sobre mi",
+    "title": "Sobre mí",
     "subtitle": "Perfil profesional y enfoque",
     "ctaFull": "Ver perfil completo",
     "linksTitle": "Enlaces",
@@ -54,7 +98,7 @@
     }
   },
   "projects": {
-    "title": "Projectos",
+    "title": "Proyectos",
     "subtitle": "Casos de estudio y proyectos personales",
     "ctaAll": "Ver todos",
     "ctaView": "Ver proyecto",
