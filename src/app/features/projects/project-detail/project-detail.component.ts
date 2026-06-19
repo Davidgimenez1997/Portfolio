@@ -7,6 +7,7 @@ import { switchMap, map } from 'rxjs/operators';
 import { ContentService } from '../../../core/content/content.service';
 import { LanguageService } from '../../../core/i18n/language.service';
 import { TranslatePipe } from '@ngx-translate/core';
+import { AnalyticsService } from '../../../core/analytics/analytics.service';
 
 @Component({
   standalone: true,
@@ -18,6 +19,7 @@ export class ProjectDetailComponent {
   private route = inject(ActivatedRoute);
   private contentService = inject(ContentService);
   private langService = inject(LanguageService);
+  analyticsService = inject(AnalyticsService);
 
   project$ = combineLatest([
     this.route.paramMap.pipe(

@@ -31,7 +31,7 @@
                         }
                         @if (profile?.links?.cv; as cv) {
                             <a class="btn btn-outline-secondary btn-sm"
-                               (click)="analyticsService.outbound('email', 'footer')"
+                               (click)="analyticsService.outbound('cv', 'footer')"
                                [href]="cv"
                                target="_blank"
                                rel="noreferrer">

@@ -15,6 +15,8 @@ import { provideVercelAnalytics } from './core/analytics/vercel-analytics.provid
 import { provideVercelSpeedInsights } from './core/analytics/vercel-speed-insights.provider';
 import { LanguageService } from './core/i18n/language.service';
 import { INITIAL_LANG } from './core/i18n/initial-lang.token';
+import { AnalyticsConfigService } from './core/analytics/analytics-config.service';
+import { AnalyticsService } from './core/analytics/analytics.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,6 +31,12 @@ export const appConfig: ApplicationConfig = {
     { provide: INITIAL_LANG, useValue: 'es' },
     provideAppInitializer(() => {
       inject(LanguageService).init(inject(INITIAL_LANG));
+    }),
+    provideAppInitializer(async () => {
+      const analyticsConfig = inject(AnalyticsConfigService);
+      const analytics = inject(AnalyticsService);
+      await analyticsConfig.load();
+      analytics.init();
     }),
     provideClientHydration(withEventReplay()),
     ...provideFontAwesomeIcons(),

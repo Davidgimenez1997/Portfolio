@@ -21,7 +21,11 @@
                             </div>
 
                             <div class="d-flex align-items-center gap-2 flex-wrap">
-                                <a class="fw-semibold text-decoration-none" [href]="'mailto:' + toEmail">
+                                <a
+                                        class="fw-semibold text-decoration-none"
+                                        [href]="'mailto:' + toEmail"
+                                        (click)="analyticsService.outbound('email', 'contact_email_link')"
+                                >
                                     {{ toEmail }}
                                 </a>
 
@@ -56,6 +60,7 @@
                                             [href]="github"
                                             target="_blank"
                                             rel="noopener"
+                                            (click)="analyticsService.outbound('github', 'contact_page')"
                                     >
                                         {{ 'contact.linkGithub' | translate }}
                                     </a>
@@ -69,6 +74,7 @@
                                             [href]="linkedin"
                                             target="_blank"
                                             rel="noopener"
+                                            (click)="analyticsService.outbound('linkedin', 'contact_page')"
                                     >
                                         {{ 'contact.linkLinkedin' | translate }}
                                     </a>
@@ -82,6 +88,7 @@
                                             [href]="cv"
                                             target="_blank"
                                             rel="noopener"
+                                            (click)="analyticsService.outbound('cv', 'contact_page')"
                                     >
                                         {{ 'contact.linkCv' | translate }}
                                     </a>

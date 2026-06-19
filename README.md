@@ -64,6 +64,16 @@ This will compile the application and store the build artifacts in the dist/ dir
 
 By default, the production build optimizes the application for performance and speed.
 
+### Analytics configuration
+
+Analytics IDs are generated from environment variables and are not committed to the public repository.
+
+```bash
+GTM_CONTAINER_ID=GTM-XXXXXXX GA_MEASUREMENT_ID=G-XXXXXXXXXX npm run build
+```
+
+For local development, copy `.env.example` to `.env.local` and fill in the values. `npm start` and `npm run build` generate `public/config/analytics.json`, which the app reads at runtime.
+
 ---
 
 ## Testing
