@@ -38,6 +38,15 @@
             "scripts": [],
             "server": "src/main.server.ts",
             "outputMode": "server",
+            "security": {
+              "allowedHosts": [
+                "davidgimenezrodriguez.com",
+                "www.davidgimenezrodriguez.com",
+                "localhost",
+                "127.0.0.1",
+                "ssr"
+              ]
+            },
             "ssr": {
               "entry": "src/server.ts"
             }
