@@ -63,7 +63,11 @@
 
 <section id="about" trackSection="about" data-spy="about" class="container py-5">
   <app-section-title [title]="'nav.about' | translate" [subtitle]="'about.subtitle' | translate">
-    <a class="btn btn-primary btn-sm btn-accent" routerLink="/about">
+    <a
+      class="btn btn-primary btn-sm btn-accent"
+      routerLink="/about"
+      (click)="analyticsService.ctaClick('about_full', 'about')"
+    >
       {{ 'about.ctaFull' | translate }}
     </a>
   </app-section-title>
@@ -96,32 +100,35 @@
             <h3 class="h6 mb-3">{{ 'about.linksTitle' | translate }}</h3>
 
             <div class="vstack gap-2">
-              @if (profile?.links?.github) {
+              @if (profile?.links?.github; as github) {
                 <a
                   class="btn btn-outline-primary btn-sm text-start"
-                  [href]="profile.links?.github"
+                  [href]="github"
                   target="_blank"
                   rel="noreferrer"
+                  (click)="analyticsService.outbound('github', 'about')"
                 >
                   GitHub
                 </a>
               }
-              @if (profile?.links?.linkedin) {
+              @if (profile?.links?.linkedin; as linkedin) {
                 <a
                   class="btn btn-outline-primary btn-sm text-start"
-                  [href]="profile.links?.linkedin"
+                  [href]="linkedin"
                   target="_blank"
                   rel="noreferrer"
+                  (click)="analyticsService.outbound('linkedin', 'about')"
                 >
                   {{ 'contact.linkLinkedin' | translate }}
                 </a>
               }
-              @if (profile?.links?.cv) {
+              @if (profile?.links?.cv; as cv) {
                 <a
                   class="btn btn-outline-primary btn-sm text-start"
-                  [href]="profile.links?.cv"
+                  [href]="cv"
                   target="_blank"
                   rel="noreferrer"
+                  (click)="analyticsService.outbound('cv', 'about')"
                 >
                   {{ 'contact.linkCv' | translate }}
                 </a>
@@ -178,7 +185,11 @@
     [title]="'nav.projects' | translate"
     [subtitle]="'projects.subtitle' | translate"
   >
-    <a class="btn btn-primary btn-sm btn-accent" routerLink="/projects">
+    <a
+      class="btn btn-primary btn-sm btn-accent"
+      routerLink="/projects"
+      (click)="analyticsService.ctaClick('view_projects', 'projects')"
+    >
       {{ 'projects.ctaAll' | translate }}
     </a>
   </app-section-title>
@@ -201,27 +212,33 @@
               }
 
               <div class="d-flex gap-2">
-                <a class="btn btn-primary btn-sm" [routerLink]="['/projects', feature?.slug]">
+                <a
+                  class="btn btn-primary btn-sm"
+                  [routerLink]="['/projects', feature?.slug]"
+                  (click)="analyticsService.projectOpen(feature.slug, 'featured')"
+                >
                   {{ 'projects.ctaView' | translate }}
                 </a>
 
-                @if (feature?.links?.github) {
+                @if (feature?.links?.github; as github) {
                   <a
                     class="btn btn-outline-secondary btn-sm"
-                    [href]="feature.links?.github"
+                    [href]="github"
                     target="_blank"
                     rel="noreferrer"
+                    (click)="analyticsService.outbound('github', 'featured_project')"
                   >
                     GitHub
                   </a>
                 }
 
-                @if (feature?.links?.live) {
+                @if (feature?.links?.live; as live) {
                   <a
                     class="btn btn-outline-secondary btn-sm"
-                    [href]="feature.links?.live"
+                    [href]="live"
                     target="_blank"
                     rel="noreferrer"
+                    (click)="analyticsService.outbound('other', 'featured_project')"
                   >
                     Live
                   </a>
@@ -240,7 +257,11 @@
     [title]="'nav.experience' | translate"
     [subtitle]="'experience.subtitle' | translate"
   >
-    <a class="btn btn-primary btn-sm btn-accent" routerLink="/experience">
+    <a
+      class="btn btn-primary btn-sm btn-accent"
+      routerLink="/experience"
+      (click)="analyticsService.ctaClick('view_experience', 'experience')"
+    >
       {{ 'experience.ctaFull' | translate }}
     </a>
   </app-section-title>
@@ -294,7 +315,11 @@
     [title]="'nav.education' | translate"
     [subtitle]="'education.subtitle' | translate"
   >
-    <a class="btn btn-primary btn-sm btn-accent" routerLink="/education">
+    <a
+      class="btn btn-primary btn-sm btn-accent"
+      routerLink="/education"
+      (click)="analyticsService.ctaClick('education_full', 'education')"
+    >
       {{ 'education.ctaFull' | translate }}
     </a>
   </app-section-title>
@@ -356,7 +381,7 @@
               <a
                 class="btn btn-primary btn-sm"
                 routerLink="/contact"
-                (click)="analyticsService.outbound('email', 'contact')"
+                (click)="analyticsService.ctaClick('contact', 'contact')"
               >
                 {{ 'contact.ctaForm' | translate }}
               </a>
@@ -371,32 +396,35 @@
             <h3 class="h6 mb-3">{{ 'contact.linksTitle' | translate }}</h3>
 
             <div class="vstack gap-2">
-              @if (profile?.links?.github) {
+              @if (profile?.links?.github; as github) {
                 <a
                   class="btn btn-outline-primary btn-sm text-start"
-                  [href]="profile.links?.github"
+                  [href]="github"
                   target="_blank"
                   rel="noreferrer"
+                  (click)="analyticsService.outbound('github', 'contact')"
                 >
                   {{ 'contact.linkGithub' | translate }}
                 </a>
               }
-              @if (profile?.links?.linkedin) {
+              @if (profile?.links?.linkedin; as linkedin) {
                 <a
                   class="btn btn-outline-primary btn-sm text-start"
-                  [href]="profile.links?.linkedin"
+                  [href]="linkedin"
                   target="_blank"
                   rel="noreferrer"
+                  (click)="analyticsService.outbound('linkedin', 'contact')"
                 >
                   {{ 'contact.linkLinkedin' | translate }}
                 </a>
               }
-              @if (profile?.links?.cv) {
+              @if (profile?.links?.cv; as cv) {
                 <a
                   class="btn btn-outline-primary btn-sm text-start"
-                  [href]="profile.links?.cv"
+                  [href]="cv"
                   target="_blank"
                   rel="noreferrer"
+                  (click)="analyticsService.outbound('cv', 'contact')"
                 >
                   {{ 'contact.linkCv' | translate }}
                 </a>

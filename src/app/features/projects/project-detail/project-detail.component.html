@@ -32,7 +32,7 @@
             @if (project.highlights?.length) {
                 <h2 class="h5 mt-4">{{ 'projects.highlights' | translate }}</h2>
                 <ul>
-                    @for (highlight of project.highlights ?? []; track highlight) {
+                    @for (highlight of project.highlights; track highlight) {
                         <li>{{ highlight }}</li>
                     }
                 </ul>
@@ -49,13 +49,15 @@
                 <div class="d-flex gap-2 mt-4">
                     @if (project.links.github) {
                         <a class="btn btn-outline-secondary btn-sm"
-                           [href]="project.links.github" target="_blank" rel="noreferrer">
+                           [href]="project.links.github" target="_blank" rel="noreferrer"
+                           (click)="analyticsService.outbound('github', 'project_detail')">
                             {{ 'contact.linkGithub' | translate }}
                         </a>
                     }
                     @if (project.links.live) {
                         <a class="btn btn-primary btn-sm"
-                           [href]="project.links.live" target="_blank" rel="noreferrer">
+                           [href]="project.links.live" target="_blank" rel="noreferrer"
+                           (click)="analyticsService.outbound('other', 'project_detail')">
                             {{ 'contact.linkLinkedin' | translate }}
                         </a>
                     }

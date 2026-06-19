@@ -13,6 +13,7 @@ import { map, shareReplay } from 'rxjs/operators';
 
 import { ContentService } from '../../core/content/content.service';
 import { Profile } from '../../core/content/models';
+import { AnalyticsService } from '../../core/analytics/analytics.service';
 
 export interface ContactFormGroup {
     name: FormControl<string>;
@@ -30,6 +31,7 @@ export class ContactComponent implements OnInit {
     private fb = inject(FormBuilder);
     private translate = inject(TranslateService);
     private content = inject(ContentService);
+    analyticsService = inject(AnalyticsService);
 
     profile$ = this.content.getProfile().pipe(shareReplay(1));
 
@@ -72,9 +74,11 @@ export class ContactComponent implements OnInit {
         try {
             await navigator.clipboard.writeText(email);
             this.copied = true;
+            this.analyticsService.outbound('email', 'contact_copy');
             window.setTimeout(() => (this.copied = false), 1200);
         } catch {
             // Best-effort fallback
+            this.analyticsService.outbound('email', 'contact_copy_fallback');
             window.location.href = `mailto:${email}`;
         }
     }
@@ -82,12 +86,14 @@ export class ContactComponent implements OnInit {
     openMailQuick(toEmail: string) {
         const subject = this.translate.instant('contact.subject', { name: '—' });
         const body = this.translate.instant('contact.mail.quickBody');
+        this.analyticsService.outbound('email', 'contact_quick');
         this.navigateToMailto(toEmail, subject, body);
     }
 
     openMail(toEmail: string) {
         if (this.formGroup.invalid) {
             this.formGroup.markAllAsTouched();
+            this.analyticsService.contactSubmit(false);
             return;
         }
 
@@ -105,6 +111,7 @@ export class ContactComponent implements OnInit {
             message,
         });
 
+        this.analyticsService.contactSubmit(true);
         this.navigateToMailto(toEmail, subject, body);
     }
 

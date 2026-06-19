@@ -13,6 +13,11 @@
 
 # Environment files
 /.env
+/.env.local
+/.vercel/
+/public/config/analytics.json
+/gtm-container-import.json
+/scripts/generate-gtm-container-import.mjs
 
 # Angular CLI and build artefacts
 /.angular-cli.json

@@ -84,6 +84,48 @@
   },
 
   {
+    "slug": "strapi-import-export-plugin",
+    "type": "case-study",
+    "title": {
+      "es": "Plugin de importación y exportación para Strapi",
+      "en": "Strapi Import/Export Plugin"
+    },
+    "description": {
+      "es": "Plugin profesional para mover contenido y configuración entre entornos Strapi de forma controlada, reduciendo procesos manuales y errores en migraciones.",
+      "en": "Professional plugin to move content and configuration between Strapi environments in a controlled way, reducing manual work and migration errors."
+    },
+    "context": {
+      "es": "Proyecto desarrollado en entorno profesional. Los equipos necesitaban replicar contenido entre entornos sin depender de tareas manuales, exportaciones parciales o cambios difíciles de auditar.",
+      "en": "Project developed in a professional environment. Teams needed to replicate content between environments without relying on manual tasks, partial exports or hard-to-audit changes."
+    },
+    "solution": {
+      "es": [
+        "Exportación estructurada de contenido, relaciones y configuración relevante del CMS.",
+        "Importación controlada con validaciones previas para detectar conflictos antes de aplicar cambios.",
+        "Flujo orientado a equipos para reducir errores al mover contenido entre local, staging y producción."
+      ],
+      "en": [
+        "Structured export of content, relations and relevant CMS configuration.",
+        "Controlled import with pre-validations to detect conflicts before applying changes.",
+        "Team-oriented workflow to reduce errors when moving content between local, staging and production."
+      ]
+    },
+    "impact": {
+      "es": [
+        "Migraciones de contenido más fiables entre entornos.",
+        "Menos intervención manual en tareas repetitivas de CMS.",
+        "Mejor experiencia para equipos de frontend, backend y contenido."
+      ],
+      "en": [
+        "More reliable content migrations between environments.",
+        "Less manual intervention in repetitive CMS tasks.",
+        "Improved experience for frontend, backend and content teams."
+      ]
+    },
+    "stack": ["Strapi", "Node.js", "TypeScript", "REST APIs", "PostgreSQL"]
+  },
+
+  {
     "slug": "multi-brand-deployment-architecture",
     "type": "case-study",
     "title": {
@@ -209,5 +251,91 @@
       ]
     },
     "stack": ["Node.js", "Angular", "TypeScript", "Docker"]
+  },
+
+  {
+    "slug": "multitenant-photography-portal",
+    "type": "personal",
+    "title": {
+      "es": "Portal multi-tenant para fotógrafos",
+      "en": "Multi-tenant Photography Portal"
+    },
+    "description": {
+      "es": "Plataforma para que fotógrafos creen espacios privados por cliente o evento, compartan galerías y centralicen la entrega de fotografías.",
+      "en": "Platform for photographers to create private spaces per client or event, share galleries and centralize photo delivery."
+    },
+    "context": {
+      "es": "Los fotógrafos necesitan una forma sencilla de entregar reportajes, separar clientes y ofrecer una experiencia cuidada sin depender de carpetas compartidas genéricas.",
+      "en": "Photographers need a simple way to deliver shoots, separate clients and provide a polished experience without relying on generic shared folders."
+    },
+    "solution": {
+      "es": [
+        "Arquitectura multi-tenant para separar fotógrafos, clientes y eventos.",
+        "Galerías privadas con acceso por enlace o código.",
+        "Interfaz responsive pensada para consulta desde móvil y escritorio.",
+        "Base preparada para subida, organización y entrega de fotografías por evento."
+      ],
+      "en": [
+        "Multi-tenant architecture to separate photographers, clients and events.",
+        "Private galleries with access by link or code.",
+        "Responsive interface designed for mobile and desktop browsing.",
+        "Foundation for uploading, organizing and delivering photos per event."
+      ]
+    },
+    "impact": {
+      "es": [
+        "Producto real orientado a un caso de negocio concreto.",
+        "Mejor experiencia de entrega para fotógrafos y clientes.",
+        "Base escalable para convertir una necesidad personal en una solución comercial."
+      ],
+      "en": [
+        "Real product focused on a specific business use case.",
+        "Improved delivery experience for photographers and clients.",
+        "Scalable foundation to turn a personal need into a commercial solution."
+      ]
+    },
+    "stack": ["Angular", "TypeScript", "Node.js", "Responsive Design", "Multi-tenant Architecture"]
+  },
+
+  {
+    "slug": "digital-wedding-invitation",
+    "type": "personal",
+    "title": {
+      "es": "Invitación digital de boda",
+      "en": "Digital Wedding Invitation"
+    },
+    "description": {
+      "es": "Página web responsive para centralizar la información de una boda, ofrecer una experiencia visual cuidada y facilitar el acceso de los invitados a los detalles del evento.",
+      "en": "Responsive website to centralize wedding information, provide a polished visual experience and help guests access event details."
+    },
+    "context": {
+      "es": "Proyecto personal real creado para sustituir una invitación tradicional por una experiencia digital accesible desde cualquier dispositivo.",
+      "en": "Real personal project created to replace a traditional invitation with a digital experience accessible from any device."
+    },
+    "solution": {
+      "es": [
+        "Diseño responsive adaptado a móvil, tablet y escritorio.",
+        "Secciones para información del evento, ubicación, horarios y detalles importantes.",
+        "Experiencia visual personalizada para transmitir el tono del evento."
+      ],
+      "en": [
+        "Responsive design adapted to mobile, tablet and desktop.",
+        "Sections for event information, location, schedule and important details.",
+        "Custom visual experience to communicate the tone of the event."
+      ]
+    },
+    "impact": {
+      "es": [
+        "Proyecto real usado por invitados.",
+        "Centralización de información importante en una única página.",
+        "Demostración de sensibilidad visual, detalle frontend y enfoque en usuario final."
+      ],
+      "en": [
+        "Real project used by guests.",
+        "Centralized important information in a single page.",
+        "Demonstrates visual care, frontend detail and end-user focus."
+      ]
+    },
+    "stack": ["Angular", "TypeScript", "SCSS", "Responsive Design"]
   }
 ]
