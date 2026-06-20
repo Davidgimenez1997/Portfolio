@@ -13,6 +13,8 @@ import { Project } from '../../../core/content/models';
 type LocalizedProject = Project & {
   _title: string;
   _description: string;
+  _role: string;
+  _scope: string;
   _context: string;
   _solution: string[];
   _impact: string[];
@@ -77,6 +79,8 @@ export class ProjectDetailComponent {
       ...project,
       _title: this.langService.resolveI18nText(project.title, lang),
       _description: this.langService.resolveI18nText(project.description, lang),
+      _role: this.langService.resolveI18nText(project.role, lang),
+      _scope: this.langService.resolveI18nText(project.scope, lang),
       _context: this.langService.resolveI18nText(project.context, lang),
       _solution: this.langService.resolveI18nList(project.solution, lang),
       _impact: this.langService.resolveI18nList(project.impact, lang),

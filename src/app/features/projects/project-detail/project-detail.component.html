@@ -20,6 +20,20 @@
       <h1 class="h3 mb-2">{{ project._title }}</h1>
       <p class="mb-4">{{ project._description }}</p>
 
+      @if (project._role || project._scope || project.type) {
+        <div class="d-flex flex-wrap gap-2 mb-4">
+          @if (project._role) {
+            <span class="badge-chip">{{ project._role }}</span>
+          }
+          @if (project._scope) {
+            <span class="badge-chip">{{ project._scope }}</span>
+          }
+          @if (project.type) {
+            <span class="badge-chip">{{ 'projects.type.' + project.type | translate }}</span>
+          }
+        </div>
+      }
+
       @if (project._context) {
         <h2 class="h5">{{ 'projects.context' | translate }}</h2>
         <p>{{ project._context }}</p>

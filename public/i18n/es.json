@@ -112,6 +112,12 @@
     "positionShort": "{{ current }} / {{ total }}",
     "previous": "Proyecto anterior",
     "next": "Proyecto siguiente",
+    "type": {
+      "case-study": "Caso de estudio",
+      "personal": "Proyecto personal",
+      "open-source": "Open source",
+      "experiment": "Experimento"
+    },
     "context": "Contexto",
     "solution": "Solución",
     "impact": "Impacto",

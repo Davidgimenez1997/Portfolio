@@ -2,6 +2,14 @@
   {
     "slug": "distributed-angular-prerendering",
     "type": "case-study",
+    "role": {
+      "es": "Arquitectura frontend y SSR",
+      "en": "Frontend architecture and SSR"
+    },
+    "scope": {
+      "es": "Proyecto profesional",
+      "en": "Professional project"
+    },
     "title": {
       "es": "Sistema distribuido de prerender en Angular",
       "en": "Distributed Angular Prerendering System"
@@ -44,6 +52,14 @@
   {
     "slug": "event-driven-prerender-queue",
     "type": "case-study",
+    "role": {
+      "es": "Arquitectura de prerender y automatización",
+      "en": "Prerender architecture and automation"
+    },
+    "scope": {
+      "es": "Proyecto profesional",
+      "en": "Professional project"
+    },
     "title": {
       "es": "Cola de prerender basada en eventos (CMS)",
       "en": "Event-driven Prerender Queue (CMS)"
@@ -86,6 +102,14 @@
   {
     "slug": "strapi-import-export-plugin",
     "type": "case-study",
+    "role": {
+      "es": "Desarrollo de plugin y flujos CMS",
+      "en": "Plugin development and CMS workflows"
+    },
+    "scope": {
+      "es": "Proyecto profesional",
+      "en": "Professional project"
+    },
     "title": {
       "es": "Plugin de importación y exportación para Strapi",
       "en": "Strapi Import/Export Plugin"
@@ -128,6 +152,14 @@
   {
     "slug": "multi-brand-deployment-architecture",
     "type": "case-study",
+    "role": {
+      "es": "Arquitectura de despliegue frontend",
+      "en": "Frontend deployment architecture"
+    },
+    "scope": {
+      "es": "Proyecto profesional",
+      "en": "Professional project"
+    },
     "title": {
       "es": "Arquitectura de despliegue multi-marca en Kubernetes",
       "en": "Multi-brand Deployment Architecture on Kubernetes"
@@ -170,6 +202,14 @@
   {
     "slug": "runtime-cache-invalidation",
     "type": "case-study",
+    "role": {
+      "es": "Caché SSR e invalidación",
+      "en": "SSR caching and invalidation"
+    },
+    "scope": {
+      "es": "Proyecto profesional",
+      "en": "Professional project"
+    },
     "title": {
       "es": "Caché en tiempo de ejecución e invalidación",
       "en": "Runtime Cache & Invalidation"
@@ -196,6 +236,14 @@
   {
     "slug": "headless-cms-dynamic-routing",
     "type": "case-study",
+    "role": {
+      "es": "Rutas dinámicas y CMS headless",
+      "en": "Dynamic routing and headless CMS"
+    },
+    "scope": {
+      "es": "Proyecto profesional",
+      "en": "Professional project"
+    },
     "title": {
       "es": "Rutas dinámicas con CMS headless",
       "en": "Headless CMS Dynamic Routing"
@@ -222,6 +270,14 @@
   {
     "slug": "frontend-dx-tooling",
     "type": "case-study",
+    "role": {
+      "es": "Tooling frontend y Developer Experience",
+      "en": "Frontend tooling and developer experience"
+    },
+    "scope": {
+      "es": "Proyecto profesional",
+      "en": "Professional project"
+    },
     "title": {
       "es": "Tooling de DX para Frontend",
       "en": "Frontend Developer Experience Tooling"
@@ -235,20 +291,11 @@
         "Scripts de automatización de build y prerender.",
         "Gestión centralizada de configuración."
       ],
-      "en": [
-        "Build and prerender automation scripts.",
-        "Centralized configuration management."
-      ]
+      "en": ["Build and prerender automation scripts.", "Centralized configuration management."]
     },
     "impact": {
-      "es": [
-        "Reducción de tiempos de build.",
-        "Onboarding más rápido."
-      ],
-      "en": [
-        "Reduced build times.",
-        "Faster onboarding."
-      ]
+      "es": ["Reducción de tiempos de build.", "Onboarding más rápido."],
+      "en": ["Reduced build times.", "Faster onboarding."]
     },
     "stack": ["Node.js", "Angular", "TypeScript", "Docker"]
   },
@@ -256,6 +303,14 @@
   {
     "slug": "multitenant-photography-portal",
     "type": "personal",
+    "role": {
+      "es": "Diseño y desarrollo de producto",
+      "en": "Product design and development"
+    },
+    "scope": {
+      "es": "Proyecto personal",
+      "en": "Personal project"
+    },
     "title": {
       "es": "Portal multi-tenant para fotógrafos",
       "en": "Multi-tenant Photography Portal"
@@ -300,6 +355,14 @@
   {
     "slug": "digital-wedding-invitation",
     "type": "personal",
+    "role": {
+      "es": "Diseño frontend y experiencia responsive",
+      "en": "Frontend design and responsive experience"
+    },
+    "scope": {
+      "es": "Proyecto personal",
+      "en": "Personal project"
+    },
     "title": {
       "es": "Invitación digital de boda",
       "en": "Digital Wedding Invitation"

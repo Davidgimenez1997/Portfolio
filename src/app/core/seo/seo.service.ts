@@ -476,6 +476,8 @@ export class SeoService {
     return {
       ...baseNode,
       creator: { '@id': `${SITE_URL}/#person` },
+      contributor: { '@id': `${SITE_URL}/#person` },
+      genre: options.project.type,
       keywords: options.project.stack?.join(', '),
       about: options.project.stack,
     };
@@ -505,6 +507,8 @@ export class SeoService {
             description: this.language.resolveI18nText(project.description, lang),
             url,
             creator: { '@id': `${SITE_URL}/#person` },
+            contributor: { '@id': `${SITE_URL}/#person` },
+            genre: project.type,
             keywords: project.stack?.join(', '),
             about: project.stack,
           },
