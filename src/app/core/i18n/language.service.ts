@@ -24,21 +24,61 @@ export class LanguageService {
   }
 
   init(initialFromServer?: string) {
+    const routeLang = this.getLangFromPath(this.document.location?.pathname ?? '');
     const preferred = this.getStoredLang();
     const detected =
-      preferred ?? this.normalizeLang(initialFromServer ?? this.detectBrowserLang() ?? 'es');
+      routeLang ??
+      preferred ??
+      this.normalizeLang(initialFromServer ?? this.detectBrowserLang() ?? 'es');
     this.use(detected);
   }
 
-  use(lang: string) {
+  use(lang: string, options: { persist?: boolean } = {}) {
     const normalized = this.normalizeLang(lang);
     this.currentLangSubject.next(normalized);
     this.document.documentElement.lang = normalized;
     this.translate.use(normalized);
 
-    if (isPlatformBrowser(this.platformId)) {
+    if (isPlatformBrowser(this.platformId) && options.persist !== false) {
       localStorage.setItem(this.storageKey, normalized);
     }
+  }
+
+  localizedPath(path = '/', lang: AppLang = this.current): string {
+    const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+    const withoutLang = this.stripLangPrefix(normalizedPath);
+
+    return withoutLang === '/' ? `/${lang}` : `/${lang}${withoutLang}`;
+  }
+
+  switchUrl(url: string, lang: AppLang): string {
+    const [pathWithQuery, fragment] = url.split('#');
+    const [path, query] = pathWithQuery.split('?');
+    const localized = this.localizedPath(path || '/', lang);
+    const withQuery = query ? `${localized}?${query}` : localized;
+
+    return fragment ? `${withQuery}#${fragment}` : withQuery;
+  }
+
+  getLangFromPath(path: string): AppLang | null {
+    const segment = path.split('/').filter(Boolean)[0];
+    return segment === 'es' || segment === 'en' ? segment : null;
+  }
+
+  stripLangPrefix(path: string): string {
+    const segments = path.split('/').filter(Boolean);
+
+    if (segments[0] === 'es' || segments[0] === 'en') {
+      const stripped = segments.slice(1).join('/');
+      return stripped ? `/${stripped}` : '/';
+    }
+
+    return path.startsWith('/') ? path : `/${path}`;
+  }
+
+  isLocalizedHomeUrl(url: string): boolean {
+    const path = url.split('#')[0].split('?')[0] || '/';
+    return path === '/' || path === '/es' || path === '/en';
   }
 
   resolveI18nText(value: string | I18nText | undefined, lang: 'es' | 'en'): string {

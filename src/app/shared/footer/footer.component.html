@@ -1,93 +1,127 @@
 <footer class="footer border-top mt-auto bg-body-tertiary">
-    <div class="container py-5">
-        <div class="row g-4">
+  <div class="container py-5">
+    <div class="row g-4">
+      <!-- Brand / Summary -->
+      <div class="col-12 col-lg-4">
+        <div class="fw-semibold mb-2">{{ 'footer.brand' | translate }}</div>
+        <p class="text-muted small mb-3">
+          {{ 'footer.summary' | translate }}
+        </p>
 
-            <!-- Brand / Summary -->
-            <div class="col-12 col-lg-4">
-                <div class="fw-semibold mb-2">{{ 'footer.brand' | translate }}</div>
-                <p class="text-muted small mb-3">
-                    {{ 'footer.summary' | translate }}
-                </p>
+        @if (profile$ | async; as profile) {
+          <div class="d-flex flex-wrap gap-2">
+            @if (profile?.links?.github; as github) {
+              <a
+                class="btn btn-outline-secondary btn-sm"
+                (click)="analyticsService.outbound('github', 'footer')"
+                [href]="github"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {{ 'footer.links.github' | translate }}
+              </a>
+            }
+            @if (profile?.links?.linkedin; as linkedin) {
+              <a
+                class="btn btn-outline-secondary btn-sm"
+                (click)="analyticsService.outbound('linkedin', 'footer')"
+                [href]="linkedin"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {{ 'footer.links.linkedin' | translate }}
+              </a>
+            }
+            @if (profile?.links?.cv; as cv) {
+              <a
+                class="btn btn-outline-secondary btn-sm"
+                (click)="analyticsService.outbound('cv', 'footer')"
+                [href]="cv"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {{ 'footer.links.cv' | translate }}
+              </a>
+            }
+          </div>
+        }
+      </div>
 
-                @if (profile$ | async; as profile) {
-                    <div class="d-flex flex-wrap gap-2">
-                        @if (profile?.links?.github; as github) {
-                            <a class="btn btn-outline-secondary btn-sm"
-                               (click)="analyticsService.outbound('github', 'footer')"
-                               [href]="github"
-                               target="_blank"
-                               rel="noreferrer">
-                                {{ 'footer.links.github' | translate }}
-                            </a>
-                        }
-                        @if (profile?.links?.linkedin; as linkedin) {
-                            <a class="btn btn-outline-secondary btn-sm"
-                               (click)="analyticsService.outbound('linkedin', 'footer')"
-                               [href]="linkedin"
-                               target="_blank"
-                               rel="noreferrer">
-                                {{ 'footer.links.linkedin' | translate }}
-                            </a>
-                        }
-                        @if (profile?.links?.cv; as cv) {
-                            <a class="btn btn-outline-secondary btn-sm"
-                               (click)="analyticsService.outbound('cv', 'footer')"
-                               [href]="cv"
-                               target="_blank"
-                               rel="noreferrer">
-                                {{ 'footer.links.cv' | translate }}
-                            </a>
-                        }
-                    </div>
-                }
-            </div>
+      <!-- Navigation -->
+      <div class="col-6 col-lg-4">
+        <div class="fw-semibold mb-2">{{ 'footer.sections.title' | translate }}</div>
 
-            <!-- Navigation -->
-            <div class="col-6 col-lg-4">
-                <div class="fw-semibold mb-2">{{ 'footer.sections.title' | translate }}</div>
+        <ul class="list-unstyled small mb-0 footer-links">
+          @if (isHome$ | async) {
+            <li>
+              <a [routerLink]="route('/')" fragment="home">{{ 'nav.home' | translate }}</a>
+            </li>
+            <li>
+              <a [routerLink]="route('/')" fragment="about">{{ 'nav.about' | translate }}</a>
+            </li>
+            <li>
+              <a [routerLink]="route('/')" fragment="projects">{{ 'nav.projects' | translate }}</a>
+            </li>
+            <li>
+              <a [routerLink]="route('/')" fragment="experience">{{
+                'nav.experience' | translate
+              }}</a>
+            </li>
+            <li>
+              <a [routerLink]="route('/')" fragment="education">{{
+                'nav.education' | translate
+              }}</a>
+            </li>
+            <li>
+              <a [routerLink]="route('/')" fragment="contact">{{ 'nav.contact' | translate }}</a>
+            </li>
+          } @else {
+            <li>
+              <a [routerLink]="route('/')">{{ 'nav.home' | translate }}</a>
+            </li>
+            <li>
+              <a [routerLink]="route('/about')">{{ 'nav.about' | translate }}</a>
+            </li>
+            <li>
+              <a [routerLink]="route('/projects')">{{ 'nav.projects' | translate }}</a>
+            </li>
+            <li>
+              <a [routerLink]="route('/experience')">{{ 'nav.experience' | translate }}</a>
+            </li>
+            <li>
+              <a [routerLink]="route('/education')">{{ 'nav.education' | translate }}</a>
+            </li>
+            <li>
+              <a [routerLink]="route('/contact')">{{ 'nav.contact' | translate }}</a>
+            </li>
+          }
+        </ul>
+      </div>
 
-                <ul class="list-unstyled small mb-0 footer-links">
-                    @if (isHome$ | async) {
-                        <li><a [routerLink]="['/']" fragment="home">{{ 'nav.home' | translate }}</a></li>
-                        <li><a [routerLink]="['/']" fragment="about">{{ 'nav.about' | translate }}</a></li>
-                        <li><a [routerLink]="['/']" fragment="projects">{{ 'nav.projects' | translate }}</a></li>
-                        <li><a [routerLink]="['/']" fragment="experience">{{ 'nav.experience' | translate }}</a></li>
-                        <li><a [routerLink]="['/']" fragment="education">{{ 'nav.education' | translate }}</a></li>
-                        <li><a [routerLink]="['/']" fragment="contact">{{ 'nav.contact' | translate }}</a></li>
-                    } @else {
-                        <li><a routerLink="/">{{ 'nav.home' | translate }}</a></li>
-                        <li><a routerLink="/about">{{ 'nav.about' | translate }}</a></li>
-                        <li><a routerLink="/projects">{{ 'nav.projects' | translate }}</a></li>
-                        <li><a routerLink="/experience">{{ 'nav.experience' | translate }}</a></li>
-                        <li><a routerLink="/education">{{ 'nav.education' | translate }}</a></li>
-                        <li><a routerLink="/contact">{{ 'nav.contact' | translate }}</a></li>
-                    }
-                </ul>
-            </div>
+      <!-- Tech stack -->
+      <div class="col-6 col-lg-4">
+        <div class="fw-semibold mb-2">{{ 'footer.stack.title' | translate }}</div>
 
-            <!-- Tech stack -->
-            <div class="col-6 col-lg-4">
-                <div class="fw-semibold mb-2">{{ 'footer.stack.title' | translate }}</div>
-
-                <div class="d-flex flex-wrap gap-2">
-                    <span class="badge-chip">Angular</span>
-                    <span class="badge-chip">Standalone</span>
-                    <span class="badge-chip">SSR</span>
-                    <span class="badge-chip">Prerender</span>
-                    <span class="badge-chip">TypeScript</span>
-                    <span class="badge-chip">Bootstrap</span>
-                    <span class="badge-chip">Docker</span>
-                </div>
-            </div>
-
+        <div class="d-flex flex-wrap gap-2">
+          <span class="badge-chip">Angular</span>
+          <span class="badge-chip">Standalone</span>
+          <span class="badge-chip">SSR</span>
+          <span class="badge-chip">Prerender</span>
+          <span class="badge-chip">TypeScript</span>
+          <span class="badge-chip">Bootstrap</span>
+          <span class="badge-chip">Docker</span>
         </div>
-
-        <hr class="my-4">
-
-        <!-- Bottom -->
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 small text-muted">
-            <div>© {{ year }} {{ 'footer.copyrightName' | translate }}</div>
-            <div>{{ 'footer.builtWith' | translate }}</div>
-        </div>
+      </div>
     </div>
+
+    <hr class="my-4" />
+
+    <!-- Bottom -->
+    <div
+      class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 small text-muted"
+    >
+      <div>© {{ year }} {{ 'footer.copyrightName' | translate }}</div>
+      <div>{{ 'footer.builtWith' | translate }}</div>
+    </div>
+  </div>
 </footer>

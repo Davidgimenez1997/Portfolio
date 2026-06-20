@@ -1,11 +1,11 @@
 import {
-    AngularNodeAppEngine,
-    createNodeRequestHandler,
-    isMainModule,
-    writeResponseToNodeResponse,
+  AngularNodeAppEngine,
+  createNodeRequestHandler,
+  isMainModule,
+  writeResponseToNodeResponse,
 } from '@angular/ssr/node';
 import express from 'express';
-import {join} from 'node:path';
+import { join } from 'node:path';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
@@ -15,12 +15,12 @@ const angularApp = new AngularNodeAppEngine();
 app.disable('x-powered-by');
 
 app.use((_req, res, next) => {
-    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
-    res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
-    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
-    res.setHeader('X-Content-Type-Options', 'nosniff');
-    res.setHeader('X-Frame-Options', 'DENY');
-    next();
+  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+  res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  next();
 });
 
 /**
@@ -39,25 +39,24 @@ app.use((_req, res, next) => {
  * Serve static files from /browser
  */
 app.use(
-    express.static(browserDistFolder, {
-        maxAge: '1y',
-        index: false,
-        redirect: false,
-    }),
+  express.static(browserDistFolder, {
+    maxAge: '1y',
+    index: false,
+    redirect: false,
+  }),
 );
 
 /**
  * Handle all other requests by rendering the Angular application.
  */
 app.use((req, res, next) => {
-    const lang = pickLangFromAcceptLanguage(req.headers['accept-language']);
+  const lang =
+    pickLangFromPath(req.path) ?? pickLangFromAcceptLanguage(req.headers['accept-language']);
 
-    angularApp
-        .handle(req, { INITIAL_LANG: lang })
-        .then((response) =>
-            response ? writeResponseToNodeResponse(response, res) : next(),
-        )
-        .catch(next);
+  angularApp
+    .handle(req, { INITIAL_LANG: lang })
+    .then((response) => (response ? writeResponseToNodeResponse(response, res) : next()))
+    .catch(next);
 });
 
 /**
@@ -65,14 +64,14 @@ app.use((req, res, next) => {
  * The server listens on the port defined by the `PORT` environment variable, or defaults to 4000.
  */
 if (isMainModule(import.meta.url) || process.env['pm_id']) {
-    const port = process.env['PORT'] || 4000;
-    app.listen(port, (error) => {
-        if (error) {
-            throw error;
-        }
+  const port = process.env['PORT'] || 4000;
+  app.listen(port, (error) => {
+    if (error) {
+      throw error;
+    }
 
-        console.log(`Node Express server listening on http://localhost:${port}`);
-    });
+    console.log(`Node Express server listening on http://localhost:${port}`);
+  });
 }
 
 /**
@@ -81,8 +80,13 @@ if (isMainModule(import.meta.url) || process.env['pm_id']) {
 export const reqHandler = createNodeRequestHandler(app);
 
 function pickLangFromAcceptLanguage(value: unknown): 'es' | 'en' {
-    const header = String(value ?? '').toLowerCase();
-    const first = header.split(',')[0]?.trim() ?? '';
-    const base = first.split('-')[0];
-    return base === 'en' ? 'en' : 'es';
+  const header = String(value ?? '').toLowerCase();
+  const first = header.split(',')[0]?.trim() ?? '';
+  const base = first.split('-')[0];
+  return base === 'en' ? 'en' : 'es';
+}
+
+function pickLangFromPath(path: string): 'es' | 'en' | null {
+  const first = path.split('/').filter(Boolean)[0];
+  return first === 'en' || first === 'es' ? first : null;
 }

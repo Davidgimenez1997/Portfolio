@@ -20,7 +20,7 @@ describe('SeoService', () => {
         {
           provide: Router,
           useValue: {
-            url: '/projects/angular-ssr?ref=test#top',
+            url: '/es/projects/angular-ssr?ref=test#top',
             events: EMPTY,
           },
         },
@@ -66,6 +66,11 @@ describe('SeoService', () => {
           useValue: {
             current: 'es',
             currentLang$: EMPTY,
+            localizedPath: (path = '/', lang = 'es') => {
+              const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+              const withoutLang = normalizedPath.replace(/^\/(?:es|en)(?=\/|$)/, '') || '/';
+              return withoutLang === '/' ? `/${lang}` : `/${lang}${withoutLang}`;
+            },
             resolveI18nText: (value: string | { es: string; en: string }, lang: 'es' | 'en') =>
               typeof value === 'string' ? value : value[lang],
             resolveI18nList: (
@@ -115,7 +120,7 @@ describe('SeoService', () => {
     expect(meta.getTag('name="author"')?.content).toBe('David Gimenez Rodriguez De Rivera');
     expect(meta.getTag('name="robots"')?.content).toBe('index,follow');
     expect(meta.getTag('property="og:url"')?.content).toBe(
-      'https://davidgimenezrodriguez.com/projects/angular-ssr',
+      'https://davidgimenezrodriguez.com/es/projects/angular-ssr',
     );
     expect(meta.getTag('property="og:site_name"')?.content).toBe('David Gimenez Portfolio');
     expect(meta.getTag('property="og:image"')?.content).toBe(
@@ -131,7 +136,13 @@ describe('SeoService', () => {
       'https://davidgimenezrodriguez.com/og-image.png',
     );
     expect(document.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(
-      'https://davidgimenezrodriguez.com/projects/angular-ssr',
+      'https://davidgimenezrodriguez.com/es/projects/angular-ssr',
+    );
+    expect(document.querySelector('link[hreflang="es"]')?.getAttribute('href')).toBe(
+      'https://davidgimenezrodriguez.com/es/projects/angular-ssr',
+    );
+    expect(document.querySelector('link[hreflang="en"]')?.getAttribute('href')).toBe(
+      'https://davidgimenezrodriguez.com/en/projects/angular-ssr',
     );
     expect(
       document.querySelector('link[rel="me"][href="https://github.com/Davidgimenez1997"]'),
@@ -242,7 +253,7 @@ describe('SeoService', () => {
               expect.objectContaining({
                 '@type': 'ListItem',
                 position: 1,
-                url: 'https://davidgimenezrodriguez.com/projects/distributed-angular-prerendering',
+                url: 'https://davidgimenezrodriguez.com/es/projects/distributed-angular-prerendering',
                 item: expect.objectContaining({
                   '@type': 'CreativeWork',
                   name: 'Prerender Angular',

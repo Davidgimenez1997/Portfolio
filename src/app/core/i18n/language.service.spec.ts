@@ -51,4 +51,18 @@ describe('LanguageService', () => {
     expect(service.resolveI18nText('Plain', 'es')).toBe('Plain');
     expect(service.resolveI18nList({ es: ['Uno'], en: ['One'] }, 'es')).toEqual(['Uno']);
   });
+
+  it('builds localized paths and switches URLs between languages', () => {
+    const service = TestBed.inject(LanguageService);
+
+    service.use('es');
+
+    expect(service.localizedPath('/projects')).toBe('/es/projects');
+    expect(service.localizedPath('/es/projects/example', 'en')).toBe('/en/projects/example');
+    expect(service.switchUrl('/es/projects/example?ref=test#top', 'en')).toBe(
+      '/en/projects/example?ref=test#top',
+    );
+    expect(service.getLangFromPath('/en/contact')).toBe('en');
+    expect(service.stripLangPrefix('/es/contact')).toBe('/contact');
+  });
 });

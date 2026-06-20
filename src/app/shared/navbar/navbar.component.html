@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom sticky-top">
   <div class="container">
-    <a class="navbar-brand fw-semibold" routerLink="/">
+    <a class="navbar-brand fw-semibold" [routerLink]="route('/')">
       <span class="brand-mark" aria-hidden="true">&lt;/&gt;</span>
       David Giménez
     </a>
@@ -26,7 +26,7 @@
             <li class="nav-item">
               <a
                 class="nav-link"
-                [routerLink]="['/']"
+                [routerLink]="route('/')"
                 [fragment]="id"
                 [class.active]="(activeSection$ | async) === id"
                 [attr.aria-current]="(activeSection$ | async) === id ? 'page' : null"
@@ -40,7 +40,7 @@
           <li class="nav-item">
             <a
               class="nav-link"
-              routerLink="/"
+              [routerLink]="route('/')"
               routerLinkActive="active"
               [routerLinkActiveOptions]="{ exact: true }"
               (click)="closeMenu()"
@@ -50,7 +50,7 @@
           <li class="nav-item">
             <a
               class="nav-link"
-              routerLink="/about"
+              [routerLink]="route('/about')"
               routerLinkActive="active"
               ariaCurrentWhenActive="page"
               (click)="closeMenu()"
@@ -60,7 +60,7 @@
           <li class="nav-item">
             <a
               class="nav-link"
-              routerLink="/projects"
+              [routerLink]="route('/projects')"
               routerLinkActive="active"
               ariaCurrentWhenActive="page"
               (click)="closeMenu()"
@@ -70,7 +70,7 @@
           <li class="nav-item">
             <a
               class="nav-link"
-              routerLink="/experience"
+              [routerLink]="route('/experience')"
               routerLinkActive="active"
               ariaCurrentWhenActive="page"
               (click)="closeMenu()"
@@ -80,7 +80,7 @@
           <li class="nav-item">
             <a
               class="nav-link"
-              routerLink="/education"
+              [routerLink]="route('/education')"
               routerLinkActive="active"
               ariaCurrentWhenActive="page"
               (click)="closeMenu()"
@@ -90,7 +90,7 @@
           <li class="nav-item">
             <a
               class="nav-link"
-              routerLink="/contact"
+              [routerLink]="route('/contact')"
               routerLinkActive="active"
               ariaCurrentWhenActive="page"
               (click)="closeMenu()"

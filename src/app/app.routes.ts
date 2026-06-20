@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [
+const localizedRoutes: Routes = [
   {
     path: '',
     loadComponent: () => import('./features/home/home.component').then((m) => m.HomeComponent),
@@ -94,4 +94,24 @@ export const routes: Routes = [
       noindex: true,
     },
   },
+];
+
+export const routes: Routes = [
+  { path: '', redirectTo: 'es', pathMatch: 'full' },
+  { path: 'about', redirectTo: 'es/about', pathMatch: 'full' },
+  { path: 'projects', redirectTo: 'es/projects', pathMatch: 'full' },
+  { path: 'projects/:slug', redirectTo: 'es/projects/:slug', pathMatch: 'full' },
+  { path: 'experience', redirectTo: 'es/experience', pathMatch: 'full' },
+  { path: 'education', redirectTo: 'es/education', pathMatch: 'full' },
+  { path: 'contact', redirectTo: 'es/contact', pathMatch: 'full' },
+  { path: '404', redirectTo: 'es/404', pathMatch: 'full' },
+  {
+    path: 'es',
+    children: localizedRoutes,
+  },
+  {
+    path: 'en',
+    children: localizedRoutes,
+  },
+  { path: '**', redirectTo: 'es/404' },
 ];

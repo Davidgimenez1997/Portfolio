@@ -6,6 +6,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { SeoService } from './core/seo/seo.service';
 import { AnalyticsService } from './core/analytics/analytics.service';
+import { LanguageService } from './core/i18n/language.service';
 
 @Component({
   standalone: true,
@@ -17,12 +18,20 @@ export class App implements OnInit {
   private readonly seo = inject(SeoService);
   private readonly router = inject(Router);
   private readonly analytics = inject(AnalyticsService);
+  private readonly language = inject(LanguageService);
   private readonly document = inject(DOCUMENT);
 
   ngOnInit() {
     this.seo.bindRouteMetadata();
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((event) => this.analytics.pageView(event.urlAfterRedirects, this.document.title));
+      .subscribe((event) => {
+        const routeLang = this.language.getLangFromPath(event.urlAfterRedirects);
+        if (routeLang && routeLang !== this.language.current) {
+          this.language.use(routeLang, { persist: false });
+        }
+
+        this.analytics.pageView(event.urlAfterRedirects, this.document.title);
+      });
   }
 }

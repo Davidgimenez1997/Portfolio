@@ -32,8 +32,8 @@ type FeaturedProjectVM = Project & { _title: string; _description: string };
 })
 export class HomeComponent implements AfterViewInit, OnDestroy {
   private contentService = inject(ContentService);
-  private langService = inject(LanguageService);
-  private route = inject(ActivatedRoute);
+  langService = inject(LanguageService);
+  private activatedRoute = inject(ActivatedRoute);
   private location = inject(Location);
   private spy = inject(ScrollSpyService);
 
@@ -78,10 +78,18 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     return rec[this.langService.current] ?? [];
   }
 
+  localizedRoute(path = '/') {
+    return this.langService.localizedPath(path);
+  }
+
+  projectRoute(slug?: string) {
+    return this.localizedRoute(`/projects/${slug ?? ''}`);
+  }
+
   ngAfterViewInit(): void {
     if (!this.isBrowser) return;
 
-    this.route.fragment.subscribe((fragment) => {
+    this.activatedRoute.fragment.subscribe((fragment) => {
       if (!fragment) return;
       document.getElementById(fragment)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });

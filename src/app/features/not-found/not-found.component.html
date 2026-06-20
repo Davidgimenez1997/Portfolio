@@ -4,8 +4,10 @@
   <p class="text-muted mb-4">{{ 'notFound.message' | translate }}</p>
 
   <div class="d-flex flex-wrap gap-2">
-    <a class="btn btn-primary btn-accent" routerLink="/">{{ 'notFound.ctaHome' | translate }}</a>
-    <a class="btn btn-outline-primary" routerLink="/projects">
+    <a class="btn btn-primary btn-accent" [routerLink]="route('/')">{{
+      'notFound.ctaHome' | translate
+    }}</a>
+    <a class="btn btn-outline-primary" [routerLink]="route('/projects')">
       {{ 'notFound.ctaProjects' | translate }}
     </a>
   </div>

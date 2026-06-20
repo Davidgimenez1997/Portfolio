@@ -33,4 +33,8 @@ export class ProjectsListComponent {
       })),
     ),
   );
+
+  projectRoute(slug: string) {
+    return this.langService.localizedPath(`/projects/${slug}`);
+  }
 }

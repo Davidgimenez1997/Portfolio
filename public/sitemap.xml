@@ -1,91 +1,181 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://davidgimenezrodriguez.com/</loc>
+    <loc>https://davidgimenezrodriguez.com/es</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://davidgimenezrodriguez.com/about</loc>
+    <loc>https://davidgimenezrodriguez.com/es/about</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://davidgimenezrodriguez.com/projects</loc>
+    <loc>https://davidgimenezrodriguez.com/es/projects</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://davidgimenezrodriguez.com/experience</loc>
+    <loc>https://davidgimenezrodriguez.com/es/experience</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://davidgimenezrodriguez.com/education</loc>
+    <loc>https://davidgimenezrodriguez.com/es/education</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://davidgimenezrodriguez.com/contact</loc>
+    <loc>https://davidgimenezrodriguez.com/es/contact</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://davidgimenezrodriguez.com/projects/distributed-angular-prerendering</loc>
+    <loc>https://davidgimenezrodriguez.com/en</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://davidgimenezrodriguez.com/en/about</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://davidgimenezrodriguez.com/projects/event-driven-prerender-queue</loc>
+    <loc>https://davidgimenezrodriguez.com/en/projects</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://davidgimenezrodriguez.com/projects/strapi-import-export-plugin</loc>
+    <loc>https://davidgimenezrodriguez.com/en/experience</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://davidgimenezrodriguez.com/projects/multi-brand-deployment-architecture</loc>
+    <loc>https://davidgimenezrodriguez.com/en/education</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://davidgimenezrodriguez.com/projects/runtime-cache-invalidation</loc>
+    <loc>https://davidgimenezrodriguez.com/en/contact</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://davidgimenezrodriguez.com/projects/headless-cms-dynamic-routing</loc>
+    <loc>https://davidgimenezrodriguez.com/es/projects/distributed-angular-prerendering</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://davidgimenezrodriguez.com/projects/frontend-dx-tooling</loc>
+    <loc>https://davidgimenezrodriguez.com/es/projects/event-driven-prerender-queue</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://davidgimenezrodriguez.com/projects/multitenant-photography-portal</loc>
+    <loc>https://davidgimenezrodriguez.com/es/projects/strapi-import-export-plugin</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://davidgimenezrodriguez.com/projects/digital-wedding-invitation</loc>
+    <loc>https://davidgimenezrodriguez.com/es/projects/multi-brand-deployment-architecture</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://davidgimenezrodriguez.com/es/projects/runtime-cache-invalidation</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://davidgimenezrodriguez.com/es/projects/headless-cms-dynamic-routing</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://davidgimenezrodriguez.com/es/projects/frontend-dx-tooling</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://davidgimenezrodriguez.com/es/projects/multitenant-photography-portal</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://davidgimenezrodriguez.com/es/projects/digital-wedding-invitation</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://davidgimenezrodriguez.com/en/projects/distributed-angular-prerendering</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://davidgimenezrodriguez.com/en/projects/event-driven-prerender-queue</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://davidgimenezrodriguez.com/en/projects/strapi-import-export-plugin</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://davidgimenezrodriguez.com/en/projects/multi-brand-deployment-architecture</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://davidgimenezrodriguez.com/en/projects/runtime-cache-invalidation</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://davidgimenezrodriguez.com/en/projects/headless-cms-dynamic-routing</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://davidgimenezrodriguez.com/en/projects/frontend-dx-tooling</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://davidgimenezrodriguez.com/en/projects/multitenant-photography-portal</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://davidgimenezrodriguez.com/en/projects/digital-wedding-invitation</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

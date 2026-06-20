@@ -5,6 +5,7 @@ import { promisify } from 'node:util';
 const siteUrl = (process.env.SITE_URL ?? 'https://davidgimenezrodriguez.com').replace(/\/$/, '');
 const projects = JSON.parse(await readFile('public/content/projects.json', 'utf8'));
 const execFileAsync = promisify(execFile);
+const languages = ['es', 'en'];
 
 const sharedSeoFiles = [
   'public/i18n/es.json',
@@ -78,18 +79,22 @@ const assetRoutes = [
 
 const staticRoutes = Object.keys(routeSources);
 const routes = [
-  ...staticRoutes.map((route) => ({
-    path: route,
-    sources: [...sharedSeoFiles, ...routeSources[route]],
-    changefreq: 'monthly',
-    priority: route === '' ? '1.0' : '0.8',
-  })),
-  ...projects.map((project) => ({
-    path: `projects/${project.slug}`,
-    sources: [...sharedSeoFiles, ...projectRouteSources],
-    changefreq: 'monthly',
-    priority: '0.8',
-  })),
+  ...languages.flatMap((lang) =>
+    staticRoutes.map((route) => ({
+      path: route ? `${lang}/${route}` : lang,
+      sources: [...sharedSeoFiles, ...routeSources[route]],
+      changefreq: 'monthly',
+      priority: route === '' ? '1.0' : '0.8',
+    })),
+  ),
+  ...languages.flatMap((lang) =>
+    projects.map((project) => ({
+      path: `${lang}/projects/${project.slug}`,
+      sources: [...sharedSeoFiles, ...projectRouteSources],
+      changefreq: 'monthly',
+      priority: '0.8',
+    })),
+  ),
   ...assetRoutes,
 ];
 

@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
 import { SeoService } from './core/seo/seo.service';
+import { LanguageService } from './core/i18n/language.service';
 
 describe('App', () => {
   beforeEach(async () => {
@@ -10,6 +11,14 @@ describe('App', () => {
         {
           provide: SeoService,
           useValue: { bindRouteMetadata: () => undefined },
+        },
+        {
+          provide: LanguageService,
+          useValue: {
+            current: 'es',
+            getLangFromPath: () => null,
+            use: () => undefined,
+          },
         },
       ],
     })

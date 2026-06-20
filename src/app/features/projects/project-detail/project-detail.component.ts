@@ -38,4 +38,8 @@ export class ProjectDetailComponent {
       };
     }),
   );
+
+  projectsRoute() {
+    return this.langService.localizedPath('/projects');
+  }
 }

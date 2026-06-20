@@ -7,21 +7,21 @@
       <div class="d-flex flex-wrap gap-2 mb-4">
         <a
           class="btn btn-primary btn-accent"
-          routerLink="/projects"
+          [routerLink]="localizedRoute('/projects')"
           (click)="analyticsService.ctaClick('view_projects', 'hero')"
         >
           {{ 'home.ctaProjects' | translate }}
         </a>
         <a
           class="btn btn-primary btn-accent"
-          routerLink="/experience"
+          [routerLink]="localizedRoute('/experience')"
           (click)="analyticsService.ctaClick('view_experience', 'hero')"
         >
           {{ 'home.ctaExperience' | translate }}
         </a>
         <a
           class="btn btn-primary btn-accent"
-          routerLink="/contact"
+          [routerLink]="localizedRoute('/contact')"
           (click)="analyticsService.ctaClick('contact', 'hero')"
         >
           {{ 'home.ctaContact' | translate }}
@@ -65,7 +65,7 @@
   <app-section-title [title]="'nav.about' | translate" [subtitle]="'about.subtitle' | translate">
     <a
       class="btn btn-primary btn-sm btn-accent"
-      routerLink="/about"
+      [routerLink]="localizedRoute('/about')"
       (click)="analyticsService.ctaClick('about_full', 'about')"
     >
       {{ 'about.ctaFull' | translate }}
@@ -187,7 +187,7 @@
   >
     <a
       class="btn btn-primary btn-sm btn-accent"
-      routerLink="/projects"
+      [routerLink]="localizedRoute('/projects')"
       (click)="analyticsService.ctaClick('view_projects', 'projects')"
     >
       {{ 'projects.ctaAll' | translate }}
@@ -214,7 +214,7 @@
               <div class="d-flex gap-2">
                 <a
                   class="btn btn-primary btn-sm"
-                  [routerLink]="['/projects', feature?.slug]"
+                  [routerLink]="projectRoute(feature?.slug)"
                   (click)="analyticsService.projectOpen(feature.slug, 'featured')"
                 >
                   {{ 'projects.ctaView' | translate }}
@@ -259,7 +259,7 @@
   >
     <a
       class="btn btn-primary btn-sm btn-accent"
-      routerLink="/experience"
+      [routerLink]="localizedRoute('/experience')"
       (click)="analyticsService.ctaClick('view_experience', 'experience')"
     >
       {{ 'experience.ctaFull' | translate }}
@@ -317,7 +317,7 @@
   >
     <a
       class="btn btn-primary btn-sm btn-accent"
-      routerLink="/education"
+      [routerLink]="localizedRoute('/education')"
       (click)="analyticsService.ctaClick('education_full', 'education')"
     >
       {{ 'education.ctaFull' | translate }}
@@ -380,7 +380,7 @@
             <div class="d-flex flex-wrap gap-2">
               <a
                 class="btn btn-primary btn-sm"
-                routerLink="/contact"
+                [routerLink]="localizedRoute('/contact')"
                 (click)="analyticsService.ctaClick('contact', 'contact')"
               >
                 {{ 'contact.ctaForm' | translate }}

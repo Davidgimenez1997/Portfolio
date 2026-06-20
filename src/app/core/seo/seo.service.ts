@@ -165,8 +165,11 @@ export class SeoService {
       .subscribe((title) => {
         this.applyMetadata(title, projectDescription, {
           breadcrumbs: [
-            { name: 'Home', url: SITE_URL },
-            { name: 'Projects', url: new URL('/projects', SITE_URL).toString() },
+            { name: 'Home', url: new URL(this.language.localizedPath('/'), SITE_URL).toString() },
+            {
+              name: 'Projects',
+              url: new URL(this.language.localizedPath('/projects'), SITE_URL).toString(),
+            },
             { name: projectTitle, url: this.getCanonicalUrl() },
           ],
           project,
@@ -225,6 +228,7 @@ export class SeoService {
     this.meta.updateTag({ name: 'twitter:image', content: SOCIAL_IMAGE_URL });
     this.meta.updateTag({ name: 'twitter:image:alt', content: SOCIAL_IMAGE_ALT });
     this.setCanonical(canonicalUrl);
+    this.setLanguageAlternates();
     this.setIdentityLinks();
     this.setStructuredData(title, description, canonicalUrl, {
       breadcrumbs: options.breadcrumbs ?? this.getDefaultBreadcrumbs(title, canonicalUrl),
@@ -263,6 +267,30 @@ export class SeoService {
     canonical.href = url;
   }
 
+  private setLanguageAlternates() {
+    this.document.querySelectorAll('link[data-seo-hreflang]').forEach((link) => link.remove());
+
+    const alternates = [
+      { hreflang: 'es', href: this.getLocalizedCanonicalUrl('es') },
+      { hreflang: 'en', href: this.getLocalizedCanonicalUrl('en') },
+      { hreflang: 'x-default', href: this.getLocalizedCanonicalUrl('es') },
+    ];
+
+    alternates.forEach(({ hreflang, href }) => {
+      const link = this.document.createElement('link');
+      link.rel = 'alternate';
+      link.hreflang = hreflang;
+      link.href = href;
+      link.setAttribute('data-seo-hreflang', 'true');
+      this.document.head.appendChild(link);
+    });
+  }
+
+  private getLocalizedCanonicalUrl(lang: 'es' | 'en') {
+    const path = this.router.url.split('#')[0].split('?')[0] || '/';
+    return new URL(this.language.localizedPath(path, lang), SITE_URL).toString();
+  }
+
   private setIdentityLinks() {
     SOCIAL_LINKS.forEach((href) => {
       const selector = `link[rel="me"][href="${href}"]`;
@@ -281,12 +309,14 @@ export class SeoService {
     title: string,
     canonicalUrl: string,
   ): Array<{ name: string; url: string }> {
-    if (canonicalUrl === `${SITE_URL}/`) {
-      return [{ name: 'Home', url: SITE_URL }];
+    const homeUrl = new URL(this.language.localizedPath('/'), SITE_URL).toString();
+
+    if (canonicalUrl === homeUrl) {
+      return [{ name: 'Home', url: homeUrl }];
     }
 
     return [
-      { name: 'Home', url: SITE_URL },
+      { name: 'Home', url: homeUrl },
       {
         name: title.replace(' | David Giménez', '').replace(' | David Gimenez', ''),
         url: canonicalUrl,
@@ -459,7 +489,10 @@ export class SeoService {
       name: 'Selected projects by David Giménez Rodríguez',
       numberOfItems: projects.length,
       itemListElement: projects.map((project, index) => {
-        const url = new URL(`/projects/${project.slug}`, SITE_URL).toString();
+        const url = new URL(
+          this.language.localizedPath(`/projects/${project.slug}`),
+          SITE_URL,
+        ).toString();
 
         return {
           '@type': 'ListItem',
