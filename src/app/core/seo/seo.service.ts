@@ -90,10 +90,26 @@ export class SeoService {
       .subscribe((translations) => {
         const title = translations[data['titleKey'] ?? fallbackTitleKey];
         const description = translations[data['descriptionKey'] ?? fallbackDescriptionKey];
+        const schemaType = data['schemaType'] ?? 'WebPage';
+
+        if (schemaType === 'CollectionPage') {
+          this.content
+            .getProjects()
+            .pipe(take(1))
+            .subscribe((projects) => {
+              this.applyMetadata(title, description, {
+                noindex: data['noindex'] === true,
+                projects,
+                schemaType,
+              });
+            });
+
+          return;
+        }
 
         this.applyMetadata(title, description, {
           noindex: data['noindex'] === true,
-          schemaType: data['schemaType'] ?? 'WebPage',
+          schemaType,
         });
       });
   }
@@ -131,6 +147,7 @@ export class SeoService {
       breadcrumbs?: Array<{ name: string; url: string }>;
       noindex?: boolean;
       project?: Project;
+      projects?: Project[];
       schemaType?: SchemaType;
     } = {},
   ) {
@@ -175,6 +192,7 @@ export class SeoService {
     this.setStructuredData(title, description, canonicalUrl, {
       breadcrumbs: options.breadcrumbs ?? this.getDefaultBreadcrumbs(title, canonicalUrl),
       project: options.project,
+      projects: options.projects,
       schemaType: options.schemaType ?? 'WebPage',
     });
   }
@@ -244,6 +262,7 @@ export class SeoService {
     options: {
       breadcrumbs: Array<{ name: string; url: string }>;
       project?: Project;
+      projects?: Project[];
       schemaType: SchemaType;
     },
   ) {
@@ -306,6 +325,7 @@ export class SeoService {
     canonicalUrl: string,
     options: {
       project?: Project;
+      projects?: Project[];
       schemaType: SchemaType;
     },
   ) {
@@ -321,12 +341,21 @@ export class SeoService {
     };
 
     if (!options.project) {
-      return options.schemaType === 'ProfilePage'
-        ? {
-            ...baseNode,
-            mainEntity: { '@id': `${SITE_URL}/#person` },
-          }
-        : baseNode;
+      if (options.schemaType === 'ProfilePage') {
+        return {
+          ...baseNode,
+          mainEntity: { '@id': `${SITE_URL}/#person` },
+        };
+      }
+
+      if (options.schemaType === 'CollectionPage' && options.projects?.length) {
+        return {
+          ...baseNode,
+          mainEntity: this.buildProjectItemList(options.projects),
+        };
+      }
+
+      return baseNode;
     }
 
     return {
@@ -334,6 +363,35 @@ export class SeoService {
       creator: { '@id': `${SITE_URL}/#person` },
       keywords: options.project.stack?.join(', '),
       about: options.project.stack,
+    };
+  }
+
+  private buildProjectItemList(projects: Project[]) {
+    const lang = this.language.current;
+
+    return {
+      '@type': 'ItemList',
+      name: 'Selected projects by David Giménez Rodríguez',
+      numberOfItems: projects.length,
+      itemListElement: projects.map((project, index) => {
+        const url = new URL(`/projects/${project.slug}`, SITE_URL).toString();
+
+        return {
+          '@type': 'ListItem',
+          position: index + 1,
+          url,
+          item: {
+            '@type': 'CreativeWork',
+            '@id': `${url}#webpage`,
+            name: this.language.resolveI18nText(project.title, lang),
+            description: this.language.resolveI18nText(project.description, lang),
+            url,
+            creator: { '@id': `${SITE_URL}/#person` },
+            keywords: project.stack?.join(', '),
+            about: project.stack,
+          },
+        };
+      }),
     };
   }
 }

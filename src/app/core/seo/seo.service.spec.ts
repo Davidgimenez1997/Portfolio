@@ -170,4 +170,65 @@ describe('SeoService', () => {
 
     expect(meta.getTag('name="robots"')?.content).toBe('noindex,follow');
   });
+
+  it('adds an ItemList schema for project collection pages', () => {
+    const service = TestBed.inject(SeoService);
+    const document = TestBed.inject(DOCUMENT);
+
+    (
+      service as unknown as {
+        applyMetadata: (
+          title: string,
+          description: string,
+          options: {
+            projects: Array<{
+              slug: string;
+              title: { es: string; en: string };
+              description: { es: string; en: string };
+              stack?: string[];
+            }>;
+            schemaType: 'CollectionPage';
+          },
+        ) => void;
+      }
+    ).applyMetadata('Projects | David Giménez', 'Selected projects', {
+      projects: [
+        {
+          slug: 'distributed-angular-prerendering',
+          title: { es: 'Prerender Angular', en: 'Angular Prerendering' },
+          description: { es: 'SEO y rendimiento en Angular', en: 'SEO and performance in Angular' },
+          stack: ['Angular', 'SSR'],
+        },
+      ],
+      schemaType: 'CollectionPage',
+    });
+
+    const structuredData = JSON.parse(
+      document.querySelector('script[data-seo-json-ld]')?.textContent ?? '{}',
+    );
+
+    expect(structuredData['@graph']).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          '@type': 'CollectionPage',
+          mainEntity: expect.objectContaining({
+            '@type': 'ItemList',
+            numberOfItems: 1,
+            itemListElement: [
+              expect.objectContaining({
+                '@type': 'ListItem',
+                position: 1,
+                url: 'https://davidgimenezrodriguez.com/projects/distributed-angular-prerendering',
+                item: expect.objectContaining({
+                  '@type': 'CreativeWork',
+                  name: 'Prerender Angular',
+                  keywords: 'Angular, SSR',
+                }),
+              }),
+            ],
+          }),
+        }),
+      ]),
+    );
+  });
 });
