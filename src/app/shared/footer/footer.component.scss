@@ -5,18 +5,18 @@
     }
 
     a {
-      color: var(--bs-secondary-color);
+      color: var(--muted);
       text-decoration: none;
       transition: color 120ms ease;
 
       &:hover {
-        color: var(--bs-body-color);
+        color: var(--text);
         text-decoration: underline;
       }
     }
   }
 
   hr {
-    border-color: rgba(0, 0, 0, 0.1);
+    border-color: var(--border);
   }
 }

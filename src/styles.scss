@@ -240,11 +240,11 @@ $utilities: map-remove(
 }
 
 .text-muted {
-  color: var(--bs-secondary-color) !important;
+  color: var(--muted) !important;
 }
 
 .bg-body-tertiary {
-  background-color: rgba(var(--bs-tertiary-bg-rgb), 1) !important;
+  background-color: rgba(11, 15, 25, .88) !important;
 }
 
 @media (min-width: 576px) {
@@ -291,12 +291,45 @@ body {
 .card-modern {
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .04));
+  color: var(--text);
   box-shadow: var(--shadow);
   backdrop-filter: blur(10px);
   transition:
     transform 160ms ease,
     border-color 160ms ease,
     box-shadow 160ms ease;
+}
+
+.card-modern .card-body {
+  color: inherit;
+}
+
+main a:not(.btn):not(.nav-link):not(.navbar-brand) {
+  color: #c4b5fd;
+  text-decoration-color: rgba(196, 181, 253, .45);
+  text-underline-offset: .18em;
+}
+
+main a:not(.btn):not(.nav-link):not(.navbar-brand):hover,
+main a:not(.btn):not(.nav-link):not(.navbar-brand):focus {
+  color: #fff;
+  text-decoration-color: rgba(255, 255, 255, .75);
+}
+
+.card-modern a:not(.btn),
+.card-modern .link-primary {
+  color: #c4b5fd !important;
+  text-decoration-color: rgba(196, 181, 253, .45);
+  text-underline-offset: .18em;
+}
+
+.card-modern a:not(.btn):hover,
+.card-modern a:not(.btn):focus,
+.card-modern .link-primary:hover,
+.card-modern .link-primary:focus {
+  color: #fff !important;
+  text-decoration-color: rgba(255, 255, 255, .75);
 }
 
 .card-modern:hover {
@@ -321,6 +354,27 @@ body {
   border-radius: 999px;
   padding: 0.65rem 1rem;
   font-weight: 600;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--accent);
+  --bs-btn-border-color: rgba(255, 255, 255, .14);
+  --bs-btn-hover-bg: #8b5cf6;
+  --bs-btn-hover-border-color: rgba(255, 255, 255, .22);
+  --bs-btn-active-bg: #6d28d9;
+  --bs-btn-active-border-color: rgba(255, 255, 255, .24);
+}
+
+.btn-outline-primary,
+.btn-outline-secondary {
+  --bs-btn-color: var(--text);
+  --bs-btn-border-color: var(--border);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: rgba(124, 58, 237, .24);
+  --bs-btn-hover-border-color: rgba(255, 255, 255, .24);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: rgba(124, 58, 237, .32);
+  --bs-btn-active-border-color: rgba(255, 255, 255, .28);
 }
 
 .btn-accent:hover {
