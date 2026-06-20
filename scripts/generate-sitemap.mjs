@@ -1,32 +1,101 @@
-import { readFile, writeFile } from 'node:fs/promises';
+import { execFile } from 'node:child_process';
+import { stat, readFile, writeFile } from 'node:fs/promises';
+import { promisify } from 'node:util';
 
 const siteUrl = (process.env.SITE_URL ?? 'https://davidgimenezrodriguez.com').replace(/\/$/, '');
-const today = new Date().toISOString().slice(0, 10);
 const projects = JSON.parse(await readFile('public/content/projects.json', 'utf8'));
+const execFileAsync = promisify(execFile);
 
-const staticRoutes = ['', 'about', 'projects', 'experience', 'education', 'contact'];
-const projectRoutes = projects.map((project) => `projects/${project.slug}`);
-const routes = [...staticRoutes, ...projectRoutes];
+const sharedSeoFiles = [
+  'public/i18n/es.json',
+  'public/i18n/en.json',
+  'src/app/core/seo/seo.service.ts',
+  'src/app/app.routes.ts',
+];
 
-const entries = routes
-  .map((route) => {
-    const loc = route ? `${siteUrl}/${route}` : `${siteUrl}/`;
+const routeSources = {
+  '': [
+    'public/content/profile.json',
+    'public/content/skills.json',
+    'public/content/projects.json',
+    'public/content/experience.json',
+    'public/content/education.json',
+    'src/app/features/home/home.component.html',
+    'src/app/features/home/home.component.ts',
+    'src/app/features/home/home.component.scss',
+  ],
+  about: [
+    'public/content/profile.json',
+    'public/content/skills.json',
+    'src/app/features/about/about.component.html',
+    'src/app/features/about/about.component.ts',
+    'src/app/features/about/about.component.scss',
+  ],
+  projects: [
+    'public/content/projects.json',
+    'src/app/features/projects/projects-list.component.html',
+    'src/app/features/projects/projects-list.component.ts',
+    'src/app/features/projects/projects-list.component.scss',
+  ],
+  experience: [
+    'public/content/experience.json',
+    'src/app/features/experience/experience.component.html',
+    'src/app/features/experience/experience.component.ts',
+    'src/app/features/experience/experience.component.scss',
+  ],
+  education: [
+    'public/content/education.json',
+    'src/app/features/education/education.component.html',
+    'src/app/features/education/education.component.ts',
+    'src/app/features/education/education.component.scss',
+  ],
+  contact: [
+    'public/content/profile.json',
+    'src/app/features/contact/contact.component.html',
+    'src/app/features/contact/contact.component.ts',
+    'src/app/features/contact/contact.component.scss',
+  ],
+};
+
+const projectRouteSources = [
+  'public/content/projects.json',
+  'src/app/features/projects/project-detail/project-detail.component.html',
+  'src/app/features/projects/project-detail/project-detail.component.ts',
+  'src/app/features/projects/project-detail/project-detail.component.scss',
+];
+
+const staticRoutes = Object.keys(routeSources);
+const routes = [
+  ...staticRoutes.map((route) => ({
+    path: route,
+    sources: [...sharedSeoFiles, ...routeSources[route]],
+  })),
+  ...projects.map((project) => ({
+    path: `projects/${project.slug}`,
+    sources: [...sharedSeoFiles, ...projectRouteSources],
+  })),
+];
+
+const entries = await Promise.all(
+  routes.map(async ({ path, sources }) => {
+    const loc = path ? `${siteUrl}/${path}` : `${siteUrl}/`;
+    const lastmod = await getLatestLastModified(sources);
 
     return [
       '  <url>',
       `    <loc>${escapeXml(loc)}</loc>`,
-      `    <lastmod>${today}</lastmod>`,
+      `    <lastmod>${lastmod}</lastmod>`,
       '    <changefreq>monthly</changefreq>',
-      route === '' ? '    <priority>1.0</priority>' : '    <priority>0.8</priority>',
+      path === '' ? '    <priority>1.0</priority>' : '    <priority>0.8</priority>',
       '  </url>',
     ].join('\n');
-  })
-  .join('\n');
+  }),
+);
 
 const sitemap = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-  entries,
+  entries.join('\n'),
   '</urlset>',
   '',
 ].join('\n');
@@ -35,6 +104,28 @@ const robots = ['User-agent: *', 'Allow: /', '', `Sitemap: ${siteUrl}/sitemap.xm
 
 await writeFile('public/sitemap.xml', sitemap);
 await writeFile('public/robots.txt', robots);
+
+async function getLatestLastModified(paths) {
+  const dates = await Promise.all(paths.map((path) => getLastModified(path)));
+  return dates.sort().at(-1) ?? new Date().toISOString().slice(0, 10);
+}
+
+async function getLastModified(path) {
+  const gitDate = await getGitLastModified(path);
+  if (gitDate) return gitDate;
+
+  const fileStat = await stat(path);
+  return fileStat.mtime.toISOString().slice(0, 10);
+}
+
+async function getGitLastModified(path) {
+  try {
+    const { stdout } = await execFileAsync('git', ['log', '-1', '--format=%cs', '--', path]);
+    return stdout.trim() || null;
+  } catch {
+    return null;
+  }
+}
 
 function escapeXml(value) {
   return value
