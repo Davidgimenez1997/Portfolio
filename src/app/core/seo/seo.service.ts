@@ -26,6 +26,13 @@ const AUTHOR_ALUMNI_OF = [
 const SOCIAL_IMAGE_URL = new URL('/og-image.png', SITE_URL).toString();
 const SOCIAL_IMAGE_ALT =
   'David Giménez Rodríguez, Senior Frontend Engineer especializado en Angular, SSR y arquitectura web.';
+const SOCIAL_IMAGE = {
+  '@type': 'ImageObject',
+  url: SOCIAL_IMAGE_URL,
+  width: 1200,
+  height: 630,
+  caption: SOCIAL_IMAGE_ALT,
+};
 const AUTHOR_KNOWS_ABOUT = [
   'Angular',
   'SSR',
@@ -438,7 +445,11 @@ export class SeoService {
       url: canonicalUrl,
       isPartOf: { '@id': `${SITE_URL}/#website` },
       author: { '@id': `${SITE_URL}/#person` },
+      publisher: { '@id': `${SITE_URL}/#person` },
       inLanguage: this.language.current,
+      image: SOCIAL_IMAGE_URL,
+      thumbnailUrl: SOCIAL_IMAGE_URL,
+      primaryImageOfPage: SOCIAL_IMAGE,
     };
 
     if (!options.project) {

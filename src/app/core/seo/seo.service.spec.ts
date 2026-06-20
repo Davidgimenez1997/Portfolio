@@ -183,8 +183,17 @@ describe('SeoService', () => {
         expect.objectContaining({
           '@type': 'CreativeWork',
           name: 'Angular SSR | David Giménez',
+          image: 'https://davidgimenezrodriguez.com/og-image.png',
+          thumbnailUrl: 'https://davidgimenezrodriguez.com/og-image.png',
+          primaryImageOfPage: expect.objectContaining({
+            '@type': 'ImageObject',
+            url: 'https://davidgimenezrodriguez.com/og-image.png',
+            width: 1200,
+            height: 630,
+          }),
           keywords: 'Angular, SSR',
           creator: { '@id': `${SITE_URL}/#person` },
+          publisher: { '@id': `${SITE_URL}/#person` },
         }),
         expect.objectContaining({
           '@type': 'BreadcrumbList',
@@ -246,6 +255,8 @@ describe('SeoService', () => {
       expect.arrayContaining([
         expect.objectContaining({
           '@type': 'CollectionPage',
+          image: 'https://davidgimenezrodriguez.com/og-image.png',
+          publisher: { '@id': `${SITE_URL}/#person` },
           mainEntity: expect.objectContaining({
             '@type': 'ItemList',
             numberOfItems: 1,
