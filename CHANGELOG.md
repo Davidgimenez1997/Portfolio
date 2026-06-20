@@ -1,5 +1,26 @@
 # Changelog
 
+## 2.3.0 - 2026-06-20
+
+### Changed
+
+- Reduced initial load cost by removing FontAwesome from the navbar and replacing it with a lightweight local brand mark.
+- Deferred analytics configuration and GTM initialization so they no longer block Angular startup.
+- Removed the external Google Fonts stylesheet from the critical document path.
+- Trimmed Bootstrap output by removing unused utilities, moving form styling to the contact route, replacing global badge/navbar CSS with local styles, and keeping only the utility classes used by the app.
+- Reduced prerendered HTML by disabling HTTP transfer cache serialization for static JSON content and disabling incremental hydration for this portfolio.
+- Added immutable cache headers for versioned JavaScript and CSS assets on Vercel.
+
+### Fixed
+
+- Removed duplicate Vercel Analytics pageview tracking so route views are emitted through the central analytics service only.
+
+### Verified
+
+- `npm run build -- --stats-json`
+- `npm test -- --watch=false`
+- Browser checks for the home page, contact page, and mobile navbar toggle.
+
 ## 2.0.0 - 2026-06-15
 
 ### Added

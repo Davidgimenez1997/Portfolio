@@ -2,73 +2,91 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://davidgimenezrodriguez.com/</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/about</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/projects</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/experience</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/education</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/contact</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/projects/distributed-angular-prerendering</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/projects/event-driven-prerender-queue</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://davidgimenezrodriguez.com/projects/strapi-import-export-plugin</loc>
+    <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/projects/multi-brand-deployment-architecture</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/projects/runtime-cache-invalidation</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/projects/headless-cms-dynamic-routing</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/projects/frontend-dx-tooling</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://davidgimenezrodriguez.com/projects/multitenant-photography-portal</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://davidgimenezrodriguez.com/projects/digital-wedding-invitation</loc>
+    <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

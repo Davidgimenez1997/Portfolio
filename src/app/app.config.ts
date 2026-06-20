@@ -1,16 +1,21 @@
 import {
   ApplicationConfig,
+  PLATFORM_ID,
   inject,
   provideAppInitializer,
   provideBrowserGlobalErrorListeners,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import {
+  provideClientHydration,
+  withNoHttpTransferCache,
+  withNoIncrementalHydration,
+} from '@angular/platform-browser';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { routes } from './app.routes';
-import { provideFontAwesomeIcons } from './core/icons/fontawesome.provider';
 import { provideVercelAnalytics } from './core/analytics/vercel-analytics.provider';
 import { provideVercelSpeedInsights } from './core/analytics/vercel-speed-insights.provider';
 import { LanguageService } from './core/i18n/language.service';
@@ -32,14 +37,27 @@ export const appConfig: ApplicationConfig = {
     provideAppInitializer(() => {
       inject(LanguageService).init(inject(INITIAL_LANG));
     }),
-    provideAppInitializer(async () => {
+    provideAppInitializer(() => {
+      const platformId = inject(PLATFORM_ID);
+      if (!isPlatformBrowser(platformId)) return;
+
       const analyticsConfig = inject(AnalyticsConfigService);
       const analytics = inject(AnalyticsService);
-      await analyticsConfig.load();
-      analytics.init();
+
+      const initAnalytics = async () => {
+        await analyticsConfig.load();
+        analytics.init();
+      };
+      const browserWindow = window as Window & typeof globalThis;
+
+      if (browserWindow.requestIdleCallback) {
+        browserWindow.requestIdleCallback(() => void initAnalytics());
+        return;
+      }
+
+      browserWindow.setTimeout(() => void initAnalytics(), 0);
     }),
-    provideClientHydration(withEventReplay()),
-    ...provideFontAwesomeIcons(),
+    provideClientHydration(withNoHttpTransferCache(), withNoIncrementalHydration()),
     provideHttpClient(withFetch()),
     provideTranslateService({
       lang: 'es',
