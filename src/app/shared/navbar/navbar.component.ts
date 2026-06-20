@@ -3,7 +3,6 @@ import { Router, NavigationEnd, RouterLink, RouterLinkActive } from '@angular/ro
 import { filter, map, startWith } from 'rxjs/operators';
 import { AsyncPipe } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 import { LanguageService } from '../../core/i18n/language.service';
 import { ScrollSpyService } from '../../core/scroll-spy/scroll-spy.service';
@@ -12,7 +11,7 @@ import { AnalyticsService } from '../../core/analytics/analytics.service';
 @Component({
   standalone: true,
   selector: 'app-navbar',
-  imports: [TranslateModule, FaIconComponent, AsyncPipe, RouterLink, RouterLinkActive],
+  imports: [TranslateModule, AsyncPipe, RouterLink, RouterLinkActive],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
