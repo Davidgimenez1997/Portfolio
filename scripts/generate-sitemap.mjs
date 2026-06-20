@@ -133,11 +133,28 @@ async function getLatestLastModified(paths) {
 }
 
 async function getLastModified(path) {
+  if (await hasUncommittedChanges(path)) {
+    return getFileModified(path);
+  }
+
   const gitDate = await getGitLastModified(path);
   if (gitDate) return gitDate;
 
+  return getFileModified(path);
+}
+
+async function getFileModified(path) {
   const fileStat = await stat(path);
   return fileStat.mtime.toISOString().slice(0, 10);
+}
+
+async function hasUncommittedChanges(path) {
+  try {
+    const { stdout } = await execFileAsync('git', ['status', '--porcelain', '--', path]);
+    return stdout.trim().length > 0;
+  } catch {
+    return false;
+  }
 }
 
 async function getGitLastModified(path) {
