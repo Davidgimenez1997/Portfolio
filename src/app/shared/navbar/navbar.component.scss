@@ -4,6 +4,10 @@
   align-items: center;
   justify-content: space-between;
   padding: .5rem 0;
+  background: rgba(11, 15, 25, .88) !important;
+  border-color: var(--border) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .22);
+  backdrop-filter: blur(14px);
 }
 
 .navbar > .container {
@@ -24,6 +28,11 @@
   white-space: nowrap;
 }
 
+.navbar-brand:hover,
+.navbar-brand:focus {
+  color: #fff;
+}
+
 .brand-mark {
   display: inline-flex;
   align-items: center;
@@ -33,7 +42,7 @@
   margin-right: .5rem;
   border: 1px solid var(--border);
   border-radius: .65rem;
-  background: rgba(124, 58, 237, .14);
+  background: rgba(124, 58, 237, .22);
   color: var(--text);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: .8rem;
@@ -46,8 +55,8 @@
   justify-content: center;
   padding: .25rem .75rem;
   border: 1px solid var(--border);
-  border-radius: var(--bs-border-radius);
-  background: transparent;
+  border-radius: .65rem;
+  background: rgba(255, 255, 255, .05);
   color: var(--text);
   font-size: 1.25rem;
   line-height: 1;
@@ -99,6 +108,11 @@
 .nav-link:focus,
 .nav-link.active {
   color: var(--text);
+}
+
+.nav-link.active {
+  background: rgba(255, 255, 255, .06);
+  border-radius: 999px;
 }
 
 .nav-link:focus-visible {

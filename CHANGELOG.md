@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.4.0 - 2026-06-20
+
+### Fixed
+
+- Restored navbar contrast and readability after replacing Bootstrap's global navbar styles.
+- Improved mobile navbar spacing, toggle contrast and active navigation states.
+- Aligned cards, footer links, content links, buttons and contact form controls with the dark UI theme.
+- Removed negative heading letter spacing so hero and section titles render more consistently across viewports.
+
+### Verified
+
+- `npm run build`
+- `npm test -- --watch=false`
+- Browser checks for desktop and mobile navigation, contact, projects, project detail, experience and education views.
+
 ## 2.3.0 - 2026-06-20
 
 ### Changed
