@@ -64,20 +64,37 @@ const projectRouteSources = [
   'src/app/features/projects/project-detail/project-detail.component.scss',
 ];
 
+const assetRoutes = [
+  {
+    path: 'cv/david-gimenez-rodriguez-senior-frontend-engineer-cv.pdf',
+    sources: [
+      'public/content/profile.json',
+      'public/cv/david-gimenez-rodriguez-senior-frontend-engineer-cv.pdf',
+    ],
+    changefreq: 'yearly',
+    priority: '0.4',
+  },
+];
+
 const staticRoutes = Object.keys(routeSources);
 const routes = [
   ...staticRoutes.map((route) => ({
     path: route,
     sources: [...sharedSeoFiles, ...routeSources[route]],
+    changefreq: 'monthly',
+    priority: route === '' ? '1.0' : '0.8',
   })),
   ...projects.map((project) => ({
     path: `projects/${project.slug}`,
     sources: [...sharedSeoFiles, ...projectRouteSources],
+    changefreq: 'monthly',
+    priority: '0.8',
   })),
+  ...assetRoutes,
 ];
 
 const entries = await Promise.all(
-  routes.map(async ({ path, sources }) => {
+  routes.map(async ({ path, sources, changefreq, priority }) => {
     const loc = path ? `${siteUrl}/${path}` : `${siteUrl}/`;
     const lastmod = await getLatestLastModified(sources);
 
@@ -85,8 +102,8 @@ const entries = await Promise.all(
       '  <url>',
       `    <loc>${escapeXml(loc)}</loc>`,
       `    <lastmod>${lastmod}</lastmod>`,
-      '    <changefreq>monthly</changefreq>',
-      path === '' ? '    <priority>1.0</priority>' : '    <priority>0.8</priority>',
+      `    <changefreq>${changefreq}</changefreq>`,
+      `    <priority>${priority}</priority>`,
       '  </url>',
     ].join('\n');
   }),
