@@ -8,6 +8,7 @@ export const routes: Routes = [
     data: {
       titleKey: 'seo.home.title',
       descriptionKey: 'seo.home.description',
+      schemaType: 'ProfilePage',
     },
   },
   {
@@ -16,6 +17,7 @@ export const routes: Routes = [
     data: {
       titleKey: 'seo.about.title',
       descriptionKey: 'seo.about.description',
+      schemaType: 'AboutPage',
     },
   },
   {
@@ -25,6 +27,7 @@ export const routes: Routes = [
     data: {
       titleKey: 'seo.projects.title',
       descriptionKey: 'seo.projects.description',
+      schemaType: 'CollectionPage',
     },
   },
   {
@@ -63,6 +66,7 @@ export const routes: Routes = [
     data: {
       titleKey: 'seo.contact.title',
       descriptionKey: 'seo.contact.description',
+      schemaType: 'ContactPage',
     },
   },
   {

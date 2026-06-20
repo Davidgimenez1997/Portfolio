@@ -91,6 +91,7 @@ describe('SeoService', () => {
             slug: string;
             title: { es: string; en: string };
             description: { es: string; en: string };
+            stack?: string[];
           },
           route: ActivatedRoute,
         ) => void;
@@ -100,6 +101,7 @@ describe('SeoService', () => {
         slug: 'angular-ssr',
         title: { es: 'Angular SSR', en: 'Angular SSR' },
         description: { es: 'Arquitectura SSR', en: 'SSR architecture' },
+        stack: ['Angular', 'SSR'],
       },
       TestBed.inject(ActivatedRoute),
     );
@@ -112,11 +114,24 @@ describe('SeoService', () => {
       'https://davidgimenezrodriguez.com/projects/angular-ssr',
     );
     expect(meta.getTag('property="og:site_name"')?.content).toBe('David Gimenez Portfolio');
+    expect(meta.getTag('property="og:image"')?.content).toBe(
+      'https://davidgimenezrodriguez.com/og-image.png',
+    );
+    expect(meta.getTag('property="og:image:width"')?.content).toBe('1200');
+    expect(meta.getTag('property="og:image:height"')?.content).toBe('630');
     expect(meta.getTag('property="og:locale"')?.content).toBe('es_ES');
-    expect(meta.getTag('name="twitter:card"')?.content).toBe('summary');
+    expect(meta.getTag('property="og:locale:alternate"')?.content).toBe('en_US');
+    expect(meta.getTag('name="creator"')?.content).toBe('David Gimenez Rodriguez De Rivera');
+    expect(meta.getTag('name="twitter:card"')?.content).toBe('summary_large_image');
+    expect(meta.getTag('name="twitter:image"')?.content).toBe(
+      'https://davidgimenezrodriguez.com/og-image.png',
+    );
     expect(document.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(
       'https://davidgimenezrodriguez.com/projects/angular-ssr',
     );
+    expect(
+      document.querySelector('link[rel="me"][href="https://github.com/Davidgimenez1997"]'),
+    ).toBeTruthy();
 
     const structuredData = JSON.parse(
       document.querySelector('script[data-seo-json-ld]')?.textContent ?? '{}',
@@ -133,6 +148,8 @@ describe('SeoService', () => {
         expect.objectContaining({
           '@type': 'CreativeWork',
           name: 'Angular SSR | David Giménez',
+          keywords: 'Angular, SSR',
+          creator: { '@id': `${SITE_URL}/#person` },
         }),
         expect.objectContaining({
           '@type': 'BreadcrumbList',

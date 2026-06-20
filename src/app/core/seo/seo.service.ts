@@ -15,6 +15,31 @@ const SITE_NAME = 'David Gimenez Portfolio';
 const AUTHOR_NAME = 'David Gimenez Rodriguez De Rivera';
 const AUTHOR_LINKEDIN = 'https://www.linkedin.com/in/davidgimenezrodriguezderivera/';
 const AUTHOR_GITHUB = 'https://github.com/Davidgimenez1997';
+const AUTHOR_EMAIL = 'davidgimenez97dev@gmail.com';
+const AUTHOR_JOB_TITLE = 'Senior Frontend Engineer';
+const AUTHOR_LOCATION = 'Madrid, Spain';
+const SOCIAL_IMAGE_URL = new URL('/og-image.png', SITE_URL).toString();
+const SOCIAL_IMAGE_ALT =
+  'David Giménez Rodríguez, Senior Frontend Engineer especializado en Angular, SSR y arquitectura web.';
+const AUTHOR_KNOWS_ABOUT = [
+  'Angular',
+  'SSR',
+  'Prerendering',
+  'Frontend Architecture',
+  'Web Performance',
+  'TypeScript',
+  'Docker',
+  'Kubernetes',
+  'Headless CMS',
+];
+const SOCIAL_LINKS = [AUTHOR_LINKEDIN, AUTHOR_GITHUB];
+type SchemaType =
+  | 'WebPage'
+  | 'ProfilePage'
+  | 'AboutPage'
+  | 'CollectionPage'
+  | 'ContactPage'
+  | 'CreativeWork';
 
 @Injectable({ providedIn: 'root' })
 export class SeoService {
@@ -66,7 +91,10 @@ export class SeoService {
         const title = translations[data['titleKey'] ?? fallbackTitleKey];
         const description = translations[data['descriptionKey'] ?? fallbackDescriptionKey];
 
-        this.applyMetadata(title, description, { noindex: data['noindex'] === true });
+        this.applyMetadata(title, description, {
+          noindex: data['noindex'] === true,
+          schemaType: data['schemaType'] ?? 'WebPage',
+        });
       });
   }
 
@@ -90,6 +118,7 @@ export class SeoService {
             { name: 'Projects', url: new URL('/projects', SITE_URL).toString() },
             { name: projectTitle, url: this.getCanonicalUrl() },
           ],
+          project,
           schemaType: 'CreativeWork',
         });
       });
@@ -101,17 +130,21 @@ export class SeoService {
     options: {
       breadcrumbs?: Array<{ name: string; url: string }>;
       noindex?: boolean;
-      schemaType?: 'WebPage' | 'CreativeWork';
+      project?: Project;
+      schemaType?: SchemaType;
     } = {},
   ) {
     const canonicalUrl = this.getCanonicalUrl();
     const lang = this.language.current;
     const locale = lang === 'es' ? 'es_ES' : 'en_US';
+    const alternateLocale = lang === 'es' ? 'en_US' : 'es_ES';
 
     this.title.setTitle(title);
     this.document.documentElement.lang = lang;
     this.meta.updateTag({ name: 'description', content: description });
     this.meta.updateTag({ name: 'author', content: AUTHOR_NAME });
+    this.meta.updateTag({ name: 'creator', content: AUTHOR_NAME });
+    this.meta.updateTag({ name: 'publisher', content: AUTHOR_NAME });
     this.meta.updateTag({
       name: 'robots',
       content: options.noindex ? 'noindex,follow' : 'index,follow',
@@ -119,15 +152,29 @@ export class SeoService {
     this.meta.updateTag({ property: 'og:title', content: title });
     this.meta.updateTag({ property: 'og:description', content: description });
     this.meta.updateTag({ property: 'og:site_name', content: SITE_NAME });
-    this.meta.updateTag({ property: 'og:type', content: 'website' });
+    this.meta.updateTag({
+      property: 'og:type',
+      content: options.schemaType === 'ProfilePage' ? 'profile' : 'website',
+    });
     this.meta.updateTag({ property: 'og:url', content: canonicalUrl });
+    this.meta.updateTag({ property: 'og:image', content: SOCIAL_IMAGE_URL });
+    this.meta.updateTag({ property: 'og:image:secure_url', content: SOCIAL_IMAGE_URL });
+    this.meta.updateTag({ property: 'og:image:type', content: 'image/png' });
+    this.meta.updateTag({ property: 'og:image:width', content: '1200' });
+    this.meta.updateTag({ property: 'og:image:height', content: '630' });
+    this.meta.updateTag({ property: 'og:image:alt', content: SOCIAL_IMAGE_ALT });
     this.meta.updateTag({ property: 'og:locale', content: locale });
-    this.meta.updateTag({ name: 'twitter:card', content: 'summary' });
+    this.meta.updateTag({ property: 'og:locale:alternate', content: alternateLocale });
+    this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
     this.meta.updateTag({ name: 'twitter:title', content: title });
     this.meta.updateTag({ name: 'twitter:description', content: description });
+    this.meta.updateTag({ name: 'twitter:image', content: SOCIAL_IMAGE_URL });
+    this.meta.updateTag({ name: 'twitter:image:alt', content: SOCIAL_IMAGE_ALT });
     this.setCanonical(canonicalUrl);
+    this.setIdentityLinks();
     this.setStructuredData(title, description, canonicalUrl, {
       breadcrumbs: options.breadcrumbs ?? this.getDefaultBreadcrumbs(title, canonicalUrl),
+      project: options.project,
       schemaType: options.schemaType ?? 'WebPage',
     });
   }
@@ -159,6 +206,20 @@ export class SeoService {
     canonical.href = url;
   }
 
+  private setIdentityLinks() {
+    SOCIAL_LINKS.forEach((href) => {
+      const selector = `link[rel="me"][href="${href}"]`;
+      let link = this.document.querySelector<HTMLLinkElement>(selector);
+
+      if (!link) {
+        link = this.document.createElement('link');
+        link.rel = 'me';
+        link.href = href;
+        this.document.head.appendChild(link);
+      }
+    });
+  }
+
   private getDefaultBreadcrumbs(
     title: string,
     canonicalUrl: string,
@@ -182,18 +243,26 @@ export class SeoService {
     canonicalUrl: string,
     options: {
       breadcrumbs: Array<{ name: string; url: string }>;
-      schemaType: 'WebPage' | 'CreativeWork';
+      project?: Project;
+      schemaType: SchemaType;
     },
   ) {
+    const pageNode = this.buildPageNode(title, description, canonicalUrl, options);
     const graph = [
       {
         '@type': 'Person',
         '@id': `${SITE_URL}/#person`,
         name: AUTHOR_NAME,
         url: SITE_URL,
-        jobTitle: 'Senior Frontend Engineer',
-        knowsAbout: ['Angular', 'SSR', 'Frontend Architecture', 'Web Performance', 'TypeScript'],
-        sameAs: [AUTHOR_LINKEDIN, AUTHOR_GITHUB],
+        email: AUTHOR_EMAIL,
+        jobTitle: AUTHOR_JOB_TITLE,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: AUTHOR_LOCATION,
+        },
+        knowsAbout: AUTHOR_KNOWS_ABOUT,
+        knowsLanguage: ['es', 'en'],
+        sameAs: SOCIAL_LINKS,
       },
       {
         '@type': 'WebSite',
@@ -203,16 +272,7 @@ export class SeoService {
         inLanguage: this.language.current,
         publisher: { '@id': `${SITE_URL}/#person` },
       },
-      {
-        '@type': options.schemaType,
-        '@id': `${canonicalUrl}#webpage`,
-        name: title,
-        description,
-        url: canonicalUrl,
-        isPartOf: { '@id': `${SITE_URL}/#website` },
-        author: { '@id': `${SITE_URL}/#person` },
-        inLanguage: this.language.current,
-      },
+      pageNode,
       {
         '@type': 'BreadcrumbList',
         '@id': `${canonicalUrl}#breadcrumb`,
@@ -238,5 +298,42 @@ export class SeoService {
       '@context': 'https://schema.org',
       '@graph': graph,
     });
+  }
+
+  private buildPageNode(
+    title: string,
+    description: string,
+    canonicalUrl: string,
+    options: {
+      project?: Project;
+      schemaType: SchemaType;
+    },
+  ) {
+    const baseNode = {
+      '@type': options.schemaType,
+      '@id': `${canonicalUrl}#webpage`,
+      name: title,
+      description,
+      url: canonicalUrl,
+      isPartOf: { '@id': `${SITE_URL}/#website` },
+      author: { '@id': `${SITE_URL}/#person` },
+      inLanguage: this.language.current,
+    };
+
+    if (!options.project) {
+      return options.schemaType === 'ProfilePage'
+        ? {
+            ...baseNode,
+            mainEntity: { '@id': `${SITE_URL}/#person` },
+          }
+        : baseNode;
+    }
+
+    return {
+      ...baseNode,
+      creator: { '@id': `${SITE_URL}/#person` },
+      keywords: options.project.stack?.join(', '),
+      about: options.project.stack,
+    };
   }
 }
