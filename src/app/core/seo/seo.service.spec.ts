@@ -143,6 +143,26 @@ describe('SeoService', () => {
         expect.objectContaining({
           '@type': 'Person',
           '@id': `${SITE_URL}/#person`,
+          hasOccupation: expect.objectContaining({
+            '@type': 'Occupation',
+            name: 'Senior Frontend Engineer',
+            skills: expect.arrayContaining(['Angular', 'SSR']),
+          }),
+          worksFor: expect.objectContaining({
+            '@type': 'Organization',
+            name: 'Grupo Orenes',
+          }),
+          alumniOf: expect.arrayContaining([
+            expect.objectContaining({
+              '@type': 'EducationalOrganization',
+              name: 'U-Tad Centro Universitario de Tecnología y Arte Digital',
+            }),
+          ]),
+          contactPoint: expect.objectContaining({
+            '@type': 'ContactPoint',
+            email: 'davidgimenez97dev@gmail.com',
+            availableLanguage: ['Spanish', 'English'],
+          }),
           sameAs: expect.arrayContaining(['https://github.com/Davidgimenez1997']),
         }),
         expect.objectContaining({

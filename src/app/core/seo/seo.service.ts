@@ -18,6 +18,11 @@ const AUTHOR_GITHUB = 'https://github.com/Davidgimenez1997';
 const AUTHOR_EMAIL = 'davidgimenez97dev@gmail.com';
 const AUTHOR_JOB_TITLE = 'Senior Frontend Engineer';
 const AUTHOR_LOCATION = 'Madrid, Spain';
+const AUTHOR_CURRENT_COMPANY = 'Grupo Orenes';
+const AUTHOR_ALUMNI_OF = [
+  'U-Tad Centro Universitario de Tecnología y Arte Digital',
+  'IES San Isidro',
+];
 const SOCIAL_IMAGE_URL = new URL('/og-image.png', SITE_URL).toString();
 const SOCIAL_IMAGE_ALT =
   'David Giménez Rodríguez, Senior Frontend Engineer especializado en Angular, SSR y arquitectura web.';
@@ -275,9 +280,37 @@ export class SeoService {
         url: SITE_URL,
         email: AUTHOR_EMAIL,
         jobTitle: AUTHOR_JOB_TITLE,
+        mainEntityOfPage: { '@id': `${SITE_URL}/#webpage` },
+        hasOccupation: {
+          '@type': 'Occupation',
+          name: AUTHOR_JOB_TITLE,
+          occupationLocation: {
+            '@type': 'City',
+            name: AUTHOR_LOCATION,
+          },
+          skills: AUTHOR_KNOWS_ABOUT,
+        },
+        worksFor: {
+          '@type': 'Organization',
+          name: AUTHOR_CURRENT_COMPANY,
+        },
+        alumniOf: AUTHOR_ALUMNI_OF.map((institution) => ({
+          '@type': 'EducationalOrganization',
+          name: institution,
+        })),
         address: {
           '@type': 'PostalAddress',
           addressLocality: AUTHOR_LOCATION,
+        },
+        workLocation: {
+          '@type': 'Place',
+          name: AUTHOR_LOCATION,
+        },
+        contactPoint: {
+          '@type': 'ContactPoint',
+          email: AUTHOR_EMAIL,
+          contactType: 'professional',
+          availableLanguage: ['Spanish', 'English'],
         },
         knowsAbout: AUTHOR_KNOWS_ABOUT,
         knowsLanguage: ['es', 'en'],
