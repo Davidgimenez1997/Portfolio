@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { provideClientHydration } from '@angular/platform-browser';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -53,7 +53,7 @@ export const appConfig: ApplicationConfig = {
 
       browserWindow.setTimeout(() => void initAnalytics(), 0);
     }),
-    provideClientHydration(withEventReplay()),
+    provideClientHydration(),
     provideHttpClient(withFetch()),
     provideTranslateService({
       lang: 'es',
