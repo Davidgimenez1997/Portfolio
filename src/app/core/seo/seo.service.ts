@@ -7,7 +7,7 @@ import { combineLatest } from 'rxjs';
 import { filter, startWith, take } from 'rxjs/operators';
 
 import { ContentService } from '../content/content.service';
-import { Project } from '../content/models';
+import { EducationItem, ExperienceItem, Project } from '../content/models';
 import { LanguageService } from '../i18n/language.service';
 import { SITE_URL } from './site-url';
 
@@ -97,7 +97,7 @@ export class SeoService {
         const description = translations[data['descriptionKey'] ?? fallbackDescriptionKey];
         const schemaType = data['schemaType'] ?? 'WebPage';
 
-        if (schemaType === 'CollectionPage') {
+        if (data['itemList'] === 'projects') {
           this.content
             .getProjects()
             .pipe(take(1))
@@ -105,6 +105,36 @@ export class SeoService {
               this.applyMetadata(title, description, {
                 noindex: data['noindex'] === true,
                 projects,
+                schemaType,
+              });
+            });
+
+          return;
+        }
+
+        if (data['itemList'] === 'experience') {
+          this.content
+            .getExperience()
+            .pipe(take(1))
+            .subscribe((experience) => {
+              this.applyMetadata(title, description, {
+                experience,
+                noindex: data['noindex'] === true,
+                schemaType,
+              });
+            });
+
+          return;
+        }
+
+        if (data['itemList'] === 'education') {
+          this.content
+            .getEducation()
+            .pipe(take(1))
+            .subscribe((education) => {
+              this.applyMetadata(title, description, {
+                education,
+                noindex: data['noindex'] === true,
                 schemaType,
               });
             });
@@ -151,6 +181,8 @@ export class SeoService {
     options: {
       breadcrumbs?: Array<{ name: string; url: string }>;
       noindex?: boolean;
+      education?: EducationItem[];
+      experience?: ExperienceItem[];
       project?: Project;
       projects?: Project[];
       schemaType?: SchemaType;
@@ -196,6 +228,8 @@ export class SeoService {
     this.setIdentityLinks();
     this.setStructuredData(title, description, canonicalUrl, {
       breadcrumbs: options.breadcrumbs ?? this.getDefaultBreadcrumbs(title, canonicalUrl),
+      education: options.education,
+      experience: options.experience,
       project: options.project,
       projects: options.projects,
       schemaType: options.schemaType ?? 'WebPage',
@@ -266,6 +300,8 @@ export class SeoService {
     canonicalUrl: string,
     options: {
       breadcrumbs: Array<{ name: string; url: string }>;
+      education?: EducationItem[];
+      experience?: ExperienceItem[];
       project?: Project;
       projects?: Project[];
       schemaType: SchemaType;
@@ -357,6 +393,8 @@ export class SeoService {
     description: string,
     canonicalUrl: string,
     options: {
+      education?: EducationItem[];
+      experience?: ExperienceItem[];
       project?: Project;
       projects?: Project[];
       schemaType: SchemaType;
@@ -385,6 +423,20 @@ export class SeoService {
         return {
           ...baseNode,
           mainEntity: this.buildProjectItemList(options.projects),
+        };
+      }
+
+      if (options.schemaType === 'CollectionPage' && options.experience?.length) {
+        return {
+          ...baseNode,
+          mainEntity: this.buildExperienceItemList(options.experience),
+        };
+      }
+
+      if (options.schemaType === 'CollectionPage' && options.education?.length) {
+        return {
+          ...baseNode,
+          mainEntity: this.buildEducationItemList(options.education),
         };
       }
 
@@ -425,6 +477,63 @@ export class SeoService {
           },
         };
       }),
+    };
+  }
+
+  private buildExperienceItemList(experience: ExperienceItem[]) {
+    const lang = this.language.current;
+
+    return {
+      '@type': 'ItemList',
+      name: 'Professional experience by David Giménez Rodríguez',
+      numberOfItems: experience.length,
+      itemListElement: experience.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'EmployeeRole',
+          roleName: this.language.resolveI18nText(item.role, lang),
+          startDate: item.from?.en ?? item.from?.es,
+          endDate: item.to ? (item.to.en ?? item.to.es) : undefined,
+          worksFor: item.company
+            ? {
+                '@type': 'Organization',
+                name: item.company,
+              }
+            : undefined,
+          skills: item.stack,
+          description: this.language.resolveI18nList(item.highlights, lang).join(' '),
+        },
+      })),
+    };
+  }
+
+  private buildEducationItemList(education: EducationItem[]) {
+    const lang = this.language.current;
+
+    return {
+      '@type': 'ItemList',
+      name: 'Education by David Giménez Rodríguez',
+      numberOfItems: education.length,
+      itemListElement: education.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'EducationalOccupationalCredential',
+          name: this.language.resolveI18nText(item.degree, lang),
+          educationalLevel: this.language.resolveI18nText(item.degree, lang),
+          recognizedBy: item.institution
+            ? {
+                '@type': 'EducationalOrganization',
+                name: item.institution,
+              }
+            : undefined,
+          startDate: item.from,
+          endDate: item.to ?? undefined,
+          competencyRequired: item.stack,
+          description: this.language.resolveI18nList(item.highlights, lang).join(' '),
+        },
+      })),
     };
   }
 }

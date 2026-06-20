@@ -68,6 +68,10 @@ describe('SeoService', () => {
             currentLang$: EMPTY,
             resolveI18nText: (value: string | { es: string; en: string }, lang: 'es' | 'en') =>
               typeof value === 'string' ? value : value[lang],
+            resolveI18nList: (
+              value: { es: string[]; en: string[] } | undefined,
+              lang: 'es' | 'en',
+            ) => value?.[lang] ?? [],
           },
         },
         {
@@ -243,6 +247,146 @@ describe('SeoService', () => {
                   '@type': 'CreativeWork',
                   name: 'Prerender Angular',
                   keywords: 'Angular, SSR',
+                }),
+              }),
+            ],
+          }),
+        }),
+      ]),
+    );
+  });
+
+  it('adds an ItemList schema for experience collection pages', () => {
+    const service = TestBed.inject(SeoService);
+    const document = TestBed.inject(DOCUMENT);
+
+    (
+      service as unknown as {
+        applyMetadata: (
+          title: string,
+          description: string,
+          options: {
+            experience: Array<{
+              company: string;
+              role: { es: string; en: string };
+              from: { es: string; en: string };
+              to: null;
+              highlights: { es: string[]; en: string[] };
+              stack?: string[];
+            }>;
+            schemaType: 'CollectionPage';
+          },
+        ) => void;
+      }
+    ).applyMetadata('Experiencia | David Giménez', 'Trayectoria profesional', {
+      experience: [
+        {
+          company: 'Grupo Orenes',
+          role: { es: 'Senior Frontend Engineer', en: 'Senior Frontend Engineer' },
+          from: { es: 'Junio 2019', en: 'June 2019' },
+          to: null,
+          highlights: {
+            es: ['Arquitectura Angular con SSR.'],
+            en: ['Angular architecture with SSR.'],
+          },
+          stack: ['Angular', 'SSR'],
+        },
+      ],
+      schemaType: 'CollectionPage',
+    });
+
+    const structuredData = JSON.parse(
+      document.querySelector('script[data-seo-json-ld]')?.textContent ?? '{}',
+    );
+
+    expect(structuredData['@graph']).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          '@type': 'CollectionPage',
+          mainEntity: expect.objectContaining({
+            '@type': 'ItemList',
+            numberOfItems: 1,
+            itemListElement: [
+              expect.objectContaining({
+                position: 1,
+                item: expect.objectContaining({
+                  '@type': 'EmployeeRole',
+                  roleName: 'Senior Frontend Engineer',
+                  worksFor: { '@type': 'Organization', name: 'Grupo Orenes' },
+                  skills: ['Angular', 'SSR'],
+                }),
+              }),
+            ],
+          }),
+        }),
+      ]),
+    );
+  });
+
+  it('adds an ItemList schema for education collection pages', () => {
+    const service = TestBed.inject(SeoService);
+    const document = TestBed.inject(DOCUMENT);
+
+    (
+      service as unknown as {
+        applyMetadata: (
+          title: string,
+          description: string,
+          options: {
+            education: Array<{
+              institution: string;
+              degree: { es: string; en: string };
+              from: string;
+              to: string;
+              highlights: { es: string[]; en: string[] };
+              stack?: string[];
+            }>;
+            schemaType: 'CollectionPage';
+          },
+        ) => void;
+      }
+    ).applyMetadata('Formación | David Giménez', 'Formación académica y técnica', {
+      education: [
+        {
+          institution: 'U-Tad Centro Universitario de Tecnología y Arte Digital',
+          degree: {
+            es: 'Grado Superior DAM',
+            en: 'Higher Level DAM',
+          },
+          from: '2017',
+          to: '2019',
+          highlights: {
+            es: ['Desarrollo de software.'],
+            en: ['Software development.'],
+          },
+          stack: ['Angular', 'TypeScript'],
+        },
+      ],
+      schemaType: 'CollectionPage',
+    });
+
+    const structuredData = JSON.parse(
+      document.querySelector('script[data-seo-json-ld]')?.textContent ?? '{}',
+    );
+
+    expect(structuredData['@graph']).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          '@type': 'CollectionPage',
+          mainEntity: expect.objectContaining({
+            '@type': 'ItemList',
+            numberOfItems: 1,
+            itemListElement: [
+              expect.objectContaining({
+                position: 1,
+                item: expect.objectContaining({
+                  '@type': 'EducationalOccupationalCredential',
+                  name: 'Grado Superior DAM',
+                  recognizedBy: {
+                    '@type': 'EducationalOrganization',
+                    name: 'U-Tad Centro Universitario de Tecnología y Arte Digital',
+                  },
+                  competencyRequired: ['Angular', 'TypeScript'],
                 }),
               }),
             ],

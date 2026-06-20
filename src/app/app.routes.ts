@@ -28,6 +28,7 @@ export const routes: Routes = [
       titleKey: 'seo.projects.title',
       descriptionKey: 'seo.projects.description',
       schemaType: 'CollectionPage',
+      itemList: 'projects',
     },
   },
   {
@@ -48,6 +49,8 @@ export const routes: Routes = [
     data: {
       titleKey: 'seo.experience.title',
       descriptionKey: 'seo.experience.description',
+      schemaType: 'CollectionPage',
+      itemList: 'experience',
     },
   },
   {
@@ -57,6 +60,8 @@ export const routes: Routes = [
     data: {
       titleKey: 'seo.education.title',
       descriptionKey: 'seo.education.description',
+      schemaType: 'CollectionPage',
+      itemList: 'education',
     },
   },
   {
