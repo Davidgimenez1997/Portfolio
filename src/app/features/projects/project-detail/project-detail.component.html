@@ -1,9 +1,21 @@
-@if (project$ | async; as project) {
+@if (project$ | async; as detail) {
   <section class="container py-5">
-    @if (project) {
-      <a class="btn btn-link px-0 mb-3" [routerLink]="projectsRoute()"
-        >← {{ 'projects.back' | translate }}</a
-      >
+    @if (detail.project; as project) {
+      <a class="project-back-link mb-3" [routerLink]="projectsRoute()">
+        <span class="project-back-link__icon" aria-hidden="true">←</span>
+        <span>{{ 'projects.backToProjects' | translate }}</span>
+      </a>
+
+      <p class="project-position mb-2">
+        {{
+          'projects.position'
+            | translate
+              : {
+                  current: detail.currentProjectNumber,
+                  total: detail.totalProjects,
+                }
+        }}
+      </p>
 
       <h1 class="h3 mb-2">{{ project._title }}</h1>
       <p class="mb-4">{{ project._description }}</p>
@@ -73,9 +85,55 @@
           }
         </div>
       }
+
+      @if (detail.previousProject || detail.nextProject) {
+        <nav
+          class="project-navigation mt-5 pt-4"
+          [attr.aria-label]="'projects.navigation' | translate"
+        >
+          <div class="project-navigation__header">
+            <h2 class="project-navigation__heading">{{ 'projects.navigation' | translate }}</h2>
+            <span class="project-navigation__position">
+              {{
+                'projects.positionShort'
+                  | translate
+                    : {
+                        current: detail.currentProjectNumber,
+                        total: detail.totalProjects,
+                      }
+              }}
+            </span>
+          </div>
+
+          @if (detail.previousProject; as previousProject) {
+            <a
+              class="project-navigation__link project-navigation__link--previous"
+              [routerLink]="projectRoute(previousProject.slug)"
+            >
+              <span class="project-navigation__arrow" aria-hidden="true">←</span>
+              <span class="project-navigation__eyebrow">{{ 'projects.previous' | translate }}</span>
+              <span class="project-navigation__title">{{ previousProject._title }}</span>
+            </a>
+          }
+
+          @if (detail.nextProject; as nextProject) {
+            <a
+              class="project-navigation__link project-navigation__link--next"
+              [routerLink]="projectRoute(nextProject.slug)"
+            >
+              <span class="project-navigation__arrow" aria-hidden="true">→</span>
+              <span class="project-navigation__eyebrow">{{ 'projects.next' | translate }}</span>
+              <span class="project-navigation__title">{{ nextProject._title }}</span>
+            </a>
+          }
+        </nav>
+      }
     } @else {
-      <h1 class="h4">Project not found</h1>
-      <a class="btn btn-link px-0" [routerLink]="projectsRoute()">Back to projects</a>
+      <h1 class="h4">{{ 'projects.notFound' | translate }}</h1>
+      <a class="project-back-link" [routerLink]="projectsRoute()">
+        <span class="project-back-link__icon" aria-hidden="true">←</span>
+        <span>{{ 'projects.backToProjects' | translate }}</span>
+      </a>
     }
   </section>
 }
