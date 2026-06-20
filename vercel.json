@@ -49,6 +49,42 @@
   "routes": [
     {
       "src": "/(.*)",
+      "has": [{ "type": "host", "value": "www.davidgimenezrodriguez.com" }],
+      "headers": {
+        "Location": "https://davidgimenezrodriguez.com/$1"
+      },
+      "status": 308
+    },
+    {
+      "src": "/cv/cv_enero_2024\\.pdf",
+      "headers": {
+        "Location": "/cv/david-gimenez-rodriguez-senior-frontend-engineer-cv.pdf"
+      },
+      "status": 308
+    },
+    {
+      "src": "/",
+      "headers": {
+        "Location": "/es"
+      },
+      "status": 308
+    },
+    {
+      "src": "/(about|projects|experience|education|contact|404)",
+      "headers": {
+        "Location": "/es/$1"
+      },
+      "status": 308
+    },
+    {
+      "src": "/projects/(.*)",
+      "headers": {
+        "Location": "/es/projects/$1"
+      },
+      "status": 308
+    },
+    {
+      "src": "/(.*)",
       "headers": {
         "X-Content-Type-Options": "nosniff",
         "X-Frame-Options": "DENY",

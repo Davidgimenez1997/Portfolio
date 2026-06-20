@@ -20,7 +20,7 @@ describe('SeoService', () => {
         {
           provide: Router,
           useValue: {
-            url: '/projects/angular-ssr?ref=test#top',
+            url: '/es/projects/angular-ssr?ref=test#top',
             events: EMPTY,
           },
         },
@@ -66,8 +66,17 @@ describe('SeoService', () => {
           useValue: {
             current: 'es',
             currentLang$: EMPTY,
+            localizedPath: (path = '/', lang = 'es') => {
+              const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+              const withoutLang = normalizedPath.replace(/^\/(?:es|en)(?=\/|$)/, '') || '/';
+              return withoutLang === '/' ? `/${lang}` : `/${lang}${withoutLang}`;
+            },
             resolveI18nText: (value: string | { es: string; en: string }, lang: 'es' | 'en') =>
               typeof value === 'string' ? value : value[lang],
+            resolveI18nList: (
+              value: { es: string[]; en: string[] } | undefined,
+              lang: 'es' | 'en',
+            ) => value?.[lang] ?? [],
           },
         },
         {
@@ -91,6 +100,7 @@ describe('SeoService', () => {
             slug: string;
             title: { es: string; en: string };
             description: { es: string; en: string };
+            stack?: string[];
           },
           route: ActivatedRoute,
         ) => void;
@@ -100,6 +110,7 @@ describe('SeoService', () => {
         slug: 'angular-ssr',
         title: { es: 'Angular SSR', en: 'Angular SSR' },
         description: { es: 'Arquitectura SSR', en: 'SSR architecture' },
+        stack: ['Angular', 'SSR'],
       },
       TestBed.inject(ActivatedRoute),
     );
@@ -109,14 +120,33 @@ describe('SeoService', () => {
     expect(meta.getTag('name="author"')?.content).toBe('David Gimenez Rodriguez De Rivera');
     expect(meta.getTag('name="robots"')?.content).toBe('index,follow');
     expect(meta.getTag('property="og:url"')?.content).toBe(
-      'https://davidgimenezrodriguez.com/projects/angular-ssr',
+      'https://davidgimenezrodriguez.com/es/projects/angular-ssr',
     );
     expect(meta.getTag('property="og:site_name"')?.content).toBe('David Gimenez Portfolio');
-    expect(meta.getTag('property="og:locale"')?.content).toBe('es_ES');
-    expect(meta.getTag('name="twitter:card"')?.content).toBe('summary');
-    expect(document.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(
-      'https://davidgimenezrodriguez.com/projects/angular-ssr',
+    expect(meta.getTag('property="og:image"')?.content).toBe(
+      'https://davidgimenezrodriguez.com/og-image.png',
     );
+    expect(meta.getTag('property="og:image:width"')?.content).toBe('1200');
+    expect(meta.getTag('property="og:image:height"')?.content).toBe('630');
+    expect(meta.getTag('property="og:locale"')?.content).toBe('es_ES');
+    expect(meta.getTag('property="og:locale:alternate"')?.content).toBe('en_US');
+    expect(meta.getTag('name="creator"')?.content).toBe('David Gimenez Rodriguez De Rivera');
+    expect(meta.getTag('name="twitter:card"')?.content).toBe('summary_large_image');
+    expect(meta.getTag('name="twitter:image"')?.content).toBe(
+      'https://davidgimenezrodriguez.com/og-image.png',
+    );
+    expect(document.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(
+      'https://davidgimenezrodriguez.com/es/projects/angular-ssr',
+    );
+    expect(document.querySelector('link[hreflang="es"]')?.getAttribute('href')).toBe(
+      'https://davidgimenezrodriguez.com/es/projects/angular-ssr',
+    );
+    expect(document.querySelector('link[hreflang="en"]')?.getAttribute('href')).toBe(
+      'https://davidgimenezrodriguez.com/en/projects/angular-ssr',
+    );
+    expect(
+      document.querySelector('link[rel="me"][href="https://github.com/Davidgimenez1997"]'),
+    ).toBeTruthy();
 
     const structuredData = JSON.parse(
       document.querySelector('script[data-seo-json-ld]')?.textContent ?? '{}',
@@ -128,11 +158,42 @@ describe('SeoService', () => {
         expect.objectContaining({
           '@type': 'Person',
           '@id': `${SITE_URL}/#person`,
+          hasOccupation: expect.objectContaining({
+            '@type': 'Occupation',
+            name: 'Senior Frontend Engineer',
+            skills: expect.arrayContaining(['Angular', 'SSR']),
+          }),
+          worksFor: expect.objectContaining({
+            '@type': 'Organization',
+            name: 'Grupo Orenes',
+          }),
+          alumniOf: expect.arrayContaining([
+            expect.objectContaining({
+              '@type': 'EducationalOrganization',
+              name: 'U-Tad Centro Universitario de Tecnología y Arte Digital',
+            }),
+          ]),
+          contactPoint: expect.objectContaining({
+            '@type': 'ContactPoint',
+            email: 'davidgimenez97dev@gmail.com',
+            availableLanguage: ['Spanish', 'English'],
+          }),
           sameAs: expect.arrayContaining(['https://github.com/Davidgimenez1997']),
         }),
         expect.objectContaining({
           '@type': 'CreativeWork',
           name: 'Angular SSR | David Giménez',
+          image: 'https://davidgimenezrodriguez.com/og-image.png',
+          thumbnailUrl: 'https://davidgimenezrodriguez.com/og-image.png',
+          primaryImageOfPage: expect.objectContaining({
+            '@type': 'ImageObject',
+            url: 'https://davidgimenezrodriguez.com/og-image.png',
+            width: 1200,
+            height: 630,
+          }),
+          keywords: 'Angular, SSR',
+          creator: { '@id': `${SITE_URL}/#person` },
+          publisher: { '@id': `${SITE_URL}/#person` },
         }),
         expect.objectContaining({
           '@type': 'BreadcrumbList',
@@ -152,5 +213,208 @@ describe('SeoService', () => {
     ).applyMetadata('Page not found | David Giménez', 'Missing page', { noindex: true });
 
     expect(meta.getTag('name="robots"')?.content).toBe('noindex,follow');
+  });
+
+  it('adds an ItemList schema for project collection pages', () => {
+    const service = TestBed.inject(SeoService);
+    const document = TestBed.inject(DOCUMENT);
+
+    (
+      service as unknown as {
+        applyMetadata: (
+          title: string,
+          description: string,
+          options: {
+            projects: Array<{
+              slug: string;
+              title: { es: string; en: string };
+              description: { es: string; en: string };
+              stack?: string[];
+            }>;
+            schemaType: 'CollectionPage';
+          },
+        ) => void;
+      }
+    ).applyMetadata('Projects | David Giménez', 'Selected projects', {
+      projects: [
+        {
+          slug: 'distributed-angular-prerendering',
+          title: { es: 'Prerender Angular', en: 'Angular Prerendering' },
+          description: { es: 'SEO y rendimiento en Angular', en: 'SEO and performance in Angular' },
+          stack: ['Angular', 'SSR'],
+        },
+      ],
+      schemaType: 'CollectionPage',
+    });
+
+    const structuredData = JSON.parse(
+      document.querySelector('script[data-seo-json-ld]')?.textContent ?? '{}',
+    );
+
+    expect(structuredData['@graph']).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          '@type': 'CollectionPage',
+          image: 'https://davidgimenezrodriguez.com/og-image.png',
+          publisher: { '@id': `${SITE_URL}/#person` },
+          mainEntity: expect.objectContaining({
+            '@type': 'ItemList',
+            numberOfItems: 1,
+            itemListElement: [
+              expect.objectContaining({
+                '@type': 'ListItem',
+                position: 1,
+                url: 'https://davidgimenezrodriguez.com/es/projects/distributed-angular-prerendering',
+                item: expect.objectContaining({
+                  '@type': 'CreativeWork',
+                  name: 'Prerender Angular',
+                  keywords: 'Angular, SSR',
+                }),
+              }),
+            ],
+          }),
+        }),
+      ]),
+    );
+  });
+
+  it('adds an ItemList schema for experience collection pages', () => {
+    const service = TestBed.inject(SeoService);
+    const document = TestBed.inject(DOCUMENT);
+
+    (
+      service as unknown as {
+        applyMetadata: (
+          title: string,
+          description: string,
+          options: {
+            experience: Array<{
+              company: string;
+              role: { es: string; en: string };
+              from: { es: string; en: string };
+              to: null;
+              highlights: { es: string[]; en: string[] };
+              stack?: string[];
+            }>;
+            schemaType: 'CollectionPage';
+          },
+        ) => void;
+      }
+    ).applyMetadata('Experiencia | David Giménez', 'Trayectoria profesional', {
+      experience: [
+        {
+          company: 'Grupo Orenes',
+          role: { es: 'Senior Frontend Engineer', en: 'Senior Frontend Engineer' },
+          from: { es: 'Junio 2019', en: 'June 2019' },
+          to: null,
+          highlights: {
+            es: ['Arquitectura Angular con SSR.'],
+            en: ['Angular architecture with SSR.'],
+          },
+          stack: ['Angular', 'SSR'],
+        },
+      ],
+      schemaType: 'CollectionPage',
+    });
+
+    const structuredData = JSON.parse(
+      document.querySelector('script[data-seo-json-ld]')?.textContent ?? '{}',
+    );
+
+    expect(structuredData['@graph']).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          '@type': 'CollectionPage',
+          mainEntity: expect.objectContaining({
+            '@type': 'ItemList',
+            numberOfItems: 1,
+            itemListElement: [
+              expect.objectContaining({
+                position: 1,
+                item: expect.objectContaining({
+                  '@type': 'EmployeeRole',
+                  roleName: 'Senior Frontend Engineer',
+                  worksFor: { '@type': 'Organization', name: 'Grupo Orenes' },
+                  skills: ['Angular', 'SSR'],
+                }),
+              }),
+            ],
+          }),
+        }),
+      ]),
+    );
+  });
+
+  it('adds an ItemList schema for education collection pages', () => {
+    const service = TestBed.inject(SeoService);
+    const document = TestBed.inject(DOCUMENT);
+
+    (
+      service as unknown as {
+        applyMetadata: (
+          title: string,
+          description: string,
+          options: {
+            education: Array<{
+              institution: string;
+              degree: { es: string; en: string };
+              from: string;
+              to: string;
+              highlights: { es: string[]; en: string[] };
+              stack?: string[];
+            }>;
+            schemaType: 'CollectionPage';
+          },
+        ) => void;
+      }
+    ).applyMetadata('Formación | David Giménez', 'Formación académica y técnica', {
+      education: [
+        {
+          institution: 'U-Tad Centro Universitario de Tecnología y Arte Digital',
+          degree: {
+            es: 'Grado Superior DAM',
+            en: 'Higher Level DAM',
+          },
+          from: '2017',
+          to: '2019',
+          highlights: {
+            es: ['Desarrollo de software.'],
+            en: ['Software development.'],
+          },
+          stack: ['Angular', 'TypeScript'],
+        },
+      ],
+      schemaType: 'CollectionPage',
+    });
+
+    const structuredData = JSON.parse(
+      document.querySelector('script[data-seo-json-ld]')?.textContent ?? '{}',
+    );
+
+    expect(structuredData['@graph']).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          '@type': 'CollectionPage',
+          mainEntity: expect.objectContaining({
+            '@type': 'ItemList',
+            numberOfItems: 1,
+            itemListElement: [
+              expect.objectContaining({
+                position: 1,
+                item: expect.objectContaining({
+                  '@type': 'EducationalOccupationalCredential',
+                  name: 'Grado Superior DAM',
+                  recognizedBy: {
+                    '@type': 'EducationalOrganization',
+                    name: 'U-Tad Centro Universitario de Tecnología y Arte Digital',
+                  },
+                  competencyRequired: ['Angular', 'TypeScript'],
+                }),
+              }),
+            ],
+          }),
+        }),
+      ]),
+    );
   });
 });

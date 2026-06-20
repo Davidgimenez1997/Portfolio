@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [
+const localizedRoutes: Routes = [
   {
     path: '',
     loadComponent: () => import('./features/home/home.component').then((m) => m.HomeComponent),
@@ -8,6 +8,7 @@ export const routes: Routes = [
     data: {
       titleKey: 'seo.home.title',
       descriptionKey: 'seo.home.description',
+      schemaType: 'ProfilePage',
     },
   },
   {
@@ -16,6 +17,7 @@ export const routes: Routes = [
     data: {
       titleKey: 'seo.about.title',
       descriptionKey: 'seo.about.description',
+      schemaType: 'AboutPage',
     },
   },
   {
@@ -25,6 +27,8 @@ export const routes: Routes = [
     data: {
       titleKey: 'seo.projects.title',
       descriptionKey: 'seo.projects.description',
+      schemaType: 'CollectionPage',
+      itemList: 'projects',
     },
   },
   {
@@ -45,6 +49,8 @@ export const routes: Routes = [
     data: {
       titleKey: 'seo.experience.title',
       descriptionKey: 'seo.experience.description',
+      schemaType: 'CollectionPage',
+      itemList: 'experience',
     },
   },
   {
@@ -54,6 +60,8 @@ export const routes: Routes = [
     data: {
       titleKey: 'seo.education.title',
       descriptionKey: 'seo.education.description',
+      schemaType: 'CollectionPage',
+      itemList: 'education',
     },
   },
   {
@@ -63,6 +71,7 @@ export const routes: Routes = [
     data: {
       titleKey: 'seo.contact.title',
       descriptionKey: 'seo.contact.description',
+      schemaType: 'ContactPage',
     },
   },
   {
@@ -85,4 +94,24 @@ export const routes: Routes = [
       noindex: true,
     },
   },
+];
+
+export const routes: Routes = [
+  { path: '', redirectTo: 'es', pathMatch: 'full' },
+  { path: 'about', redirectTo: 'es/about', pathMatch: 'full' },
+  { path: 'projects', redirectTo: 'es/projects', pathMatch: 'full' },
+  { path: 'projects/:slug', redirectTo: 'es/projects/:slug', pathMatch: 'full' },
+  { path: 'experience', redirectTo: 'es/experience', pathMatch: 'full' },
+  { path: 'education', redirectTo: 'es/education', pathMatch: 'full' },
+  { path: 'contact', redirectTo: 'es/contact', pathMatch: 'full' },
+  { path: '404', redirectTo: 'es/404', pathMatch: 'full' },
+  {
+    path: 'es',
+    children: localizedRoutes,
+  },
+  {
+    path: 'en',
+    children: localizedRoutes,
+  },
+  { path: '**', redirectTo: 'es/404' },
 ];

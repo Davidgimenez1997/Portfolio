@@ -1,27 +1,30 @@
 <section class="container py-5">
-    <h1 class="h3 mb-4">{{ 'projects.title' | translate }}</h1>
+  <h1 class="h3 mb-4">{{ 'projects.title' | translate }}</h1>
 
-    <div class="row g-3">
-        @for (project of projects$ | async; track project.slug) {
-            <div class="col-12 col-md-6">
-                <div class="card h-100 card-modern">
-                    <div class="card-body">
-                        <h2 class="h5">{{ project._title }}</h2>
-                        <p class="text-muted mb-3">{{ project._description }}</p>
+  <div class="row g-3">
+    @for (project of projects$ | async; track project.slug) {
+      <div class="col-12 col-md-6">
+        <div class="card h-100 card-modern">
+          <div class="card-body">
+            <h2 class="h5">{{ project._title }}</h2>
+            <p class="text-muted mb-3">{{ project._description }}</p>
 
-                        <div class="d-flex flex-wrap gap-2 mb-3">
-                            @for (tech of project.stack ?? []; track tech) {
-                                <span class="badge-chip">{{ tech }}</span>
-                            }
-                        </div>
-
-                        <a class="btn btn-sm btn-primary" [routerLink]="['/projects', project.slug]"
-                           (click)="analyticsService.projectOpen(project.slug, 'projects_list')">
-                            {{ 'projects.view' | translate }}
-                        </a>
-                    </div>
-                </div>
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              @for (tech of project.stack ?? []; track tech) {
+                <span class="badge-chip">{{ tech }}</span>
+              }
             </div>
-        }
-    </div>
+
+            <a
+              class="btn btn-sm btn-primary"
+              [routerLink]="projectRoute(project.slug)"
+              (click)="analyticsService.projectOpen(project.slug, 'projects_list')"
+            >
+              {{ 'projects.view' | translate }}
+            </a>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
 </section>

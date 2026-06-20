@@ -1,45 +1,31 @@
 import { RenderMode, ServerRoute } from '@angular/ssr';
 import projects from './../../public/content/projects.json';
 
+const languages = ['es', 'en'];
+const localizedStaticRoutes = [
+  '',
+  'about',
+  'projects',
+  'experience',
+  'education',
+  'contact',
+  '404',
+];
+
 export const serverRoutes: ServerRoute[] = [
-  {
-    path: '',
-    renderMode: RenderMode.Prerender,
-  },
-  {
-    path: 'about',
-    renderMode: RenderMode.Prerender,
-  },
-  {
-    path: 'projects',
-    renderMode: RenderMode.Prerender,
-  },
-  {
-    path: 'projects/:slug',
-    renderMode: RenderMode.Prerender,
-    getPrerenderParams: async () => {
-      return projects.map((p) => ({ slug: p.slug }));
-    },
-  },
-  {
-    path: 'experience',
-    renderMode: RenderMode.Prerender,
-  },
-  {
-    path: 'education',
-    renderMode: RenderMode.Prerender,
-  },
-  {
-    path: 'contact',
-    renderMode: RenderMode.Prerender,
-  },
-  {
-    path: '404',
-    renderMode: RenderMode.Prerender,
-  },
+  ...languages.flatMap((lang) =>
+    localizedStaticRoutes.map((route) => ({
+      path: route ? `${lang}/${route}` : lang,
+      renderMode: RenderMode.Prerender as const,
+    })),
+  ),
+  ...languages.map((lang) => ({
+    path: `${lang}/projects/:slug`,
+    renderMode: RenderMode.Prerender as const,
+    getPrerenderParams: async () => projects.map((project) => ({ slug: project.slug })),
+  })),
   {
     path: '**',
     renderMode: RenderMode.Server,
-    status: 404,
   },
 ];

@@ -11,33 +11,33 @@
   },
   "seo": {
     "home": {
-      "title": "David Giménez | Senior Frontend Engineer",
-      "description": "Portfolio de David Giménez, Senior Frontend Engineer especializado en Angular, SSR, arquitectura web y rendimiento."
+      "title": "David Giménez | Senior Frontend Engineer Angular SSR",
+      "description": "Portfolio de David Giménez, Senior Frontend Engineer en Madrid especializado en Angular, SSR, arquitectura frontend y rendimiento web."
     },
     "about": {
-      "title": "Sobre mí | David Giménez",
-      "description": "Perfil profesional de David Giménez, frontend engineer especializado en Angular, SSR y arquitectura escalable."
+      "title": "Sobre David Giménez | Angular Frontend Engineer",
+      "description": "Perfil profesional de David Giménez: Senior Frontend Engineer especializado en Angular, SSR, prerendering y arquitectura web escalable."
     },
     "projects": {
-      "title": "Proyectos | David Giménez",
-      "description": "Casos de estudio sobre Angular, SSR, prerendering, Kubernetes, CMS headless y arquitectura frontend."
+      "title": "Proyectos Angular, SSR y Arquitectura Frontend | David Giménez",
+      "description": "Casos de estudio de Angular, SSR, prerendering, Kubernetes, CMS headless y rendimiento frontend desarrollados por David Giménez."
     },
     "projectDetail": {
       "title": "Proyecto | David Giménez",
-      "description": "Detalle de proyecto técnico de David Giménez sobre arquitectura frontend, rendimiento y despliegue.",
+      "description": "Detalle técnico de un proyecto de David Giménez sobre Angular, arquitectura frontend, rendimiento web y despliegue.",
       "dynamicTitle": "{{ title }} | David Giménez"
     },
     "experience": {
-      "title": "Experiencia | David Giménez",
-      "description": "Trayectoria profesional de David Giménez como frontend engineer especializado en Angular."
+      "title": "Experiencia Frontend Angular | David Giménez",
+      "description": "Experiencia profesional de David Giménez en Angular, SSR, CMS headless, Docker, Kubernetes y arquitectura frontend."
     },
     "education": {
-      "title": "Formación | David Giménez",
-      "description": "Formación académica y técnica de David Giménez."
+      "title": "Formación Técnica Frontend | David Giménez",
+      "description": "Formación técnica de David Giménez en desarrollo de software, Angular, TypeScript, APIs REST y metodologías ágiles."
     },
     "contact": {
-      "title": "Contacto | David Giménez",
-      "description": "Contacta con David Giménez para oportunidades frontend, Angular, SSR y arquitectura web."
+      "title": "Contacto Frontend Engineer Angular | David Giménez",
+      "description": "Contacta con David Giménez para oportunidades de Senior Frontend Engineer, Angular, SSR, rendimiento y arquitectura web."
     },
     "notFound": {
       "title": "Página no encontrada | David Giménez",
@@ -105,6 +105,19 @@
     "empty": "No hay proyectos disponibles en este momento",
     "view": "Ver proyecto",
     "back": "Atrás",
+    "backToProjects": "Volver a proyectos",
+    "notFound": "Proyecto no encontrado",
+    "navigation": "Navegación de proyectos",
+    "position": "Proyecto {{ current }} de {{ total }}",
+    "positionShort": "{{ current }} / {{ total }}",
+    "previous": "Proyecto anterior",
+    "next": "Proyecto siguiente",
+    "type": {
+      "case-study": "Caso de estudio",
+      "personal": "Proyecto personal",
+      "open-source": "Open source",
+      "experiment": "Experimento"
+    },
     "context": "Contexto",
     "solution": "Solución",
     "impact": "Impacto",

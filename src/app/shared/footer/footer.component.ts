@@ -5,27 +5,33 @@ import { Router, NavigationEnd, RouterLink } from '@angular/router';
 import { filter, map, startWith } from 'rxjs/operators';
 
 import { ContentService } from '../../core/content/content.service';
-import {AnalyticsService} from "../../core/analytics/analytics.service";
+import { AnalyticsService } from '../../core/analytics/analytics.service';
+import { LanguageService } from '../../core/i18n/language.service';
 
 @Component({
-    standalone: true,
-    selector: 'app-footer',
-    imports: [TranslateModule, AsyncPipe, RouterLink],
-    templateUrl: './footer.component.html',
-    styleUrl: './footer.component.scss',
+  standalone: true,
+  selector: 'app-footer',
+  imports: [TranslateModule, AsyncPipe, RouterLink],
+  templateUrl: './footer.component.html',
+  styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
-    private contentService = inject(ContentService);
-    private router = inject(Router);
+  private contentService = inject(ContentService);
+  private router = inject(Router);
+  private language = inject(LanguageService);
 
-    analyticsService: AnalyticsService = inject(AnalyticsService);
+  analyticsService: AnalyticsService = inject(AnalyticsService);
 
-    year = new Date().getFullYear();
-    profile$ = this.contentService.getProfile();
+  year = new Date().getFullYear();
+  profile$ = this.contentService.getProfile();
 
-    isHome$ = this.router.events.pipe(
-        filter(e => e instanceof NavigationEnd),
-        startWith(null),
-        map(() => this.router.url === '/' || this.router.url.startsWith('/#'))
-    );
+  isHome$ = this.router.events.pipe(
+    filter((e) => e instanceof NavigationEnd),
+    startWith(null),
+    map(() => this.language.isLocalizedHomeUrl(this.router.url)),
+  );
+
+  route(path = '/') {
+    return this.language.localizedPath(path);
+  }
 }

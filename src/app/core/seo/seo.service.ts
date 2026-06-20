@@ -7,7 +7,7 @@ import { combineLatest } from 'rxjs';
 import { filter, startWith, take } from 'rxjs/operators';
 
 import { ContentService } from '../content/content.service';
-import { Project } from '../content/models';
+import { EducationItem, ExperienceItem, Project } from '../content/models';
 import { LanguageService } from '../i18n/language.service';
 import { SITE_URL } from './site-url';
 
@@ -15,6 +15,43 @@ const SITE_NAME = 'David Gimenez Portfolio';
 const AUTHOR_NAME = 'David Gimenez Rodriguez De Rivera';
 const AUTHOR_LINKEDIN = 'https://www.linkedin.com/in/davidgimenezrodriguezderivera/';
 const AUTHOR_GITHUB = 'https://github.com/Davidgimenez1997';
+const AUTHOR_EMAIL = 'davidgimenez97dev@gmail.com';
+const AUTHOR_JOB_TITLE = 'Senior Frontend Engineer';
+const AUTHOR_LOCATION = 'Madrid, Spain';
+const AUTHOR_CURRENT_COMPANY = 'Grupo Orenes';
+const AUTHOR_ALUMNI_OF = [
+  'U-Tad Centro Universitario de Tecnología y Arte Digital',
+  'IES San Isidro',
+];
+const SOCIAL_IMAGE_URL = new URL('/og-image.png', SITE_URL).toString();
+const SOCIAL_IMAGE_ALT =
+  'David Giménez Rodríguez, Senior Frontend Engineer especializado en Angular, SSR y arquitectura web.';
+const SOCIAL_IMAGE = {
+  '@type': 'ImageObject',
+  url: SOCIAL_IMAGE_URL,
+  width: 1200,
+  height: 630,
+  caption: SOCIAL_IMAGE_ALT,
+};
+const AUTHOR_KNOWS_ABOUT = [
+  'Angular',
+  'SSR',
+  'Prerendering',
+  'Frontend Architecture',
+  'Web Performance',
+  'TypeScript',
+  'Docker',
+  'Kubernetes',
+  'Headless CMS',
+];
+const SOCIAL_LINKS = [AUTHOR_LINKEDIN, AUTHOR_GITHUB];
+type SchemaType =
+  | 'WebPage'
+  | 'ProfilePage'
+  | 'AboutPage'
+  | 'CollectionPage'
+  | 'ContactPage'
+  | 'CreativeWork';
 
 @Injectable({ providedIn: 'root' })
 export class SeoService {
@@ -65,8 +102,57 @@ export class SeoService {
       .subscribe((translations) => {
         const title = translations[data['titleKey'] ?? fallbackTitleKey];
         const description = translations[data['descriptionKey'] ?? fallbackDescriptionKey];
+        const schemaType = data['schemaType'] ?? 'WebPage';
 
-        this.applyMetadata(title, description, { noindex: data['noindex'] === true });
+        if (data['itemList'] === 'projects') {
+          this.content
+            .getProjects()
+            .pipe(take(1))
+            .subscribe((projects) => {
+              this.applyMetadata(title, description, {
+                noindex: data['noindex'] === true,
+                projects,
+                schemaType,
+              });
+            });
+
+          return;
+        }
+
+        if (data['itemList'] === 'experience') {
+          this.content
+            .getExperience()
+            .pipe(take(1))
+            .subscribe((experience) => {
+              this.applyMetadata(title, description, {
+                experience,
+                noindex: data['noindex'] === true,
+                schemaType,
+              });
+            });
+
+          return;
+        }
+
+        if (data['itemList'] === 'education') {
+          this.content
+            .getEducation()
+            .pipe(take(1))
+            .subscribe((education) => {
+              this.applyMetadata(title, description, {
+                education,
+                noindex: data['noindex'] === true,
+                schemaType,
+              });
+            });
+
+          return;
+        }
+
+        this.applyMetadata(title, description, {
+          noindex: data['noindex'] === true,
+          schemaType,
+        });
       });
   }
 
@@ -86,10 +172,14 @@ export class SeoService {
       .subscribe((title) => {
         this.applyMetadata(title, projectDescription, {
           breadcrumbs: [
-            { name: 'Home', url: SITE_URL },
-            { name: 'Projects', url: new URL('/projects', SITE_URL).toString() },
+            { name: 'Home', url: new URL(this.language.localizedPath('/'), SITE_URL).toString() },
+            {
+              name: 'Projects',
+              url: new URL(this.language.localizedPath('/projects'), SITE_URL).toString(),
+            },
             { name: projectTitle, url: this.getCanonicalUrl() },
           ],
+          project,
           schemaType: 'CreativeWork',
         });
       });
@@ -101,17 +191,24 @@ export class SeoService {
     options: {
       breadcrumbs?: Array<{ name: string; url: string }>;
       noindex?: boolean;
-      schemaType?: 'WebPage' | 'CreativeWork';
+      education?: EducationItem[];
+      experience?: ExperienceItem[];
+      project?: Project;
+      projects?: Project[];
+      schemaType?: SchemaType;
     } = {},
   ) {
     const canonicalUrl = this.getCanonicalUrl();
     const lang = this.language.current;
     const locale = lang === 'es' ? 'es_ES' : 'en_US';
+    const alternateLocale = lang === 'es' ? 'en_US' : 'es_ES';
 
     this.title.setTitle(title);
     this.document.documentElement.lang = lang;
     this.meta.updateTag({ name: 'description', content: description });
     this.meta.updateTag({ name: 'author', content: AUTHOR_NAME });
+    this.meta.updateTag({ name: 'creator', content: AUTHOR_NAME });
+    this.meta.updateTag({ name: 'publisher', content: AUTHOR_NAME });
     this.meta.updateTag({
       name: 'robots',
       content: options.noindex ? 'noindex,follow' : 'index,follow',
@@ -119,15 +216,33 @@ export class SeoService {
     this.meta.updateTag({ property: 'og:title', content: title });
     this.meta.updateTag({ property: 'og:description', content: description });
     this.meta.updateTag({ property: 'og:site_name', content: SITE_NAME });
-    this.meta.updateTag({ property: 'og:type', content: 'website' });
+    this.meta.updateTag({
+      property: 'og:type',
+      content: options.schemaType === 'ProfilePage' ? 'profile' : 'website',
+    });
     this.meta.updateTag({ property: 'og:url', content: canonicalUrl });
+    this.meta.updateTag({ property: 'og:image', content: SOCIAL_IMAGE_URL });
+    this.meta.updateTag({ property: 'og:image:secure_url', content: SOCIAL_IMAGE_URL });
+    this.meta.updateTag({ property: 'og:image:type', content: 'image/png' });
+    this.meta.updateTag({ property: 'og:image:width', content: '1200' });
+    this.meta.updateTag({ property: 'og:image:height', content: '630' });
+    this.meta.updateTag({ property: 'og:image:alt', content: SOCIAL_IMAGE_ALT });
     this.meta.updateTag({ property: 'og:locale', content: locale });
-    this.meta.updateTag({ name: 'twitter:card', content: 'summary' });
+    this.meta.updateTag({ property: 'og:locale:alternate', content: alternateLocale });
+    this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
     this.meta.updateTag({ name: 'twitter:title', content: title });
     this.meta.updateTag({ name: 'twitter:description', content: description });
+    this.meta.updateTag({ name: 'twitter:image', content: SOCIAL_IMAGE_URL });
+    this.meta.updateTag({ name: 'twitter:image:alt', content: SOCIAL_IMAGE_ALT });
     this.setCanonical(canonicalUrl);
+    this.setLanguageAlternates();
+    this.setIdentityLinks();
     this.setStructuredData(title, description, canonicalUrl, {
       breadcrumbs: options.breadcrumbs ?? this.getDefaultBreadcrumbs(title, canonicalUrl),
+      education: options.education,
+      experience: options.experience,
+      project: options.project,
+      projects: options.projects,
       schemaType: options.schemaType ?? 'WebPage',
     });
   }
@@ -159,16 +274,56 @@ export class SeoService {
     canonical.href = url;
   }
 
+  private setLanguageAlternates() {
+    this.document.querySelectorAll('link[data-seo-hreflang]').forEach((link) => link.remove());
+
+    const alternates = [
+      { hreflang: 'es', href: this.getLocalizedCanonicalUrl('es') },
+      { hreflang: 'en', href: this.getLocalizedCanonicalUrl('en') },
+      { hreflang: 'x-default', href: this.getLocalizedCanonicalUrl('es') },
+    ];
+
+    alternates.forEach(({ hreflang, href }) => {
+      const link = this.document.createElement('link');
+      link.rel = 'alternate';
+      link.hreflang = hreflang;
+      link.href = href;
+      link.setAttribute('data-seo-hreflang', 'true');
+      this.document.head.appendChild(link);
+    });
+  }
+
+  private getLocalizedCanonicalUrl(lang: 'es' | 'en') {
+    const path = this.router.url.split('#')[0].split('?')[0] || '/';
+    return new URL(this.language.localizedPath(path, lang), SITE_URL).toString();
+  }
+
+  private setIdentityLinks() {
+    SOCIAL_LINKS.forEach((href) => {
+      const selector = `link[rel="me"][href="${href}"]`;
+      let link = this.document.querySelector<HTMLLinkElement>(selector);
+
+      if (!link) {
+        link = this.document.createElement('link');
+        link.rel = 'me';
+        link.href = href;
+        this.document.head.appendChild(link);
+      }
+    });
+  }
+
   private getDefaultBreadcrumbs(
     title: string,
     canonicalUrl: string,
   ): Array<{ name: string; url: string }> {
-    if (canonicalUrl === `${SITE_URL}/`) {
-      return [{ name: 'Home', url: SITE_URL }];
+    const homeUrl = new URL(this.language.localizedPath('/'), SITE_URL).toString();
+
+    if (canonicalUrl === homeUrl) {
+      return [{ name: 'Home', url: homeUrl }];
     }
 
     return [
-      { name: 'Home', url: SITE_URL },
+      { name: 'Home', url: homeUrl },
       {
         name: title.replace(' | David Giménez', '').replace(' | David Gimenez', ''),
         url: canonicalUrl,
@@ -182,18 +337,57 @@ export class SeoService {
     canonicalUrl: string,
     options: {
       breadcrumbs: Array<{ name: string; url: string }>;
-      schemaType: 'WebPage' | 'CreativeWork';
+      education?: EducationItem[];
+      experience?: ExperienceItem[];
+      project?: Project;
+      projects?: Project[];
+      schemaType: SchemaType;
     },
   ) {
+    const pageNode = this.buildPageNode(title, description, canonicalUrl, options);
     const graph = [
       {
         '@type': 'Person',
         '@id': `${SITE_URL}/#person`,
         name: AUTHOR_NAME,
         url: SITE_URL,
-        jobTitle: 'Senior Frontend Engineer',
-        knowsAbout: ['Angular', 'SSR', 'Frontend Architecture', 'Web Performance', 'TypeScript'],
-        sameAs: [AUTHOR_LINKEDIN, AUTHOR_GITHUB],
+        email: AUTHOR_EMAIL,
+        jobTitle: AUTHOR_JOB_TITLE,
+        mainEntityOfPage: { '@id': `${SITE_URL}/#webpage` },
+        hasOccupation: {
+          '@type': 'Occupation',
+          name: AUTHOR_JOB_TITLE,
+          occupationLocation: {
+            '@type': 'City',
+            name: AUTHOR_LOCATION,
+          },
+          skills: AUTHOR_KNOWS_ABOUT,
+        },
+        worksFor: {
+          '@type': 'Organization',
+          name: AUTHOR_CURRENT_COMPANY,
+        },
+        alumniOf: AUTHOR_ALUMNI_OF.map((institution) => ({
+          '@type': 'EducationalOrganization',
+          name: institution,
+        })),
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: AUTHOR_LOCATION,
+        },
+        workLocation: {
+          '@type': 'Place',
+          name: AUTHOR_LOCATION,
+        },
+        contactPoint: {
+          '@type': 'ContactPoint',
+          email: AUTHOR_EMAIL,
+          contactType: 'professional',
+          availableLanguage: ['Spanish', 'English'],
+        },
+        knowsAbout: AUTHOR_KNOWS_ABOUT,
+        knowsLanguage: ['es', 'en'],
+        sameAs: SOCIAL_LINKS,
       },
       {
         '@type': 'WebSite',
@@ -203,16 +397,7 @@ export class SeoService {
         inLanguage: this.language.current,
         publisher: { '@id': `${SITE_URL}/#person` },
       },
-      {
-        '@type': options.schemaType,
-        '@id': `${canonicalUrl}#webpage`,
-        name: title,
-        description,
-        url: canonicalUrl,
-        isPartOf: { '@id': `${SITE_URL}/#website` },
-        author: { '@id': `${SITE_URL}/#person` },
-        inLanguage: this.language.current,
-      },
+      pageNode,
       {
         '@type': 'BreadcrumbList',
         '@id': `${canonicalUrl}#breadcrumb`,
@@ -238,5 +423,165 @@ export class SeoService {
       '@context': 'https://schema.org',
       '@graph': graph,
     });
+  }
+
+  private buildPageNode(
+    title: string,
+    description: string,
+    canonicalUrl: string,
+    options: {
+      education?: EducationItem[];
+      experience?: ExperienceItem[];
+      project?: Project;
+      projects?: Project[];
+      schemaType: SchemaType;
+    },
+  ) {
+    const baseNode = {
+      '@type': options.schemaType,
+      '@id': `${canonicalUrl}#webpage`,
+      name: title,
+      description,
+      url: canonicalUrl,
+      isPartOf: { '@id': `${SITE_URL}/#website` },
+      author: { '@id': `${SITE_URL}/#person` },
+      publisher: { '@id': `${SITE_URL}/#person` },
+      inLanguage: this.language.current,
+      image: SOCIAL_IMAGE_URL,
+      thumbnailUrl: SOCIAL_IMAGE_URL,
+      primaryImageOfPage: SOCIAL_IMAGE,
+    };
+
+    if (!options.project) {
+      if (options.schemaType === 'ProfilePage') {
+        return {
+          ...baseNode,
+          mainEntity: { '@id': `${SITE_URL}/#person` },
+        };
+      }
+
+      if (options.schemaType === 'CollectionPage' && options.projects?.length) {
+        return {
+          ...baseNode,
+          mainEntity: this.buildProjectItemList(options.projects),
+        };
+      }
+
+      if (options.schemaType === 'CollectionPage' && options.experience?.length) {
+        return {
+          ...baseNode,
+          mainEntity: this.buildExperienceItemList(options.experience),
+        };
+      }
+
+      if (options.schemaType === 'CollectionPage' && options.education?.length) {
+        return {
+          ...baseNode,
+          mainEntity: this.buildEducationItemList(options.education),
+        };
+      }
+
+      return baseNode;
+    }
+
+    return {
+      ...baseNode,
+      creator: { '@id': `${SITE_URL}/#person` },
+      contributor: { '@id': `${SITE_URL}/#person` },
+      genre: options.project.type,
+      keywords: options.project.stack?.join(', '),
+      about: options.project.stack,
+    };
+  }
+
+  private buildProjectItemList(projects: Project[]) {
+    const lang = this.language.current;
+
+    return {
+      '@type': 'ItemList',
+      name: 'Selected projects by David Giménez Rodríguez',
+      numberOfItems: projects.length,
+      itemListElement: projects.map((project, index) => {
+        const url = new URL(
+          this.language.localizedPath(`/projects/${project.slug}`),
+          SITE_URL,
+        ).toString();
+
+        return {
+          '@type': 'ListItem',
+          position: index + 1,
+          url,
+          item: {
+            '@type': 'CreativeWork',
+            '@id': `${url}#webpage`,
+            name: this.language.resolveI18nText(project.title, lang),
+            description: this.language.resolveI18nText(project.description, lang),
+            url,
+            creator: { '@id': `${SITE_URL}/#person` },
+            contributor: { '@id': `${SITE_URL}/#person` },
+            genre: project.type,
+            keywords: project.stack?.join(', '),
+            about: project.stack,
+          },
+        };
+      }),
+    };
+  }
+
+  private buildExperienceItemList(experience: ExperienceItem[]) {
+    const lang = this.language.current;
+
+    return {
+      '@type': 'ItemList',
+      name: 'Professional experience by David Giménez Rodríguez',
+      numberOfItems: experience.length,
+      itemListElement: experience.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'EmployeeRole',
+          roleName: this.language.resolveI18nText(item.role, lang),
+          startDate: item.from?.en ?? item.from?.es,
+          endDate: item.to ? (item.to.en ?? item.to.es) : undefined,
+          worksFor: item.company
+            ? {
+                '@type': 'Organization',
+                name: item.company,
+              }
+            : undefined,
+          skills: item.stack,
+          description: this.language.resolveI18nList(item.highlights, lang).join(' '),
+        },
+      })),
+    };
+  }
+
+  private buildEducationItemList(education: EducationItem[]) {
+    const lang = this.language.current;
+
+    return {
+      '@type': 'ItemList',
+      name: 'Education by David Giménez Rodríguez',
+      numberOfItems: education.length,
+      itemListElement: education.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'EducationalOccupationalCredential',
+          name: this.language.resolveI18nText(item.degree, lang),
+          educationalLevel: this.language.resolveI18nText(item.degree, lang),
+          recognizedBy: item.institution
+            ? {
+                '@type': 'EducationalOrganization',
+                name: item.institution,
+              }
+            : undefined,
+          startDate: item.from,
+          endDate: item.to ?? undefined,
+          competencyRequired: item.stack,
+          description: this.language.resolveI18nList(item.highlights, lang).join(' '),
+        },
+      })),
+    };
   }
 }

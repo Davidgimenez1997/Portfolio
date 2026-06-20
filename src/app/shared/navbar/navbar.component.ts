@@ -27,7 +27,7 @@ export class NavbarComponent {
   isHome$ = this.router.events.pipe(
     filter((e) => e instanceof NavigationEnd),
     startWith(null),
-    map(() => this.router.url === '/' || this.router.url.startsWith('/#')),
+    map(() => this.languageService.isLocalizedHomeUrl(this.router.url)),
   );
 
   get currentLang() {
@@ -46,7 +46,12 @@ export class NavbarComponent {
     const currentLang = this.currentLang;
     const nextLang = this.currentLang === 'es' ? 'en' : 'es';
     this.languageService.use(nextLang);
+    void this.router.navigateByUrl(this.languageService.switchUrl(this.router.url, nextLang));
     this.analyticService.langChange(currentLang, nextLang);
+  }
+
+  route(path = '/') {
+    return this.languageService.localizedPath(path);
   }
 
   toggleMenu() {
