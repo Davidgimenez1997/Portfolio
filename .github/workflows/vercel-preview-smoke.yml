@@ -33,7 +33,7 @@ jobs:
           VERCEL_BYPASS_SECRET: ${{ secrets.VERCEL_BYPASS_SECRET }}
         run: |
           URL="${{ github.event.deployment_status.target_url }}"
-          curl -fsS -H "x-vercel-protection-bypass: $VERCEL_BYPASS_SECRET" "$URL/" > /dev/null
+          curl -fsSL -H "x-vercel-protection-bypass: $VERCEL_BYPASS_SECRET" "$URL/" > /dev/null
 
 
       - name: Assert SSR actually ran (optional)
@@ -41,5 +41,5 @@ jobs:
           VERCEL_BYPASS_SECRET: ${{ secrets.VERCEL_BYPASS_SECRET }}
         run: |
           URL="${{ github.event.deployment_status.target_url }}"
-          html="$(curl -fsS -H "x-vercel-protection-bypass: $VERCEL_BYPASS_SECRET" "$URL/")"
+          html="$(curl -fsSL -H "x-vercel-protection-bypass: $VERCEL_BYPASS_SECRET" "$URL/")"
           echo "$html" | grep -qi "<app-root" || (echo "No app-root found" && exit 1)
