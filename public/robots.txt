@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 
 Sitemap: https://davidgimenezrodriguez.com/sitemap.xml
+Sitemap: https://davidgimenezrodriguez.com/es/sitemap.xml
+Sitemap: https://davidgimenezrodriguez.com/en/sitemap.xml
