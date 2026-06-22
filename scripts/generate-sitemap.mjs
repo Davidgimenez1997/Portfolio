@@ -1,5 +1,5 @@
 import { execFile } from 'node:child_process';
-import { stat, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, stat, readFile, writeFile } from 'node:fs/promises';
 import { promisify } from 'node:util';
 
 const siteUrl = (process.env.SITE_URL ?? 'https://davidgimenezrodriguez.com').replace(/\/$/, '');
@@ -78,54 +78,82 @@ const assetRoutes = [
 ];
 
 const staticRoutes = Object.keys(routeSources);
+const localizedRoutes = languages.flatMap((lang) => [
+  ...staticRoutes.map((route) => ({
+    lang,
+    path: route ? `${lang}/${route}` : lang,
+    sources: [...sharedSeoFiles, ...routeSources[route]],
+    changefreq: 'monthly',
+    priority: route === '' ? '1.0' : '0.8',
+  })),
+  ...projects.map((project) => ({
+    lang,
+    path: `${lang}/projects/${project.slug}`,
+    sources: [...sharedSeoFiles, ...projectRouteSources],
+    changefreq: 'monthly',
+    priority: '0.8',
+  })),
+]);
+
 const routes = [
-  ...languages.flatMap((lang) =>
-    staticRoutes.map((route) => ({
-      path: route ? `${lang}/${route}` : lang,
-      sources: [...sharedSeoFiles, ...routeSources[route]],
-      changefreq: 'monthly',
-      priority: route === '' ? '1.0' : '0.8',
-    })),
-  ),
-  ...languages.flatMap((lang) =>
-    projects.map((project) => ({
-      path: `${lang}/projects/${project.slug}`,
-      sources: [...sharedSeoFiles, ...projectRouteSources],
-      changefreq: 'monthly',
-      priority: '0.8',
-    })),
-  ),
+  ...localizedRoutes,
   ...assetRoutes,
 ];
 
-const entries = await Promise.all(
-  routes.map(async ({ path, sources, changefreq, priority }) => {
-    const loc = path ? `${siteUrl}/${path}` : `${siteUrl}/`;
-    const lastmod = await getLatestLastModified(sources);
-
-    return [
-      '  <url>',
-      `    <loc>${escapeXml(loc)}</loc>`,
-      `    <lastmod>${lastmod}</lastmod>`,
-      `    <changefreq>${changefreq}</changefreq>`,
-      `    <priority>${priority}</priority>`,
-      '  </url>',
-    ].join('\n');
-  }),
+const sitemap = await buildSitemap(routes);
+const localizedSitemaps = Object.fromEntries(
+  await Promise.all(
+    languages.map(async (lang) => [
+      lang,
+      await buildSitemap(localizedRoutes.filter((route) => route.lang === lang)),
+    ]),
+  ),
 );
 
-const sitemap = [
-  '<?xml version="1.0" encoding="UTF-8"?>',
-  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-  entries.join('\n'),
-  '</urlset>',
+const robots = [
+  'User-agent: *',
+  'Allow: /',
+  '',
+  `Sitemap: ${siteUrl}/sitemap.xml`,
+  `Sitemap: ${siteUrl}/es/sitemap.xml`,
+  `Sitemap: ${siteUrl}/en/sitemap.xml`,
   '',
 ].join('\n');
 
-const robots = ['User-agent: *', 'Allow: /', '', `Sitemap: ${siteUrl}/sitemap.xml`, ''].join('\n');
-
 await writeFile('public/sitemap.xml', sitemap);
+await Promise.all(
+  languages.map(async (lang) => {
+    await mkdir(`public/${lang}`, { recursive: true });
+    await writeFile(`public/${lang}/sitemap.xml`, localizedSitemaps[lang]);
+  }),
+);
 await writeFile('public/robots.txt', robots);
+
+async function buildSitemap(sitemapRoutes) {
+  const entries = await Promise.all(
+    sitemapRoutes.map(async ({ path, sources, changefreq, priority }) => {
+      const loc = path ? `${siteUrl}/${path}` : `${siteUrl}/`;
+      const lastmod = await getLatestLastModified(sources);
+
+      return [
+        '  <url>',
+        `    <loc>${escapeXml(loc)}</loc>`,
+        `    <lastmod>${lastmod}</lastmod>`,
+        `    <changefreq>${changefreq}</changefreq>`,
+        `    <priority>${priority}</priority>`,
+        '  </url>',
+      ].join('\n');
+    }),
+  );
+
+  return [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    entries.join('\n'),
+    '</urlset>',
+    '',
+  ].join('\n');
+}
 
 async function getLatestLastModified(paths) {
   const dates = await Promise.all(paths.map((path) => getLastModified(path)));
