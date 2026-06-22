@@ -15,35 +15,37 @@
       "en": "Distributed Angular Prerendering System"
     },
     "description": {
-      "es": "Sistema de prerender distribuido para aplicaciones Angular multi-marca, orientado a SEO, rendimiento y despliegues independientes.",
-      "en": "Distributed prerendering system for multi-brand Angular applications, focused on SEO, performance and independent deployments."
+      "es": "Sistema distribuido de prerender para aplicaciones Angular multi-marca y multi-idioma, diseñado para mejorar SEO técnico, rendimiento percibido y despliegues independientes.",
+      "en": "Distributed prerendering system for multi-brand and multilingual Angular applications, designed to improve technical SEO, perceived performance and independent deployments."
     },
     "context": {
-      "es": "Aplicaciones Angular con cientos de rutas dinámicas, múltiples idiomas y necesidad de actualización frecuente sin downtime.",
-      "en": "Angular applications with hundreds of dynamic routes, multiple languages and frequent update requirements without downtime."
+      "es": "Aplicaciones Angular con cientos de rutas dinámicas, contenido gestionado por CMS, múltiples idiomas y necesidad de servir HTML indexable sin bloquear despliegues ni depender siempre del SSR en caliente.",
+      "en": "Angular applications with hundreds of dynamic routes, CMS-managed content, multiple languages and the need to serve indexable HTML without blocking deployments or always depending on live SSR."
     },
     "solution": {
       "es": [
-        "Separación de procesos SSR y prerender en servicios independientes.",
-        "Generación de HTML estático bajo demanda y por eventos.",
-        "Persistencia de prerender en volúmenes compartidos."
+        "Separación de procesos SSR, prerender y entrega de estáticos en servicios independientes.",
+        "Generación de HTML estático bajo demanda y por eventos del CMS para rutas críticas.",
+        "Persistencia de prerender en volúmenes compartidos para conservar resultados entre despliegues.",
+        "Estrategia preparada para múltiples marcas, idiomas y configuraciones por entorno."
       ],
       "en": [
-        "Separation of SSR and prerender processes into independent services.",
-        "Event-driven generation of static HTML.",
-        "Shared volume persistence for prerendered output."
+        "Separated SSR, prerender and static delivery into independent services.",
+        "Generated static HTML on demand and from CMS events for critical routes.",
+        "Persisted prerendered output in shared volumes to preserve results across deployments.",
+        "Designed the strategy for multiple brands, languages and environment-specific configuration."
       ]
     },
     "impact": {
       "es": [
-        "Mejora significativa de SEO y TTFB.",
-        "Reducción de carga en el servidor SSR.",
-        "Despliegues sin interrupciones."
+        "HTML indexable disponible para buscadores y previews sociales en rutas dinámicas.",
+        "Reducción de carga sobre el servidor SSR y mejor estabilidad en picos de tráfico.",
+        "Despliegues más independientes, con menor riesgo de interrumpir contenido ya prerenderizado."
       ],
       "en": [
-        "Significant SEO and TTFB improvements.",
-        "Reduced SSR server load.",
-        "Zero-downtime deployments."
+        "Indexable HTML available for search engines and social previews on dynamic routes.",
+        "Reduced SSR server load and improved stability during traffic peaks.",
+        "More independent deployments with lower risk of interrupting already prerendered content."
       ]
     },
     "stack": ["Angular", "SSR", "Prerender", "Node.js", "Docker", "Kubernetes"]
@@ -65,35 +67,35 @@
       "en": "Event-driven Prerender Queue (CMS)"
     },
     "description": {
-      "es": "Sistema de colas para disparar builds y prerender bajo demanda a partir de eventos del CMS, desacoplando procesos pesados del servidor SSR.",
-      "en": "Queue-based system to trigger builds and prerender on demand from CMS events, decoupling heavy processes from the SSR server."
+      "es": "Sistema de colas para disparar builds y prerender bajo demanda desde eventos del CMS, desacoplando procesos pesados del servidor SSR y reduciendo intervención manual.",
+      "en": "Queue-based system to trigger builds and prerender on demand from CMS events, decoupling heavy processes from the SSR server and reducing manual intervention."
     },
     "context": {
-      "es": "La publicación de contenido requiere refrescar rutas prerenderizadas sin redeploy completo ni impacto en tráfico.",
-      "en": "Content publishing requires refreshing prerendered routes without full redeploy or traffic impact."
+      "es": "La publicación de contenido necesitaba refrescar rutas prerenderizadas de forma selectiva, sin redeploy completo y sin trasladar trabajos pesados al servidor que atiende tráfico.",
+      "en": "Content publishing required selectively refreshing prerendered routes without a full redeploy and without moving heavy jobs into the server handling traffic."
     },
     "solution": {
       "es": [
-        "Plugin de CMS que escucha eventos create/update/delete.",
-        "Disparo de prerender mediante endpoint protegido por API key.",
-        "Filtrado de eventos y control de ejecuciones masivas."
+        "Plugin de CMS que escucha eventos create/update/delete y traduce cambios de contenido en rutas afectadas.",
+        "Disparo de prerender mediante endpoint protegido por API key y desacoplado del flujo de publicación.",
+        "Filtrado de eventos, control de ejecuciones masivas y base para evitar regeneraciones innecesarias."
       ],
       "en": [
-        "CMS plugin listening to create/update/delete events.",
-        "Prerender trigger via API-key protected endpoint.",
-        "Event filtering and bulk execution control."
+        "CMS plugin listening to create/update/delete events and translating content changes into affected routes.",
+        "Prerender trigger through an API-key protected endpoint decoupled from the publishing flow.",
+        "Event filtering, bulk execution control and a foundation to avoid unnecessary regeneration."
       ]
     },
     "impact": {
       "es": [
-        "Actualización de contenido más rápida.",
-        "Menos redeploys y menos errores manuales.",
-        "Mayor estabilidad del SSR."
+        "Actualización de contenido más rápida sin depender de despliegues completos.",
+        "Menos tareas manuales y menor riesgo de olvidar rutas afectadas.",
+        "Mayor estabilidad del SSR al mover trabajos costosos fuera del runtime principal."
       ],
       "en": [
-        "Faster content updates.",
-        "Fewer redeploys and manual errors.",
-        "Improved SSR stability."
+        "Faster content updates without depending on full deployments.",
+        "Fewer manual tasks and lower risk of missing affected routes.",
+        "Improved SSR stability by moving expensive jobs outside the main runtime."
       ]
     },
     "stack": ["Strapi", "Node.js", "TypeScript", "Docker", "Kubernetes"]
@@ -115,8 +117,8 @@
       "en": "Strapi Import/Export Plugin"
     },
     "description": {
-      "es": "Plugin profesional para mover contenido y configuración entre entornos Strapi de forma controlada, reduciendo procesos manuales y errores en migraciones.",
-      "en": "Professional plugin to move content and configuration between Strapi environments in a controlled way, reducing manual work and migration errors."
+      "es": "Plugin profesional para importar y exportar contenido entre entornos Strapi de forma controlada, reduciendo tareas manuales, inconsistencias y errores en migraciones.",
+      "en": "Professional plugin to import and export content between Strapi environments in a controlled way, reducing manual work, inconsistencies and migration errors."
     },
     "context": {
       "es": "Proyecto desarrollado en entorno profesional. Los equipos necesitaban replicar contenido entre entornos sin depender de tareas manuales, exportaciones parciales o cambios difíciles de auditar.",
@@ -126,24 +128,28 @@
       "es": [
         "Exportación estructurada de contenido, relaciones y configuración relevante del CMS.",
         "Importación controlada con validaciones previas para detectar conflictos antes de aplicar cambios.",
-        "Flujo orientado a equipos para reducir errores al mover contenido entre local, staging y producción."
+        "Flujo orientado a equipos para mover contenido entre local, staging y producción con más trazabilidad.",
+        "Base extensible para ajustar entidades, relaciones y reglas específicas del proyecto."
       ],
       "en": [
         "Structured export of content, relations and relevant CMS configuration.",
         "Controlled import with pre-validations to detect conflicts before applying changes.",
-        "Team-oriented workflow to reduce errors when moving content between local, staging and production."
+        "Team-oriented workflow to move content between local, staging and production with better traceability.",
+        "Extensible foundation to adapt entities, relations and project-specific rules."
       ]
     },
     "impact": {
       "es": [
         "Migraciones de contenido más fiables entre entornos.",
         "Menos intervención manual en tareas repetitivas de CMS.",
-        "Mejor experiencia para equipos de frontend, backend y contenido."
+        "Mejor experiencia para equipos de frontend, backend y contenido.",
+        "Reducción de riesgos al sincronizar contenido antes de publicar cambios."
       ],
       "en": [
         "More reliable content migrations between environments.",
         "Less manual intervention in repetitive CMS tasks.",
-        "Improved experience for frontend, backend and content teams."
+        "Improved experience for frontend, backend and content teams.",
+        "Reduced risk when synchronizing content before publishing changes."
       ]
     },
     "stack": ["Strapi", "Node.js", "TypeScript", "REST APIs", "PostgreSQL"]
@@ -165,35 +171,37 @@
       "en": "Multi-brand Deployment Architecture on Kubernetes"
     },
     "description": {
-      "es": "Arquitectura de despliegue para múltiples marcas y entornos basada en Kubernetes y Helm.",
-      "en": "Deployment architecture for multiple brands and environments based on Kubernetes and Helm."
+      "es": "Arquitectura de despliegue para múltiples marcas, entornos y servicios frontend basada en Kubernetes, Helm y configuración reproducible.",
+      "en": "Deployment architecture for multiple brands, environments and frontend services based on Kubernetes, Helm and reproducible configuration."
     },
     "context": {
-      "es": "Múltiples marcas comparten base técnica pero requieren configuración, rutas y assets distintos.",
-      "en": "Multiple brands share a technical base but require different configuration, routes and assets."
+      "es": "Múltiples marcas compartían una misma base técnica, pero necesitaban configuración, rutas, assets, dominios y comportamiento de despliegue diferenciados por entorno.",
+      "en": "Multiple brands shared the same technical base but required different configuration, routes, assets, domains and deployment behavior per environment."
     },
     "solution": {
       "es": [
-        "Parametrización mediante Helm y values específicos por entorno.",
-        "Separación de servicios SSR, prerender y estáticos.",
-        "Configuración dinámica con ConfigMaps y Secrets."
+        "Parametrización mediante Helm y values específicos por marca, entorno y servicio.",
+        "Separación de servicios SSR, prerender y entrega de estáticos para escalar de forma independiente.",
+        "Configuración dinámica con ConfigMaps y Secrets, evitando duplicación innecesaria de código.",
+        "Estructura preparada para despliegues repetibles y rollback más sencillo."
       ],
       "en": [
-        "Helm-based parametrization with environment-specific values.",
-        "Separation of SSR, prerender and static services.",
-        "Dynamic configuration via ConfigMaps and Secrets."
+        "Helm-based parametrization with brand, environment and service-specific values.",
+        "Separated SSR, prerender and static delivery services to scale independently.",
+        "Dynamic configuration through ConfigMaps and Secrets, avoiding unnecessary code duplication.",
+        "Structure designed for repeatable deployments and simpler rollback."
       ]
     },
     "impact": {
       "es": [
-        "Despliegues reproducibles.",
-        "Menos incidencias entre entornos.",
-        "Escalado independiente por servicio."
+        "Despliegues reproducibles y más fáciles de auditar entre entornos.",
+        "Menos incidencias provocadas por diferencias de configuración.",
+        "Escalado independiente por servicio según carga real y criticidad."
       ],
       "en": [
-        "Reproducible deployments.",
-        "Fewer environment-related incidents.",
-        "Independent service scaling."
+        "Reproducible deployments that are easier to audit across environments.",
+        "Fewer incidents caused by configuration differences.",
+        "Independent service scaling based on real load and criticality."
       ]
     },
     "stack": ["Kubernetes", "Helm", "Docker", "Nginx", "Node.js"]
@@ -215,19 +223,37 @@
       "en": "Runtime Cache & Invalidation"
     },
     "description": {
-      "es": "Sistema de caché e invalidación de contenido dinámico en aplicaciones Angular con SSR.",
-      "en": "Runtime caching and invalidation system for dynamic content in Angular SSR applications."
+      "es": "Sistema de caché e invalidación para contenido dinámico en aplicaciones Angular con SSR, orientado a reducir carga y mantener contenido actualizado.",
+      "en": "Caching and invalidation system for dynamic content in Angular SSR applications, focused on reducing load while keeping content fresh."
+    },
+    "context": {
+      "es": "Las páginas dinámicas consultaban contenido externo y podían generar peticiones repetidas en SSR, afectando tiempos de respuesta, estabilidad y consumo de recursos.",
+      "en": "Dynamic pages queried external content and could generate repeated SSR requests, affecting response times, stability and resource usage."
     },
     "solution": {
       "es": [
-        "Caché de HTML y datos en tiempo de ejecución.",
-        "Invalidación por eventos de CMS.",
-        "Fallback controlado a SSR."
+        "Caché de HTML y datos en tiempo de ejecución para rutas y contenidos de alto uso.",
+        "Invalidación por eventos de CMS para refrescar contenido cuando cambia la fuente.",
+        "Fallback controlado a SSR cuando no existe caché válida o se necesita regeneración.",
+        "Separación entre contenido cacheable y datos que requieren respuesta fresca."
       ],
       "en": [
-        "Runtime HTML and data caching.",
-        "CMS-driven invalidation events.",
-        "Controlled SSR fallback."
+        "Runtime HTML and data caching for high-usage routes and content.",
+        "CMS-driven invalidation events to refresh content when the source changes.",
+        "Controlled SSR fallback when no valid cache exists or regeneration is needed.",
+        "Separation between cacheable content and data requiring fresh responses."
+      ]
+    },
+    "impact": {
+      "es": [
+        "Menos peticiones redundantes a servicios externos.",
+        "Mejor tiempo de respuesta en rutas dinámicas con tráfico recurrente.",
+        "Contenido actualizado sin renunciar a estabilidad y rendimiento."
+      ],
+      "en": [
+        "Fewer redundant requests to external services.",
+        "Better response times on recurring-traffic dynamic routes.",
+        "Fresh content without sacrificing stability and performance."
       ]
     },
     "stack": ["Angular", "Node.js", "SSR", "Docker"]
@@ -249,19 +275,37 @@
       "en": "Headless CMS Dynamic Routing"
     },
     "description": {
-      "es": "Sistema de rutas dinámicas en Angular basado en contenido gestionado desde un CMS headless.",
-      "en": "Dynamic routing system in Angular driven by headless CMS content."
+      "es": "Sistema de rutas dinámicas en Angular basado en contenido gestionado desde CMS headless, preparado para multi-idioma, SEO y caché.",
+      "en": "Dynamic routing system in Angular driven by headless CMS content, prepared for multilingual content, SEO and caching."
+    },
+    "context": {
+      "es": "El contenido necesitaba crecer sin redeploy constante, permitiendo que equipos no técnicos gestionasen páginas, slugs y traducciones desde el CMS.",
+      "en": "Content needed to grow without constant redeploys, allowing non-technical teams to manage pages, slugs and translations from the CMS."
     },
     "solution": {
       "es": [
-        "Carga dinámica de rutas en el arranque.",
-        "Resolución multi-idioma.",
-        "Caché para evitar peticiones redundantes."
+        "Carga dinámica de configuración de rutas durante el arranque de la aplicación.",
+        "Resolución multi-idioma de slugs, contenido y navegación.",
+        "Caché para evitar peticiones redundantes y estabilizar la experiencia de usuario.",
+        "Modelo compatible con SSR, prerender y generación de metadatos por página."
       ],
       "en": [
-        "Runtime route configuration loading.",
-        "Multi-language resolution.",
-        "Caching to avoid redundant requests."
+        "Runtime loading of route configuration during application startup.",
+        "Multilingual resolution for slugs, content and navigation.",
+        "Caching to avoid redundant requests and stabilize the user experience.",
+        "Model compatible with SSR, prerendering and per-page metadata generation."
+      ]
+    },
+    "impact": {
+      "es": [
+        "Mayor autonomía para gestionar contenido y landing pages.",
+        "Menos cambios de código para publicar nuevas rutas.",
+        "Base más sólida para SEO internacional y contenido escalable."
+      ],
+      "en": [
+        "More autonomy to manage content and landing pages.",
+        "Fewer code changes needed to publish new routes.",
+        "Stronger foundation for international SEO and scalable content."
       ]
     },
     "stack": ["Angular", "Strapi", "TypeScript", "RxJS"]
@@ -283,19 +327,38 @@
       "en": "Frontend Developer Experience Tooling"
     },
     "description": {
-      "es": "Herramientas internas para mejorar la experiencia de desarrollo en proyectos Angular de gran escala.",
-      "en": "Internal tooling to improve developer experience in large-scale Angular projects."
+      "es": "Herramientas internas para mejorar la experiencia de desarrollo, builds y flujos de configuración en proyectos Angular de gran escala.",
+      "en": "Internal tooling to improve developer experience, builds and configuration workflows in large-scale Angular projects."
+    },
+    "context": {
+      "es": "El crecimiento de marcas, entornos y rutas hacía más costoso mantener builds, configuración y tareas repetitivas de forma manual.",
+      "en": "The growth of brands, environments and routes made builds, configuration and repetitive tasks harder to maintain manually."
     },
     "solution": {
       "es": [
-        "Scripts de automatización de build y prerender.",
-        "Gestión centralizada de configuración."
+        "Scripts de automatización de build, prerender y tareas recurrentes de entorno.",
+        "Gestión centralizada de configuración para reducir duplicidad y errores humanos.",
+        "Convenciones de proyecto para facilitar onboarding y mantenimiento.",
+        "Utilidades enfocadas en detectar problemas antes de llegar a despliegue."
       ],
-      "en": ["Build and prerender automation scripts.", "Centralized configuration management."]
+      "en": [
+        "Automation scripts for build, prerender and recurring environment tasks.",
+        "Centralized configuration management to reduce duplication and human error.",
+        "Project conventions to improve onboarding and maintenance.",
+        "Utilities focused on detecting problems before deployment."
+      ]
     },
     "impact": {
-      "es": ["Reducción de tiempos de build.", "Onboarding más rápido."],
-      "en": ["Reduced build times.", "Faster onboarding."]
+      "es": [
+        "Flujos de trabajo más previsibles para el equipo frontend.",
+        "Onboarding más rápido gracias a comandos y convenciones claras.",
+        "Menos errores repetitivos en tareas de configuración y despliegue."
+      ],
+      "en": [
+        "More predictable workflows for the frontend team.",
+        "Faster onboarding thanks to clear commands and conventions.",
+        "Fewer repetitive errors in configuration and deployment tasks."
+      ]
     },
     "stack": ["Node.js", "Angular", "TypeScript", "Docker"]
   },
@@ -316,8 +379,8 @@
       "en": "Multi-tenant Photography Portal"
     },
     "description": {
-      "es": "Plataforma para que fotógrafos creen espacios privados por cliente o evento, compartan galerías y centralicen la entrega de fotografías.",
-      "en": "Platform for photographers to create private spaces per client or event, share galleries and centralize photo delivery."
+      "es": "Plataforma multi-tenant para que fotógrafos creen espacios privados por cliente o evento, compartan galerías y centralicen la entrega digital de fotografías.",
+      "en": "Multi-tenant platform for photographers to create private spaces per client or event, share galleries and centralize digital photo delivery."
     },
     "context": {
       "es": "Los fotógrafos necesitan una forma sencilla de entregar reportajes, separar clientes y ofrecer una experiencia cuidada sin depender de carpetas compartidas genéricas.",
@@ -325,28 +388,30 @@
     },
     "solution": {
       "es": [
-        "Arquitectura multi-tenant para separar fotógrafos, clientes y eventos.",
-        "Galerías privadas con acceso por enlace o código.",
+        "Arquitectura multi-tenant para separar fotógrafos, clientes, eventos y permisos.",
+        "Galerías privadas con acceso por enlace o código y experiencia centrada en el cliente final.",
         "Interfaz responsive pensada para consulta desde móvil y escritorio.",
-        "Base preparada para subida, organización y entrega de fotografías por evento."
+        "Base preparada para subida, organización, selección y entrega de fotografías por evento."
       ],
       "en": [
-        "Multi-tenant architecture to separate photographers, clients and events.",
-        "Private galleries with access by link or code.",
+        "Multi-tenant architecture to separate photographers, clients, events and permissions.",
+        "Private galleries with link or code access and an end-client focused experience.",
         "Responsive interface designed for mobile and desktop browsing.",
-        "Foundation for uploading, organizing and delivering photos per event."
+        "Foundation for uploading, organizing, selecting and delivering photos per event."
       ]
     },
     "impact": {
       "es": [
         "Producto real orientado a un caso de negocio concreto.",
         "Mejor experiencia de entrega para fotógrafos y clientes.",
-        "Base escalable para convertir una necesidad personal en una solución comercial."
+        "Base escalable para convertir una necesidad personal en una solución comercial.",
+        "Demostración de criterio de producto además de ejecución frontend."
       ],
       "en": [
         "Real product focused on a specific business use case.",
         "Improved delivery experience for photographers and clients.",
-        "Scalable foundation to turn a personal need into a commercial solution."
+        "Scalable foundation to turn a personal need into a commercial solution.",
+        "Demonstrates product thinking alongside frontend execution."
       ]
     },
     "stack": ["Angular", "TypeScript", "Node.js", "Responsive Design", "Multi-tenant Architecture"]
@@ -368,8 +433,8 @@
       "en": "Digital Wedding Invitation"
     },
     "description": {
-      "es": "Página web responsive para centralizar la información de una boda, ofrecer una experiencia visual cuidada y facilitar el acceso de los invitados a los detalles del evento.",
-      "en": "Responsive website to centralize wedding information, provide a polished visual experience and help guests access event details."
+      "es": "Invitación digital responsive para centralizar la información de una boda, ofrecer una experiencia visual cuidada y facilitar a los invitados el acceso a los detalles del evento.",
+      "en": "Responsive digital invitation to centralize wedding information, provide a polished visual experience and help guests access event details."
     },
     "context": {
       "es": "Proyecto personal real creado para sustituir una invitación tradicional por una experiencia digital accesible desde cualquier dispositivo.",
@@ -379,24 +444,28 @@
       "es": [
         "Diseño responsive adaptado a móvil, tablet y escritorio.",
         "Secciones para información del evento, ubicación, horarios y detalles importantes.",
-        "Experiencia visual personalizada para transmitir el tono del evento."
+        "Experiencia visual personalizada para transmitir el tono del evento.",
+        "Estructura sencilla para que los invitados encuentren rápido la información clave."
       ],
       "en": [
         "Responsive design adapted to mobile, tablet and desktop.",
         "Sections for event information, location, schedule and important details.",
-        "Custom visual experience to communicate the tone of the event."
+        "Custom visual experience to communicate the tone of the event.",
+        "Simple structure so guests can quickly find key information."
       ]
     },
     "impact": {
       "es": [
         "Proyecto real usado por invitados.",
-        "Centralización de información importante en una única página.",
-        "Demostración de sensibilidad visual, detalle frontend y enfoque en usuario final."
+        "Centralización de información importante en una única página accesible.",
+        "Demostración de sensibilidad visual, detalle frontend y enfoque en usuario final.",
+        "Ejemplo de cómo una solución web pequeña puede sustituir procesos tradicionales."
       ],
       "en": [
         "Real project used by guests.",
-        "Centralized important information in a single page.",
-        "Demonstrates visual care, frontend detail and end-user focus."
+        "Centralized important information in a single accessible page.",
+        "Demonstrates visual care, frontend detail and end-user focus.",
+        "Example of how a small web solution can replace traditional processes."
       ]
     },
     "stack": ["Angular", "TypeScript", "SCSS", "Responsive Design"]

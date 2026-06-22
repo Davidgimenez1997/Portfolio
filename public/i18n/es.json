@@ -53,14 +53,14 @@
   },
   "home": {
     "title": "Hola, soy David",
-    "subtitle": "Desarrollador Frontend especializado en Angular, arquitectura web y rendimiento.",
+    "subtitle": "Senior Frontend Engineer especializado en Angular, SSR, arquitectura frontend escalable y rendimiento web.",
     "ctaProjects": "Ver proyectos",
     "ctaExperience": "Ver experiencia",
     "ctaContact": "Contactar",
     "skillsTitle": "Tecnologías",
-    "skillsSubtitle": "Herramientas con las que trabajo habitualmente",
+    "skillsSubtitle": "Tecnologías y prácticas que uso para construir aplicaciones Angular mantenibles, rápidas e indexables",
     "featuredTitle": "Proyectos destacados",
-    "featuredSubtitle": "Una selección de proyectos representativos",
+    "featuredSubtitle": "Casos reales de arquitectura frontend, SEO técnico, prerendering y producto digital",
     "snapshot": "Instantánea",
     "focus": {
       "title": "Enfoque",
@@ -84,13 +84,13 @@
   },
   "about": {
     "title": "Sobre mí",
-    "subtitle": "Perfil profesional y enfoque",
+    "subtitle": "Perfil profesional, especialización técnica y forma de trabajar",
     "ctaFull": "Ver perfil completo",
     "linksTitle": "Enlaces",
     "highlightsTitle": "Resumen",
-    "highlight1": "Más de 6 años de experiencia en desarrollo frontend",
-    "highlight2": "Especializado en Angular, SSR y rendimiento web",
-    "highlight3": "Experiencia en arquitecturas complejas y entornos productivos",
+    "highlight1": "Más de 6 años creando aplicaciones frontend para entornos productivos",
+    "highlight2": "Especializado en Angular, SSR, prerendering y SEO técnico",
+    "highlight3": "Experiencia en arquitecturas multi-marca, CMS headless y despliegues escalables",
     "skills": {
       "core": "Core",
       "daily": "Diario",
@@ -99,7 +99,7 @@
   },
   "projects": {
     "title": "Proyectos",
-    "subtitle": "Casos de estudio y proyectos personales",
+    "subtitle": "Casos de estudio y proyectos personales centrados en Angular, SSR, CMS headless, rendimiento y arquitectura frontend",
     "ctaAll": "Ver todos",
     "ctaView": "Ver proyecto",
     "empty": "No hay proyectos disponibles en este momento",
@@ -126,13 +126,13 @@
   },
   "experience": {
     "title": "Experiencia",
-    "subtitle": "Trayectoria profesional",
+    "subtitle": "Trayectoria profesional construyendo frontend escalable, integraciones CMS y soluciones orientadas a rendimiento",
     "ctaFull": "Ver experiencia completa",
     "present": "Actualidad"
   },
   "education": {
     "title": "Formación",
-    "subtitle": "Formación académica y técnica",
+    "subtitle": "Base académica y técnica en desarrollo de software, arquitectura de aplicaciones y trabajo en equipo",
     "ctaFull": "Ver formación completa",
     "present": "Actualidad"
   },
@@ -140,7 +140,7 @@
     "title": "Contacto",
     "subtitle": "¿Hablamos?",
     "quickTitle": "Contacto rápido",
-    "quickText": "Si te interesa mi perfil o quieres comentar un proyecto, estaré encantado de hablar contigo.",
+    "quickText": "Si buscas un perfil frontend senior para Angular, SSR, arquitectura web o rendimiento, estaré encantado de hablar contigo.",
     "ctaForm": "Formulario de contacto",
     "ctaEmail": "Enviar email",
     "linksTitle": "Enlaces",
@@ -172,7 +172,7 @@
   },
   "footer": {
     "brand": "David Giménez",
-    "summary": "Frontend Developer especializado en Angular, arquitectura web y rendimiento.",
+    "summary": "Senior Frontend Engineer especializado en Angular, SSR, arquitectura web y rendimiento.",
     "sections": {
       "title": "Secciones"
     },

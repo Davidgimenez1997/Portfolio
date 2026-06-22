@@ -1,5 +1,23 @@
 {
-  "core": ["Angular", "TypeScript", "RxJS", "SCSS", "SSR", "Prerender"],
-  "daily": ["Bootstrap", "Node.js", "Docker", "Git", "REST APIs"],
-  "familiar": ["Kubernetes", "Helm", "Strapi", "PostgreSQL", "CI/CD"]
+  "core": [
+    "Angular",
+    "TypeScript",
+    "RxJS",
+    "SSR",
+    "Prerender",
+    "Frontend Architecture",
+    "Web Performance",
+    "Technical SEO"
+  ],
+  "daily": [
+    "SCSS",
+    "Bootstrap",
+    "Node.js",
+    "REST APIs",
+    "Headless CMS",
+    "Docker",
+    "Git",
+    "Build Automation"
+  ],
+  "familiar": ["Kubernetes", "Helm", "Strapi", "PostgreSQL", "Nginx", "CI/CD", "Analytics"]
 }

@@ -53,14 +53,14 @@
   },
   "home": {
     "title": "Hi, I'm David",
-    "subtitle": "Frontend Developer specialized in Angular, web architecture and performance.",
+    "subtitle": "Senior Frontend Engineer specialized in Angular, SSR, scalable frontend architecture and web performance.",
     "ctaProjects": "View projects",
     "ctaExperience": "View experience",
     "ctaContact": "Contact",
     "skillsTitle": "Technologies",
-    "skillsSubtitle": "Tools I work with on a daily basis",
+    "skillsSubtitle": "Technologies and practices I use to build maintainable, fast and indexable Angular applications",
     "featuredTitle": "Featured projects",
-    "featuredSubtitle": "A selection of representative projects",
+    "featuredSubtitle": "Real case studies in frontend architecture, technical SEO, prerendering and digital product",
     "snapshot": "Snapshot",
     "focus": {
       "title": "Focus",
@@ -84,13 +84,13 @@
   },
   "about": {
     "title": "About",
-    "subtitle": "Professional profile and approach",
+    "subtitle": "Professional profile, technical specialization and working approach",
     "ctaFull": "View full profile",
     "linksTitle": "Links",
     "highlightsTitle": "Overview",
-    "highlight1": "More than 6 years of frontend development experience",
-    "highlight2": "Specialized in Angular, SSR and web performance",
-    "highlight3": "Experience with complex architectures and production environments",
+    "highlight1": "Over 6 years building frontend applications for production environments",
+    "highlight2": "Specialized in Angular, SSR, prerendering and technical SEO",
+    "highlight3": "Experience with multi-brand architectures, headless CMS and scalable deployments",
     "skills": {
       "core": "Core",
       "daily": "Daily",
@@ -99,7 +99,7 @@
   },
   "projects": {
     "title": "Projects",
-    "subtitle": "Case studies and personal projects",
+    "subtitle": "Case studies and personal projects focused on Angular, SSR, headless CMS, performance and frontend architecture",
     "ctaAll": "View all",
     "ctaView": "View project",
     "empty": "No projects available at the moment",
@@ -126,13 +126,13 @@
   },
   "experience": {
     "title": "Experience",
-    "subtitle": "Professional background",
+    "subtitle": "Professional background building scalable frontend, CMS integrations and performance-oriented solutions",
     "ctaFull": "View full experience",
     "present": "Present"
   },
   "education": {
     "title": "Education",
-    "subtitle": "Academic and technical education",
+    "subtitle": "Academic and technical foundation in software development, application architecture and teamwork",
     "ctaFull": "View full education",
     "present": "Present"
   },
@@ -140,7 +140,7 @@
     "title": "Contact",
     "subtitle": "Let’s talk",
     "quickTitle": "Quick contact",
-    "quickText": "If you are interested in my profile or would like to discuss a project, feel free to reach out.",
+    "quickText": "If you are looking for a senior frontend profile for Angular, SSR, web architecture or performance, feel free to reach out.",
     "ctaForm": "Contact form",
     "ctaEmail": "Send email",
     "linksTitle": "Links",
@@ -173,7 +173,7 @@
 
   "footer": {
     "brand": "David Giménez",
-    "summary": "Frontend Developer specialized in Angular, web architecture and performance.",
+    "summary": "Senior Frontend Engineer specialized in Angular, SSR, web architecture and performance.",
     "sections": {
       "title": "Sections"
     },
