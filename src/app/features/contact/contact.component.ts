@@ -1,11 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import {
-    ReactiveFormsModule,
-    Validators,
-    FormBuilder,
-    FormGroup,
-    FormControl,
-    AbstractControl,
+  ReactiveFormsModule,
+  Validators,
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  AbstractControl,
 } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AsyncPipe } from '@angular/common';
@@ -14,110 +14,115 @@ import { map, shareReplay } from 'rxjs/operators';
 import { ContentService } from '../../core/content/content.service';
 import { Profile } from '../../core/content/models';
 import { AnalyticsService } from '../../core/analytics/analytics.service';
+import { LanguageService } from '../../core/i18n/language.service';
 
 export interface ContactFormGroup {
-    name: FormControl<string>;
-    email: FormControl<string>;
-    message: FormControl<string>;
+  name: FormControl<string>;
+  email: FormControl<string>;
+  message: FormControl<string>;
 }
 
 @Component({
-    standalone: true,
-    imports: [ReactiveFormsModule, TranslateModule, AsyncPipe],
-    templateUrl: './contact.component.html',
-    styleUrl: './contact.component.scss',
+  standalone: true,
+  imports: [ReactiveFormsModule, TranslateModule, AsyncPipe],
+  templateUrl: './contact.component.html',
+  styleUrl: './contact.component.scss',
 })
 export class ContactComponent implements OnInit {
-    private fb = inject(FormBuilder);
-    private translate = inject(TranslateService);
-    private content = inject(ContentService);
-    analyticsService = inject(AnalyticsService);
+  private fb = inject(FormBuilder);
+  private translate = inject(TranslateService);
+  private content = inject(ContentService);
+  private language = inject(LanguageService);
+  analyticsService = inject(AnalyticsService);
 
-    profile$ = this.content.getProfile().pipe(shareReplay(1));
+  profile$ = this.content.getProfile().pipe(shareReplay(1));
 
-    toEmail$ = this.profile$.pipe(
-        map((p: Profile) => p.email ?? 'davidgimenez97dev@gmail.com')
-    );
+  toEmail$ = this.profile$.pipe(map((p: Profile) => p.email ?? 'davidgimenez97dev@gmail.com'));
 
-    copied = false;
+  copied = false;
 
-    formGroup!: FormGroup<ContactFormGroup>;
+  formGroup!: FormGroup<ContactFormGroup>;
 
-    maxLengthNameField = 80;
-    minLengthMessageField = 10;
-    maxLengthMessageField = 2000;
+  maxLengthNameField = 80;
+  minLengthMessageField = 10;
+  maxLengthMessageField = 2000;
 
-    ngOnInit() {
-        this.formGroup = this.fb.nonNullable.group<ContactFormGroup>({
-            name: this.fb.nonNullable.control('', [
-                Validators.required,
-                Validators.maxLength(this.maxLengthNameField),
-            ]),
-            email: this.fb.nonNullable.control('', [Validators.required, Validators.email]),
-            message: this.fb.nonNullable.control('', [
-                Validators.required,
-                Validators.minLength(this.minLengthMessageField),
-                Validators.maxLength(this.maxLengthMessageField),
-            ]),
-        });
+  ngOnInit() {
+    this.formGroup = this.fb.nonNullable.group<ContactFormGroup>({
+      name: this.fb.nonNullable.control('', [
+        Validators.required,
+        Validators.maxLength(this.maxLengthNameField),
+      ]),
+      email: this.fb.nonNullable.control('', [Validators.required, Validators.email]),
+      message: this.fb.nonNullable.control('', [
+        Validators.required,
+        Validators.minLength(this.minLengthMessageField),
+        Validators.maxLength(this.maxLengthMessageField),
+      ]),
+    });
+  }
+
+  showErrors(ctrl: AbstractControl) {
+    return ctrl.invalid && (ctrl.touched || ctrl.dirty);
+  }
+
+  isInvalid(ctrl: AbstractControl) {
+    return this.showErrors(ctrl);
+  }
+
+  localizedAsset(value?: string | Record<'es' | 'en', string> | null): string {
+    if (!value) return '';
+    return typeof value === 'string' ? value : (value[this.language.current] ?? '');
+  }
+
+  async copyEmail(email: string) {
+    try {
+      await navigator.clipboard.writeText(email);
+      this.copied = true;
+      this.analyticsService.outbound('email', 'contact_copy');
+      window.setTimeout(() => (this.copied = false), 1200);
+    } catch {
+      // Best-effort fallback
+      this.analyticsService.outbound('email', 'contact_copy_fallback');
+      window.location.href = `mailto:${email}`;
+    }
+  }
+
+  openMailQuick(toEmail: string) {
+    const subject = this.translate.instant('contact.subject', { name: '—' });
+    const body = this.translate.instant('contact.mail.quickBody');
+    this.analyticsService.outbound('email', 'contact_quick');
+    this.navigateToMailto(toEmail, subject, body);
+  }
+
+  openMail(toEmail: string) {
+    if (this.formGroup.invalid) {
+      this.formGroup.markAllAsTouched();
+      this.analyticsService.contactSubmit(false);
+      return;
     }
 
-    showErrors(ctrl: AbstractControl) {
-        return ctrl.invalid && (ctrl.touched || ctrl.dirty);
-    }
+    const raw = this.formGroup.getRawValue();
 
-    isInvalid(ctrl: AbstractControl) {
-        return this.showErrors(ctrl);
-    }
+    const name = raw.name.trim();
+    const email = raw.email.trim();
+    const message = raw.message.trim();
 
-    async copyEmail(email: string) {
-        try {
-            await navigator.clipboard.writeText(email);
-            this.copied = true;
-            this.analyticsService.outbound('email', 'contact_copy');
-            window.setTimeout(() => (this.copied = false), 1200);
-        } catch {
-            // Best-effort fallback
-            this.analyticsService.outbound('email', 'contact_copy_fallback');
-            window.location.href = `mailto:${email}`;
-        }
-    }
+    const subject = this.translate.instant('contact.subject', { name });
 
-    openMailQuick(toEmail: string) {
-        const subject = this.translate.instant('contact.subject', { name: '—' });
-        const body = this.translate.instant('contact.mail.quickBody');
-        this.analyticsService.outbound('email', 'contact_quick');
-        this.navigateToMailto(toEmail, subject, body);
-    }
+    const body = this.translate.instant('contact.mail.formBody', {
+      name,
+      email,
+      message,
+    });
 
-    openMail(toEmail: string) {
-        if (this.formGroup.invalid) {
-            this.formGroup.markAllAsTouched();
-            this.analyticsService.contactSubmit(false);
-            return;
-        }
+    this.analyticsService.contactSubmit(true);
+    this.navigateToMailto(toEmail, subject, body);
+  }
 
-        const raw = this.formGroup.getRawValue();
-
-        const name = raw.name.trim();
-        const email = raw.email.trim();
-        const message = raw.message.trim();
-
-        const subject = this.translate.instant('contact.subject', { name });
-
-        const body = this.translate.instant('contact.mail.formBody', {
-            name,
-            email,
-            message,
-        });
-
-        this.analyticsService.contactSubmit(true);
-        this.navigateToMailto(toEmail, subject, body);
-    }
-
-    private navigateToMailto(toEmail: string, subject: string, body: string) {
-        const encodedSubject = encodeURIComponent(subject);
-        const encodedBody = encodeURIComponent(body);
-        window.location.href = `mailto:${toEmail}?subject=${encodedSubject}&body=${encodedBody}`;
-    }
+  private navigateToMailto(toEmail: string, subject: string, body: string) {
+    const encodedSubject = encodeURIComponent(subject);
+    const encodedBody = encodeURIComponent(body);
+    window.location.href = `mailto:${toEmail}?subject=${encodedSubject}&body=${encodedBody}`;
+  }
 }

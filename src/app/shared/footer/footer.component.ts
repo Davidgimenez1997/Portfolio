@@ -34,4 +34,9 @@ export class FooterComponent {
   route(path = '/') {
     return this.language.localizedPath(path);
   }
+
+  localizedAsset(value?: string | Record<'es' | 'en', string> | null): string {
+    if (!value) return '';
+    return typeof value === 'string' ? value : (value[this.language.current] ?? '');
+  }
 }

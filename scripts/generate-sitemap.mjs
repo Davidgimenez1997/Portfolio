@@ -75,6 +75,24 @@ const assetRoutes = [
     changefreq: 'yearly',
     priority: '0.4',
   },
+  {
+    path: 'cv/david-gimenez-rodriguez-senior-frontend-engineer-cv-es.pdf',
+    sources: [
+      'public/content/profile.json',
+      'public/cv/david-gimenez-rodriguez-senior-frontend-engineer-cv-es.pdf',
+    ],
+    changefreq: 'yearly',
+    priority: '0.4',
+  },
+  {
+    path: 'cv/david-gimenez-rodriguez-senior-frontend-engineer-cv-en.pdf',
+    sources: [
+      'public/content/profile.json',
+      'public/cv/david-gimenez-rodriguez-senior-frontend-engineer-cv-en.pdf',
+    ],
+    changefreq: 'yearly',
+    priority: '0.4',
+  },
 ];
 
 const staticRoutes = Object.keys(routeSources);
@@ -95,10 +113,7 @@ const localizedRoutes = languages.flatMap((lang) => [
   })),
 ]);
 
-const routes = [
-  ...localizedRoutes,
-  ...assetRoutes,
-];
+const routes = [...localizedRoutes, ...assetRoutes];
 
 const sitemap = await buildSitemap(routes);
 const localizedSitemaps = Object.fromEntries(
