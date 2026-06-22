@@ -1,16 +1,16 @@
 {
   "name": "David Giménez Rodríguez De Rivera",
   "role": {
-    "es": "Senior Frontend Engineer (Angular · SSR · Arquitectura)",
-    "en": "Senior Frontend Engineer (Angular · SSR · Architecture)"
+    "es": "Senior Frontend Engineer especializado en Angular, SSR y arquitectura frontend",
+    "en": "Senior Frontend Engineer specialized in Angular, SSR and frontend architecture"
   },
   "location": {
     "es": "Madrid, España",
     "en": "Madrid, Spain"
   },
   "summary": {
-    "es": "Senior Frontend Engineer especializado en Angular con foco en SSR, prerendering y arquitectura escalable. Más de 6 años de experiencia desarrollando aplicaciones complejas, integradas con CMS y desplegadas con Docker y Kubernetes.",
-    "en": "Senior Frontend Engineer specialized in Angular with a strong focus on SSR, prerendering, and scalable architecture. Over 6 years of experience building complex applications integrated with headless CMS and deployed using Docker and Kubernetes."
+    "es": "Senior Frontend Engineer en Madrid con más de 6 años de experiencia creando aplicaciones Angular de alto rendimiento. Trabajo especialmente en SSR, prerendering, arquitectura frontend escalable, integración con CMS headless y despliegues con Docker y Kubernetes. Me enfoco en convertir requisitos de producto, SEO y rendimiento en soluciones mantenibles para equipos reales.",
+    "en": "Senior Frontend Engineer in Madrid with over 6 years of experience building high-performance Angular applications. I focus on SSR, prerendering, scalable frontend architecture, headless CMS integration and Docker/Kubernetes deployments. I turn product, SEO and performance requirements into maintainable solutions for real teams."
   },
   "links": {
     "github": "https://github.com/Davidgimenez1997",

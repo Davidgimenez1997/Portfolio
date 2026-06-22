@@ -9,19 +9,27 @@
     "to": "2019",
     "highlights": {
       "es": [
-        "Formación sólida en desarrollo de software, algoritmos y arquitecturas de sistemas.",
-        "Proyectos de equipo específicos en Angular, TypeScript y desarrollo web moderno.",
-        "Participación en seminarios de DevOps, testing y metodologías ágiles.",
-        "Trabajo de Fin de Grado enfocado en aplicaciones web escalables."
+        "Formación práctica en programación, sistemas informáticos, bases de datos, entornos de desarrollo y acceso a datos.",
+        "Desarrollo de aplicaciones multiplataforma con foco en interfaces, dispositivos móviles, procesos, servicios y persistencia.",
+        "Trabajo con lenguajes de marcas, sistemas de gestión de información y fundamentos de integración con sistemas empresariales.",
+        "Base técnica orientada a implantar, documentar y mantener aplicaciones con criterios de usabilidad, calidad y acceso seguro a datos."
       ],
       "en": [
-        "Strong academic foundation in software development, algorithms and system architecture.",
-        "Team projects focused on Angular, TypeScript and modern web development.",
-        "Participation in DevOps, testing and agile methodology workshops.",
-        "Final Degree Project focused on scalable web applications."
+        "Practical training in programming, computer systems, databases, development environments and data access.",
+        "Development of multiplatform applications focused on interfaces, mobile devices, processes, services and persistence.",
+        "Work with markup languages, information management systems and fundamentals of enterprise system integration.",
+        "Technical foundation for implementing, documenting and maintaining applications with usability, quality and secure data access criteria."
       ]
     },
-    "stack": ["Angular", "TypeScript", "REST APIs", "Agile", "Git"]
+    "stack": [
+      "Java",
+      "SQL",
+      "Databases",
+      "Android",
+      "Desktop Applications",
+      "Interfaces",
+      "Data Access"
+    ]
   },
   {
     "institution": "IES San Isidro",
@@ -33,10 +41,10 @@
     "to": "2016",
     "highlights": {
       "es": [
-        "Bachillerato especializado en la modalidad de ciencias y tecnologia."
+        "Formación en la modalidad de ciencias y tecnología, con base en matemáticas, pensamiento analítico y resolución de problemas."
       ],
       "en": [
-        "High school diploma specializing in science and technology."
+        "Science and technology track with a foundation in mathematics, analytical thinking and problem solving."
       ]
     },
     "stack": []
