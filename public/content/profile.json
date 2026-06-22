@@ -15,7 +15,10 @@
   "links": {
     "github": "https://github.com/Davidgimenez1997",
     "linkedin": "https://www.linkedin.com/in/davidgimenezrodriguezderivera/",
-    "cv": "/cv/david-gimenez-rodriguez-senior-frontend-engineer-cv.pdf"
+    "cv": {
+      "es": "/cv/david-gimenez-rodriguez-senior-frontend-engineer-cv-es.pdf",
+      "en": "/cv/david-gimenez-rodriguez-senior-frontend-engineer-cv-en.pdf"
+    }
   },
   "email": "davidgimenez97dev@gmail.com"
 }

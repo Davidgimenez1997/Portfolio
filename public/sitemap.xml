@@ -186,4 +186,16 @@
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
+  <url>
+    <loc>https://davidgimenezrodriguez.com/cv/david-gimenez-rodriguez-senior-frontend-engineer-cv-es.pdf</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://davidgimenezrodriguez.com/cv/david-gimenez-rodriguez-senior-frontend-engineer-cv-en.pdf</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
 </urlset>

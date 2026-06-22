@@ -14,7 +14,7 @@ export interface Profile {
   links?: {
     github?: string;
     linkedin?: string;
-    cv?: string;
+    cv?: string | Record<Lang, string>;
   };
 }
 

@@ -125,7 +125,7 @@
               @if (profile?.links?.cv; as cv) {
                 <a
                   class="btn btn-outline-primary btn-sm text-start"
-                  [href]="cv"
+                  [href]="localizedAsset(cv)"
                   target="_blank"
                   rel="noreferrer"
                   (click)="analyticsService.outbound('cv', 'about')"
@@ -421,7 +421,7 @@
               @if (profile?.links?.cv; as cv) {
                 <a
                   class="btn btn-outline-primary btn-sm text-start"
-                  [href]="cv"
+                  [href]="localizedAsset(cv)"
                   target="_blank"
                   rel="noreferrer"
                   (click)="analyticsService.outbound('cv', 'contact')"

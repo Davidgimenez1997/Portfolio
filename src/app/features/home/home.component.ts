@@ -78,6 +78,11 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     return rec[this.langService.current] ?? [];
   }
 
+  localizedAsset(value?: string | Record<'es' | 'en', string> | null): string {
+    if (!value) return '';
+    return typeof value === 'string' ? value : (value[this.langService.current] ?? '');
+  }
+
   localizedRoute(path = '/') {
     return this.langService.localizedPath(path);
   }
