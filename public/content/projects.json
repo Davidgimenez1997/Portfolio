@@ -1,5 +1,116 @@
 [
   {
+    "slug": "multitenant-photography-portal",
+    "type": "personal",
+    "role": {
+      "es": "Diseño y desarrollo de producto",
+      "en": "Product design and development"
+    },
+    "scope": {
+      "es": "Proyecto personal",
+      "en": "Personal project"
+    },
+    "title": {
+      "es": "Portal multi-tenant para fotógrafos",
+      "en": "Multi-tenant Photography Portal"
+    },
+    "description": {
+      "es": "Plataforma multi-tenant para que fotógrafos creen espacios privados por cliente o evento, compartan galerías y centralicen la entrega digital de fotografías.",
+      "en": "Multi-tenant platform for photographers to create private spaces per client or event, share galleries and centralize digital photo delivery."
+    },
+    "context": {
+      "es": "Los fotógrafos necesitan una forma sencilla de entregar reportajes, separar clientes y ofrecer una experiencia cuidada sin depender de carpetas compartidas genéricas.",
+      "en": "Photographers need a simple way to deliver shoots, separate clients and provide a polished experience without relying on generic shared folders."
+    },
+    "solution": {
+      "es": [
+        "Arquitectura multi-tenant para separar fotógrafos, clientes, eventos y permisos.",
+        "Galerías privadas con acceso por enlace o código y experiencia centrada en el cliente final.",
+        "Interfaz responsive pensada para consulta desde móvil y escritorio.",
+        "Base preparada para subida, organización, selección y entrega de fotografías por evento."
+      ],
+      "en": [
+        "Multi-tenant architecture to separate photographers, clients, events and permissions.",
+        "Private galleries with link or code access and an end-client focused experience.",
+        "Responsive interface designed for mobile and desktop browsing.",
+        "Foundation for uploading, organizing, selecting and delivering photos per event."
+      ]
+    },
+    "impact": {
+      "es": [
+        "Producto real orientado a un caso de negocio concreto.",
+        "Mejor experiencia de entrega para fotógrafos y clientes.",
+        "Base escalable para convertir una necesidad personal en una solución comercial.",
+        "Demostración de criterio de producto además de ejecución frontend."
+      ],
+      "en": [
+        "Real product focused on a specific business use case.",
+        "Improved delivery experience for photographers and clients.",
+        "Scalable foundation to turn a personal need into a commercial solution.",
+        "Demonstrates product thinking alongside frontend execution."
+      ]
+    },
+    "links": {
+      "live": "https://viktorcookoriginals.vercel.app/es"
+    },
+    "stack": ["Angular", "TypeScript", "Node.js", "Responsive Design", "Multi-tenant Architecture"]
+  },
+
+  {
+    "slug": "digital-wedding-invitation",
+    "type": "personal",
+    "role": {
+      "es": "Diseño frontend y experiencia responsive",
+      "en": "Frontend design and responsive experience"
+    },
+    "scope": {
+      "es": "Proyecto personal",
+      "en": "Personal project"
+    },
+    "title": {
+      "es": "Invitación digital de boda",
+      "en": "Digital Wedding Invitation"
+    },
+    "description": {
+      "es": "Invitación digital responsive para centralizar la información de una boda, ofrecer una experiencia visual cuidada y facilitar a los invitados el acceso a los detalles del evento.",
+      "en": "Responsive digital invitation to centralize wedding information, provide a polished visual experience and help guests access event details."
+    },
+    "context": {
+      "es": "Proyecto personal real creado para sustituir una invitación tradicional por una experiencia digital accesible desde cualquier dispositivo.",
+      "en": "Real personal project created to replace a traditional invitation with a digital experience accessible from any device."
+    },
+    "solution": {
+      "es": [
+        "Diseño responsive adaptado a móvil, tablet y escritorio.",
+        "Secciones para información del evento, ubicación, horarios y detalles importantes.",
+        "Experiencia visual personalizada para transmitir el tono del evento.",
+        "Estructura sencilla para que los invitados encuentren rápido la información clave."
+      ],
+      "en": [
+        "Responsive design adapted to mobile, tablet and desktop.",
+        "Sections for event information, location, schedule and important details.",
+        "Custom visual experience to communicate the tone of the event.",
+        "Simple structure so guests can quickly find key information."
+      ]
+    },
+    "impact": {
+      "es": [
+        "Proyecto real usado por invitados.",
+        "Centralización de información importante en una única página accesible.",
+        "Demostración de sensibilidad visual, detalle frontend y enfoque en usuario final.",
+        "Ejemplo de cómo una solución web pequeña puede sustituir procesos tradicionales."
+      ],
+      "en": [
+        "Real project used by guests.",
+        "Centralized important information in a single accessible page.",
+        "Demonstrates visual care, frontend detail and end-user focus.",
+        "Example of how a small web solution can replace traditional processes."
+      ]
+    },
+    "stack": ["Angular", "TypeScript", "SCSS", "Responsive Design"]
+  },
+
+  {
     "slug": "distributed-angular-prerendering",
     "type": "case-study",
     "role": {
@@ -361,113 +472,5 @@
       ]
     },
     "stack": ["Node.js", "Angular", "TypeScript", "Docker"]
-  },
-
-  {
-    "slug": "multitenant-photography-portal",
-    "type": "personal",
-    "role": {
-      "es": "Diseño y desarrollo de producto",
-      "en": "Product design and development"
-    },
-    "scope": {
-      "es": "Proyecto personal",
-      "en": "Personal project"
-    },
-    "title": {
-      "es": "Portal multi-tenant para fotógrafos",
-      "en": "Multi-tenant Photography Portal"
-    },
-    "description": {
-      "es": "Plataforma multi-tenant para que fotógrafos creen espacios privados por cliente o evento, compartan galerías y centralicen la entrega digital de fotografías.",
-      "en": "Multi-tenant platform for photographers to create private spaces per client or event, share galleries and centralize digital photo delivery."
-    },
-    "context": {
-      "es": "Los fotógrafos necesitan una forma sencilla de entregar reportajes, separar clientes y ofrecer una experiencia cuidada sin depender de carpetas compartidas genéricas.",
-      "en": "Photographers need a simple way to deliver shoots, separate clients and provide a polished experience without relying on generic shared folders."
-    },
-    "solution": {
-      "es": [
-        "Arquitectura multi-tenant para separar fotógrafos, clientes, eventos y permisos.",
-        "Galerías privadas con acceso por enlace o código y experiencia centrada en el cliente final.",
-        "Interfaz responsive pensada para consulta desde móvil y escritorio.",
-        "Base preparada para subida, organización, selección y entrega de fotografías por evento."
-      ],
-      "en": [
-        "Multi-tenant architecture to separate photographers, clients, events and permissions.",
-        "Private galleries with link or code access and an end-client focused experience.",
-        "Responsive interface designed for mobile and desktop browsing.",
-        "Foundation for uploading, organizing, selecting and delivering photos per event."
-      ]
-    },
-    "impact": {
-      "es": [
-        "Producto real orientado a un caso de negocio concreto.",
-        "Mejor experiencia de entrega para fotógrafos y clientes.",
-        "Base escalable para convertir una necesidad personal en una solución comercial.",
-        "Demostración de criterio de producto además de ejecución frontend."
-      ],
-      "en": [
-        "Real product focused on a specific business use case.",
-        "Improved delivery experience for photographers and clients.",
-        "Scalable foundation to turn a personal need into a commercial solution.",
-        "Demonstrates product thinking alongside frontend execution."
-      ]
-    },
-    "stack": ["Angular", "TypeScript", "Node.js", "Responsive Design", "Multi-tenant Architecture"]
-  },
-
-  {
-    "slug": "digital-wedding-invitation",
-    "type": "personal",
-    "role": {
-      "es": "Diseño frontend y experiencia responsive",
-      "en": "Frontend design and responsive experience"
-    },
-    "scope": {
-      "es": "Proyecto personal",
-      "en": "Personal project"
-    },
-    "title": {
-      "es": "Invitación digital de boda",
-      "en": "Digital Wedding Invitation"
-    },
-    "description": {
-      "es": "Invitación digital responsive para centralizar la información de una boda, ofrecer una experiencia visual cuidada y facilitar a los invitados el acceso a los detalles del evento.",
-      "en": "Responsive digital invitation to centralize wedding information, provide a polished visual experience and help guests access event details."
-    },
-    "context": {
-      "es": "Proyecto personal real creado para sustituir una invitación tradicional por una experiencia digital accesible desde cualquier dispositivo.",
-      "en": "Real personal project created to replace a traditional invitation with a digital experience accessible from any device."
-    },
-    "solution": {
-      "es": [
-        "Diseño responsive adaptado a móvil, tablet y escritorio.",
-        "Secciones para información del evento, ubicación, horarios y detalles importantes.",
-        "Experiencia visual personalizada para transmitir el tono del evento.",
-        "Estructura sencilla para que los invitados encuentren rápido la información clave."
-      ],
-      "en": [
-        "Responsive design adapted to mobile, tablet and desktop.",
-        "Sections for event information, location, schedule and important details.",
-        "Custom visual experience to communicate the tone of the event.",
-        "Simple structure so guests can quickly find key information."
-      ]
-    },
-    "impact": {
-      "es": [
-        "Proyecto real usado por invitados.",
-        "Centralización de información importante en una única página accesible.",
-        "Demostración de sensibilidad visual, detalle frontend y enfoque en usuario final.",
-        "Ejemplo de cómo una solución web pequeña puede sustituir procesos tradicionales."
-      ],
-      "en": [
-        "Real project used by guests.",
-        "Centralized important information in a single accessible page.",
-        "Demonstrates visual care, frontend detail and end-user focus.",
-        "Example of how a small web solution can replace traditional processes."
-      ]
-    },
-    "stack": ["Angular", "TypeScript", "SCSS", "Responsive Design"]
   }
 ]
