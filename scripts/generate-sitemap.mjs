@@ -97,25 +97,35 @@ const assetRoutes = [
 
 const staticRoutes = Object.keys(routeSources);
 const localizedRoutes = languages.flatMap((lang) => [
-  ...staticRoutes.map((route) => ({
-    lang,
-    path: route ? `${lang}/${route}` : lang,
-    sources: [...sharedSeoFiles, ...routeSources[route]],
-    changefreq: 'monthly',
-    priority: route === '' ? '1.0' : '0.8',
-  })),
-  ...projects.map((project) => ({
-    lang,
-    path: `${lang}/projects/${project.slug}`,
-    sources: [...sharedSeoFiles, ...projectRouteSources],
-    changefreq: 'monthly',
-    priority: '0.8',
-  })),
+  ...staticRoutes.map((route) =>
+    withLanguageAlternates({
+      lang,
+      route,
+      path: route ? `${lang}/${route}` : lang,
+      sources: [...sharedSeoFiles, ...routeSources[route]],
+      changefreq: 'monthly',
+      priority: route === '' ? '1.0' : '0.8',
+    }),
+  ),
+  ...projects.map((project) =>
+    withLanguageAlternates({
+      lang,
+      route: `projects/${project.slug}`,
+      path: `${lang}/projects/${project.slug}`,
+      sources: [...sharedSeoFiles, ...projectRouteSources],
+      changefreq: 'monthly',
+      priority: '0.8',
+    }),
+  ),
 ]);
 
 const routes = [...localizedRoutes, ...assetRoutes];
 
 const sitemap = await buildSitemap(routes);
+const sitemapIndex = buildSitemapIndex([
+  'sitemap.xml',
+  ...languages.map((lang) => `${lang}/sitemap.xml`),
+]);
 const localizedSitemaps = Object.fromEntries(
   await Promise.all(
     languages.map(async (lang) => [
@@ -129,6 +139,7 @@ const robots = [
   'User-agent: *',
   'Allow: /',
   '',
+  `Sitemap: ${siteUrl}/sitemap-index.xml`,
   `Sitemap: ${siteUrl}/sitemap.xml`,
   `Sitemap: ${siteUrl}/es/sitemap.xml`,
   `Sitemap: ${siteUrl}/en/sitemap.xml`,
@@ -136,6 +147,7 @@ const robots = [
 ].join('\n');
 
 await writeFile('public/sitemap.xml', sitemap);
+await writeFile('public/sitemap-index.xml', sitemapIndex);
 await Promise.all(
   languages.map(async (lang) => {
     await mkdir(`public/${lang}`, { recursive: true });
@@ -144,15 +156,38 @@ await Promise.all(
 );
 await writeFile('public/robots.txt', robots);
 
+function withLanguageAlternates(routeConfig) {
+  return {
+    ...routeConfig,
+    alternates: [
+      ...languages.map((lang) => ({
+        hreflang: lang,
+        href: new URL(routeConfig.route ? `${lang}/${routeConfig.route}` : lang, siteUrl).toString(),
+      })),
+      {
+        hreflang: 'x-default',
+        href: new URL(routeConfig.route ? `es/${routeConfig.route}` : 'es', siteUrl).toString(),
+      },
+    ],
+  };
+}
+
 async function buildSitemap(sitemapRoutes) {
   const entries = await Promise.all(
-    sitemapRoutes.map(async ({ path, sources, changefreq, priority }) => {
+    sitemapRoutes.map(async ({ path, sources, changefreq, priority, alternates = [] }) => {
       const loc = path ? `${siteUrl}/${path}` : `${siteUrl}/`;
       const lastmod = await getLatestLastModified(sources);
+      const alternateLinks = alternates.map(
+        ({ hreflang, href }) =>
+          `    <xhtml:link rel="alternate" hreflang="${escapeXml(hreflang)}" href="${escapeXml(
+            href,
+          )}" />`,
+      );
 
       return [
         '  <url>',
         `    <loc>${escapeXml(loc)}</loc>`,
+        ...alternateLinks,
         `    <lastmod>${lastmod}</lastmod>`,
         `    <changefreq>${changefreq}</changefreq>`,
         `    <priority>${priority}</priority>`,
@@ -163,9 +198,29 @@ async function buildSitemap(sitemapRoutes) {
 
   return [
     '<?xml version="1.0" encoding="UTF-8"?>',
-    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
     entries.join('\n'),
     '</urlset>',
+    '',
+  ].join('\n');
+}
+
+function buildSitemapIndex(paths) {
+  const today = new Date().toISOString().slice(0, 10);
+  const entries = paths.map((path) =>
+    [
+      '  <sitemap>',
+      `    <loc>${escapeXml(new URL(path, `${siteUrl}/`).toString())}</loc>`,
+      `    <lastmod>${today}</lastmod>`,
+      '  </sitemap>',
+    ].join('\n'),
+  );
+
+  return [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    entries.join('\n'),
+    '</sitemapindex>',
     '',
   ].join('\n');
 }

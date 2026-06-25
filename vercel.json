@@ -56,6 +56,13 @@
       "status": 308
     },
     {
+      "src": "/(.+)/$",
+      "headers": {
+        "Location": "/$1"
+      },
+      "status": 308
+    },
+    {
       "src": "/cv/cv_enero_2024\\.pdf",
       "headers": {
         "Location": "/cv/david-gimenez-rodriguez-senior-frontend-engineer-cv.pdf"
