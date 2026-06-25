@@ -1,91 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://davidgimenezrodriguez.com/en</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://davidgimenezrodriguez.com/es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://davidgimenezrodriguez.com/en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://davidgimenezrodriguez.com/es" />
     <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/en/about</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://davidgimenezrodriguez.com/es/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://davidgimenezrodriguez.com/en/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://davidgimenezrodriguez.com/es/about" />
     <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/en/projects</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://davidgimenezrodriguez.com/es/projects" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://davidgimenezrodriguez.com/en/projects" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://davidgimenezrodriguez.com/es/projects" />
     <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/en/experience</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://davidgimenezrodriguez.com/es/experience" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://davidgimenezrodriguez.com/en/experience" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://davidgimenezrodriguez.com/es/experience" />
     <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/en/education</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://davidgimenezrodriguez.com/es/education" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://davidgimenezrodriguez.com/en/education" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://davidgimenezrodriguez.com/es/education" />
     <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/en/contact</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://davidgimenezrodriguez.com/es/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://davidgimenezrodriguez.com/en/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://davidgimenezrodriguez.com/es/contact" />
     <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/en/projects/multitenant-photography-portal</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://davidgimenezrodriguez.com/es/projects/multitenant-photography-portal" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://davidgimenezrodriguez.com/en/projects/multitenant-photography-portal" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://davidgimenezrodriguez.com/es/projects/multitenant-photography-portal" />
     <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/en/projects/digital-wedding-invitation</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://davidgimenezrodriguez.com/es/projects/digital-wedding-invitation" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://davidgimenezrodriguez.com/en/projects/digital-wedding-invitation" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://davidgimenezrodriguez.com/es/projects/digital-wedding-invitation" />
     <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/en/projects/distributed-angular-prerendering</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://davidgimenezrodriguez.com/es/projects/distributed-angular-prerendering" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://davidgimenezrodriguez.com/en/projects/distributed-angular-prerendering" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://davidgimenezrodriguez.com/es/projects/distributed-angular-prerendering" />
     <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/en/projects/event-driven-prerender-queue</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://davidgimenezrodriguez.com/es/projects/event-driven-prerender-queue" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://davidgimenezrodriguez.com/en/projects/event-driven-prerender-queue" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://davidgimenezrodriguez.com/es/projects/event-driven-prerender-queue" />
     <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/en/projects/strapi-import-export-plugin</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://davidgimenezrodriguez.com/es/projects/strapi-import-export-plugin" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://davidgimenezrodriguez.com/en/projects/strapi-import-export-plugin" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://davidgimenezrodriguez.com/es/projects/strapi-import-export-plugin" />
     <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/en/projects/multi-brand-deployment-architecture</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://davidgimenezrodriguez.com/es/projects/multi-brand-deployment-architecture" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://davidgimenezrodriguez.com/en/projects/multi-brand-deployment-architecture" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://davidgimenezrodriguez.com/es/projects/multi-brand-deployment-architecture" />
     <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/en/projects/runtime-cache-invalidation</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://davidgimenezrodriguez.com/es/projects/runtime-cache-invalidation" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://davidgimenezrodriguez.com/en/projects/runtime-cache-invalidation" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://davidgimenezrodriguez.com/es/projects/runtime-cache-invalidation" />
     <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/en/projects/headless-cms-dynamic-routing</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://davidgimenezrodriguez.com/es/projects/headless-cms-dynamic-routing" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://davidgimenezrodriguez.com/en/projects/headless-cms-dynamic-routing" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://davidgimenezrodriguez.com/es/projects/headless-cms-dynamic-routing" />
     <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://davidgimenezrodriguez.com/en/projects/frontend-dx-tooling</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://davidgimenezrodriguez.com/es/projects/frontend-dx-tooling" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://davidgimenezrodriguez.com/en/projects/frontend-dx-tooling" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://davidgimenezrodriguez.com/es/projects/frontend-dx-tooling" />
     <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
